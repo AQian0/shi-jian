@@ -4,6 +4,7 @@
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
+    "oxfmt": "^0.18.0",
     "oxlint": "^1.33.0",
     "oxlint-tsgolint": "^0.9.1"
   },
