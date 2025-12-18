@@ -1,9 +1,9 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "objectWrap":"always",
-  "arrowParens":"avoid",
+  "objectWrap": "always",
+  "arrowParens": "avoid",
   "experimentalSortImports": {
-    "order":"asc",
+    "order": "asc",
     "sortSideEffects": true
   }
 }
