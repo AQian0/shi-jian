@@ -6,7 +6,8 @@
     "@types/bun": "latest",
     "oxfmt": "^0.18.0",
     "oxlint": "^1.33.0",
-    "oxlint-tsgolint": "^0.9.1"
+    "oxlint-tsgolint": "^0.9.1",
+    "tsdown": "^0.18.1"
   },
   "peerDependencies": {
     "typescript": "^5"
