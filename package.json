@@ -3,7 +3,9 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "oxlint": "^1.33.0",
+    "oxlint-tsgolint": "^0.9.1"
   },
   "peerDependencies": {
     "typescript": "^5"
