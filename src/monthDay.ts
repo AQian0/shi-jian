@@ -1,11 +1,8 @@
-import { monthEnd } from "./monthEnd"
-import type { MaybeDateInput } from "./types"
+import type { MaybeDateInput } from "./types";
 
-/**
- * Returns the total number of days from a given month.
- * @param [inputDate] - A string, Date object or nothing for the current month
- */
+import { monthEnd } from "./monthEnd";
+
 export const monthDays = (inputDate?: MaybeDateInput): number => {
-  const d = monthEnd(inputDate)
-  return d.getDate()
-}
+  const d = monthEnd(inputDate);
+  return d.getDate();
+};
