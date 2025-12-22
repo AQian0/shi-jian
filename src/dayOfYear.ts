@@ -10,4 +10,4 @@ export const dayOfYear = (date?: MaybeDateInput): number => {
       new Date(d.getFullYear(), 0, 0).getTime()) /
       MS_DAY,
   );
-}
+};
