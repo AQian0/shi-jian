@@ -28,4 +28,4 @@ export const formatStr = (
       "",
     )
     .normalize("NFKC");
-}
+};
