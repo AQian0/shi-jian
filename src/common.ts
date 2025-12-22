@@ -1,4 +1,4 @@
-import type { FormatPattern, FormatStyle } from "./types";
+import type { FormatPattern, FormatStyle, TimezoneToken } from "./types";
 
 export const MS_DAY = 86400000 as const;
 
@@ -163,4 +163,14 @@ export const normalizeStr = (part: Intl.DateTimeFormatPart): Intl.DateTimeFormat
     part.value = part.value.normalize("NFKC");
   }
   return part;
+};
+
+export const minsToOffset = (timeDiffInMins: number, token: TimezoneToken = "Z"): string => {
+  const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(2, "0");
+  const mins = String(Math.abs(timeDiffInMins % 60)).padStart(2, "0");
+  const sign = timeDiffInMins < 0 ? "-" : "+";
+  if (token === "ZZ") {
+    return `${sign}${hours}${mins}`;
+  }
+  return `${sign}${hours}:${mins}`;
 };
