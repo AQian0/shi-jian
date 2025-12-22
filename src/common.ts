@@ -178,24 +178,23 @@ export const minsToOffset = (timeDiffInMins: number, token: TimezoneToken = "Z")
 export const fixedLengthByOffset = (offsetString: string): 6 | 5 => {
   // starts with [+-]xx:xx
   if (/^[+-]\d{2}:\d{2}/.test(offsetString)) {
-    return 6
+    return 6;
   }
   if (/^[+-]\d{4}/.test(offsetString)) {
-    return 5
+    return 5;
   }
-  throw new Error("Invalid offset format")
-}
-
+  throw new Error("Invalid offset format");
+};
 
 export const validOffset = (offset: string, token: TimezoneToken = "Z") => {
   const valid = ((token: TimezoneToken): boolean => {
     switch (token) {
       case "Z":
-        return /^([+-])[0-3][0-9]:[0-6][0-9]$/.test(offset)
+        return /^([+-])[0-3][0-9]:[0-6][0-9]$/.test(offset);
       case "ZZ":
-        return /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset)
+        return /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset);
     }
-  })(token)
-  if (!valid) throw new Error(`Invalid offset: ${offset}`)
-  return offset
-}
+  })(token);
+  if (!valid) throw new Error(`Invalid offset: ${offset}`);
+  return offset;
+};
