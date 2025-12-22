@@ -57,7 +57,10 @@ export const parts = (format: Format, locale: string): Part[] => {
     return patterns;
   };
 
-  const createPart = (hour12: boolean, [token, option, exp]: FormatPattern): Part => {
+  const createPart = (
+    hour12: boolean,
+    [token, option, exp]: FormatPattern,
+  ): Part => {
     const [partName, partValue] = Object.entries(option)[0] as [
       Intl.DateTimeFormatPartTypes,
       string,
@@ -109,7 +112,10 @@ export const parts = (format: Format, locale: string): Part[] => {
     .filter(part => part.partName !== "literal" || part.partValue !== "");
 };
 
-const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[] => {
+const styleParts = (
+  format: FormatStyle | FormatStyleObj,
+  locale: string,
+): Part[] => {
   const options: Intl.DateTimeFormatOptions = {
     timeZone: "UTC",
   };
@@ -122,9 +128,13 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
   }
 
   const formatter = new Intl.DateTimeFormat(locale, options);
-  const segments = formatter.formatToParts(new Date(SPEC_DATE)).map(normalizeStr);
+  const segments = formatter
+    .formatToParts(new Date(SPEC_DATE))
+    .map(normalizeStr);
   const HOUR_TYPE_TEST_DATE = "1999-04-05T23:05:01.000Z";
-  const hourTypeSegments = formatter.formatToParts(new Date(HOUR_TYPE_TEST_DATE)).map(normalizeStr);
+  const hourTypeSegments = formatter
+    .formatToParts(new Date(HOUR_TYPE_TEST_DATE))
+    .map(normalizeStr);
   const hourPart = hourTypeSegments.find(segment => segment.type === "hour");
   const hourType = hourPart?.value === "23" ? 24 : 12;
   return segments
@@ -280,7 +290,9 @@ const partStyle = (
           })
             .formatToParts(date)
             .map(normalizeStr);
-          const genitiveMonth = genitiveFormattedParts.find(part => part.type === "month");
+          const genitiveMonth = genitiveFormattedParts.find(
+            part => part.type === "month",
+          );
           const index = segments.findIndex(part => part.type === "month");
           if (index > -1 && genitiveMonth) {
             segments[index] = genitiveMonth;

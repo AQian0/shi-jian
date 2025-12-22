@@ -76,7 +76,9 @@ const createPartMap = (
               .map(normalizeStr);
             break;
         }
-        const genitiveFormattedPart = formattedParts.find(p => p.type === part.partName);
+        const genitiveFormattedPart = formattedParts.find(
+          p => p.type === part.partName,
+        );
         const index = valueParts.findIndex(p => p.type === part.partName);
         if (genitiveFormattedPart && index > -1) {
           valueParts[index] = genitiveFormattedPart;
@@ -127,7 +129,10 @@ const fill = (
       return token === "A" ? p.toUpperCase() : p.toLowerCase();
     }
     if (partName === "timeZoneName") {
-      return offset ?? minsToOffset(-1 * d.getTimezoneOffset(), token as TimezoneToken);
+      return (
+        offset ??
+        minsToOffset(-1 * d.getTimezoneOffset(), token as TimezoneToken)
+      );
     }
     return value;
   };
@@ -163,18 +168,37 @@ export function format(
 ): string {
   let tz: string | undefined, forceOffset: string | undefined;
 
-  if (typeof inputDateOrOptions === "object" && !(inputDateOrOptions instanceof Date)) {
-    ({ date: inputDateOrOptions, format, locale, genitive, partFilter, tz } = inputDateOrOptions);
+  if (
+    typeof inputDateOrOptions === "object" &&
+    !(inputDateOrOptions instanceof Date)
+  ) {
+    ({
+      date: inputDateOrOptions,
+      format,
+      locale,
+      genitive,
+      partFilter,
+      tz,
+    } = inputDateOrOptions);
   }
-  if (format === "ISO8601") return normalizeDate(inputDateOrOptions).toISOString();
+  if (format === "ISO8601")
+    return normalizeDate(inputDateOrOptions).toISOString();
 
   if (tz) {
-    forceOffset = offset(inputDateOrOptions, "utc", tz, getOffsetFormat(format));
+    forceOffset = offset(
+      inputDateOrOptions,
+      "utc",
+      tz,
+      getOffsetFormat(format),
+    );
   }
 
   tz ??= Intl.DateTimeFormat().resolvedOptions().timeZone;
   if (tz?.toLowerCase() !== "utc") {
-    inputDateOrOptions = removeOffset(inputDateOrOptions, offset(inputDateOrOptions, tz, "utc"));
+    inputDateOrOptions = removeOffset(
+      inputDateOrOptions,
+      offset(inputDateOrOptions, tz, "utc"),
+    );
   }
 
   if (!locale || locale === "device") {

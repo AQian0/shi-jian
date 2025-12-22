@@ -38,10 +38,15 @@ export function offset(
   tzB = "device",
   timeZoneToken: TimezoneToken = "Z",
 ): string {
-  tzB = tzB === "device" ? (Intl.DateTimeFormat().resolvedOptions().timeZone ?? "utc") : tzB;
+  tzB =
+    tzB === "device"
+      ? (Intl.DateTimeFormat().resolvedOptions().timeZone ?? "utc")
+      : tzB;
   const d = normalizeDate(utcTime);
   const timeA = relativeTime(d, tzA);
   const timeB = relativeTime(d, tzB);
-  const timeDiffInMins = Math.round((timeB.getTime() - timeA.getTime()) / 1000 / 60);
+  const timeDiffInMins = Math.round(
+    (timeB.getTime() - timeA.getTime()) / 1000 / 60,
+  );
   return minsToOffset(timeDiffInMins, timeZoneToken);
 }
