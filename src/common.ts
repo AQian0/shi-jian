@@ -158,15 +158,23 @@ export const CLOCK_AGNOSTIC_PATTERNS = [
   ],
 ] as const satisfies ReadonlyArray<FormatPattern>;
 
-export const normalizeStr = (part: Intl.DateTimeFormatPart): Intl.DateTimeFormatPart => {
+export const normalizeStr = (
+  part: Intl.DateTimeFormatPart,
+): Intl.DateTimeFormatPart => {
   if (part.type === "literal") {
     part.value = part.value.normalize("NFKC");
   }
   return part;
 };
 
-export const minsToOffset = (timeDiffInMins: number, token: TimezoneToken = "Z"): string => {
-  const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(2, "0");
+export const minsToOffset = (
+  timeDiffInMins: number,
+  token: TimezoneToken = "Z",
+): string => {
+  const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(
+    2,
+    "0",
+  );
   const mins = String(Math.abs(timeDiffInMins % 60)).padStart(2, "0");
   const sign = timeDiffInMins < 0 ? "-" : "+";
   if (token === "ZZ") {
@@ -199,6 +207,17 @@ export const validOffset = (offset: string, token: TimezoneToken = "Z") => {
   return offset;
 };
 
-export const two = (n: number) => String(n).padStart(2, "0")
+export const FIXED_LENGTH = {
+  DD: 2,
+  HH: 2,
+  MM: 2,
+  YY: 2,
+  YYYY: 4,
+  hh: 2,
+  mm: 2,
+  ss: 2,
+} as const;
 
-export const four = (n: number) => String(n).padStart(4, "0")
+export const two = (n: number) => String(n).padStart(2, "0");
+
+export const four = (n: number) => String(n).padStart(4, "0");
