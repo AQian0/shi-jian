@@ -198,3 +198,7 @@ export const validOffset = (offset: string, token: TimezoneToken = "Z") => {
   if (!valid) throw new Error(`Invalid offset: ${offset}`);
   return offset;
 };
+
+export const two = (n: number) => String(n).padStart(2, "0")
+
+export const four = (n: number) => String(n).padStart(4, "0")
