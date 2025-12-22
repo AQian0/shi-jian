@@ -1,4 +1,4 @@
-import type { FormatStyle } from "./types";
+import type { FormatPattern, FormatStyle } from "./types";
 
 export const MS_DAY = 86400000 as const;
 
@@ -10,6 +10,153 @@ export const STYLES = [
   "medium",
   "short",
 ] as const satisfies ReadonlyArray<FormatStyle>;
+
+export const CLOCK_24_PATTERNS = [
+  [
+    "HH",
+    {
+      hour: "2-digit",
+    },
+  ],
+  [
+    "H",
+    {
+      hour: "numeric",
+    },
+  ],
+] as const satisfies ReadonlyArray<FormatPattern>;
+
+export const CLOCK_12_PATTERNS = [
+  [
+    "hh",
+    {
+      hour: "2-digit",
+    },
+  ],
+  [
+    "h",
+    {
+      hour: "numeric",
+    },
+  ],
+  [
+    "a",
+    {
+      dayPeriod: "narrow",
+    },
+  ],
+  [
+    "A",
+    {
+      dayPeriod: "narrow",
+    },
+  ],
+] as const satisfies ReadonlyArray<FormatPattern>;
+
+export const CLOCK_AGNOSTIC_PATTERNS = [
+  [
+    "YYYY",
+    {
+      year: "numeric",
+    },
+  ],
+  [
+    "YY",
+    {
+      year: "2-digit",
+    },
+  ],
+  [
+    "MMMM",
+    {
+      month: "long",
+    },
+  ],
+  [
+    "MMM",
+    {
+      month: "short",
+    },
+  ],
+  [
+    "MM",
+    {
+      month: "2-digit",
+    },
+  ],
+  [
+    "M",
+    {
+      month: "numeric",
+    },
+  ],
+  [
+    "DD",
+    {
+      day: "2-digit",
+    },
+  ],
+  [
+    "D",
+    {
+      day: "numeric",
+    },
+  ],
+  [
+    "dddd",
+    {
+      weekday: "long",
+    },
+  ],
+  [
+    "ddd",
+    {
+      weekday: "short",
+    },
+  ],
+  [
+    "d",
+    {
+      weekday: "narrow",
+    },
+  ],
+  [
+    "mm",
+    {
+      minute: "2-digit",
+    },
+  ],
+  [
+    "m",
+    {
+      minute: "numeric",
+    },
+  ],
+  [
+    "ss",
+    {
+      second: "2-digit",
+    },
+  ],
+  [
+    "s",
+    {
+      second: "numeric",
+    },
+  ],
+  [
+    "ZZ",
+    {
+      timeZoneName: "long",
+    },
+  ],
+  [
+    "Z",
+    {
+      timeZoneName: "short",
+    },
+  ],
+] as const satisfies ReadonlyArray<FormatPattern>;
 
 export const normalizeStr = (part: Intl.DateTimeFormatPart): Intl.DateTimeFormatPart => {
   if (part.type === "literal") {
