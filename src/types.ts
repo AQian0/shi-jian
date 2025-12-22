@@ -181,3 +181,5 @@ export interface FormatOptions {
    */
   partFilter?: (part: Part) => boolean;
 }
+
+export type TimezoneToken = "Z" | "ZZ";
