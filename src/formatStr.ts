@@ -1,10 +1,6 @@
 import type { Format, Part } from "./types";
 
-import {
-  CLOCK_12_PATTERNS,
-  CLOCK_24_PATTERNS,
-  CLOCK_AGNOSTIC_PATTERNS,
-} from "./common";
+import { CLOCK_12_PATTERNS, CLOCK_24_PATTERNS, CLOCK_AGNOSTIC_PATTERNS } from "./common";
 import { parts } from "./parts";
 
 const escapeTokens = (str: string): string => {
@@ -28,11 +24,7 @@ export const formatStr = (
   return parts(format, locale)
     .filter(filterParts)
     .reduce(
-      (f, p) =>
-        (f +=
-          escapeLiterals && p.partName === "literal"
-            ? escapeTokens(p.token)
-            : p.token),
+      (f, p) => (f += escapeLiterals && p.partName === "literal" ? escapeTokens(p.token) : p.token),
       "",
     )
     .normalize("NFKC");

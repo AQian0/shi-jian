@@ -2,10 +2,7 @@ import type { Part, FilledPart } from "./types";
 
 import { FIXED_LENGTH, fixedLengthByOffset } from "./common";
 
-export const parseParts = (
-  dateStr: string,
-  formatParts: Part[],
-): FilledPart[] => {
+export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] => {
   let i = 0;
   const advance = (
     parts: Part[],

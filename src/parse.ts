@@ -1,10 +1,4 @@
-import type {
-  ParseOptions,
-  Format,
-  Part,
-  FormatStyle,
-  FormatToken,
-} from "./types";
+import type { ParseOptions, Format, Part, FormatStyle, FormatToken } from "./types";
 
 import { ap } from "./ap";
 import { FIXED_LENGTH, STYLES, four, two, validOffset } from "./common";
@@ -22,11 +16,7 @@ const validate = (parts: Part[]): Part[] | never => {
     if (part.partName === "literal" && !isNaN(parseFloat(part.partValue))) {
       throw new Error(`Numbers in format (${part.partValue}).`);
     }
-    if (
-      lastPart &&
-      lastPart.partName !== "literal" &&
-      part.partName !== "literal"
-    ) {
+    if (lastPart && lastPart.partName !== "literal" && part.partName !== "literal") {
       if (
         !(lastPart.token in FIXED_LENGTH) &&
         !(part.token in FIXED_LENGTH) &&
@@ -37,9 +27,7 @@ const validate = (parts: Part[]): Part[] | never => {
           ].includes(lastPart.partValue) && part.token.toLowerCase() === "a"
         )
       ) {
-        throw new Error(
-          `Illegal adjacent tokens (${lastPart.token}, ${part.token})`,
-        );
+        throw new Error(`Illegal adjacent tokens (${lastPart.token}, ${part.token})`);
       }
     }
     lastPart = part;
@@ -48,11 +36,7 @@ const validate = (parts: Part[]): Part[] | never => {
 };
 
 export function parse(options: ParseOptions): Date | never;
-export function parse(
-  dateStr: string,
-  format?: Format,
-  locale?: string,
-): Date | never;
+export function parse(dateStr: string, format?: Format, locale?: string): Date | never;
 export function parse(
   dateStrOrOptions: string | ParseOptions,
   format: Format = "ISO8601",
@@ -74,13 +58,10 @@ export function parse(
   }
   if (!dateStr) throw new Error("parse() requires a date string.");
   const invalid = (): never => {
-    throw new Error(
-      `Date (${dateStr}) does not match format (${formatStr(format, locale)})`,
-    );
+    throw new Error(`Date (${dateStr}) does not match format (${formatStr(format, locale)})`);
   };
   if (format === "ISO8601") return normalizeDate(dateStr);
-  const genitive =
-    STYLES.includes(format as FormatStyle) || typeof format === "object";
+  const genitive = STYLES.includes(format as FormatStyle) || typeof format === "object";
   const formatParts = validate(parts(format, locale).filter(partFilter));
   if (!formatParts.length) throw new Error("parse() requires a pattern.");
   let parsedParts;
@@ -186,9 +167,7 @@ export function parse(
   D = dateOverflow === "backward" ? Math.min(D, maxDaysInMonth) : D;
 
   // Create the date.
-  const isoString = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(
-    m,
-  )}:${two(s)}${offset}`;
+  const isoString = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(m)}:${two(s)}${offset}`;
   const d = new Date(isoString);
   if (isFinite(+d)) return d;
   return invalid();
