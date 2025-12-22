@@ -8,7 +8,7 @@ const dayPeriodMap: Map<
   }
 > = new Map();
 
-export function ap(ampm: "am" | "pm", locale: string): string {
+export const ap = (ampm: "am" | "pm", locale: string): string => {
   const l = dayPeriodMap.get(locale);
   if (l && l[ampm]) return l[ampm] as string;
   const specimen = new Date(SPEC_DATE);
