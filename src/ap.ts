@@ -35,4 +35,4 @@ export const ap = (ampm: "am" | "pm", locale: string): string => {
     return period.value;
   }
   return ampm;
-}
+};
