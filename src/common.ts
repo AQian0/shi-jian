@@ -175,12 +175,14 @@ export const minsToOffset = (timeDiffInMins: number, token: TimezoneToken = "Z")
   return `${sign}${hours}:${mins}`;
 };
 
+const OFFSET_WITH_COLON_REGEX = /^[+-]\d{2}:\d{2}/;
+const OFFSET_WITHOUT_COLON_REGEX = /^[+-]\d{4}/;
+
 export const fixedLengthByOffset = (offsetString: string): 6 | 5 => {
-  // starts with [+-]xx:xx
-  if (/^[+-]\d{2}:\d{2}/.test(offsetString)) {
+  if (OFFSET_WITH_COLON_REGEX.test(offsetString)) {
     return 6;
   }
-  if (/^[+-]\d{4}/.test(offsetString)) {
+  if (OFFSET_WITHOUT_COLON_REGEX.test(offsetString)) {
     return 5;
   }
   throw new Error("Invalid offset format");
