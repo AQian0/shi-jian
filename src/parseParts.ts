@@ -32,7 +32,7 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
         if (len < 0) throw new Error();
       } else if (next.partName === "dayPeriod") {
         for (let i = 1; i <= 4; i++) {
-          if (isNaN(Number(dateStr.charAt(pos + i)))) {
+          if (Number.isNaN(Number(dateStr.charAt(pos + i)))) {
             len = i;
             break;
           }

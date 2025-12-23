@@ -13,7 +13,7 @@ import { range } from "./range";
 const validate = (parts: Part[]): Part[] | never => {
   let lastPart: Part | undefined = undefined;
   for (const part of parts) {
-    if (part.partName === "literal" && !isNaN(Number.parseFloat(part.partValue))) {
+    if (part.partName === "literal" && !Number.isNaN(Number.parseFloat(part.partValue))) {
       throw new Error(`Numbers in format (${part.partValue}).`);
     }
     if (lastPart && lastPart.partName !== "literal" && part.partName !== "literal") {

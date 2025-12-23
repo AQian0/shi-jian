@@ -167,7 +167,7 @@ const guessPattern = <T extends Intl.DateTimeFormatPartTypes>(
   options: Intl.DateTimeFormatOptions,
 ): FormatPattern | undefined => {
   const length = partValue.length;
-  const isNumeric = !isNaN(Number(partValue));
+  const isNumeric = !Number.isNaN(Number(partValue));
 
   switch (partName) {
     case "year":
