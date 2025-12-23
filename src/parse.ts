@@ -11,7 +11,7 @@ import { parts } from "./parts";
 import { range } from "./range";
 
 const validate = (parts: Part[]): Part[] | never => {
-  let lastPart: Part | undefined = undefined;
+  let lastPart: Part | undefined = void 0;
   for (const part of parts) {
     if (part.partName === "literal" && !Number.isNaN(Number.parseFloat(part.partValue))) {
       throw new Error(`Numbers in format (${part.partValue}).`);

@@ -134,7 +134,7 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
         part.type,
         part.value,
         locale,
-        part.type === "hour" ? hourType : undefined,
+        part.type === "hour" ? hourType : void 0,
         options,
       );
       if (!formatPattern) return;
@@ -220,7 +220,7 @@ const guessPattern = <T extends Intl.DateTimeFormatPartTypes>(
       return tokens.get(options.timeStyle === "full" ? "Z" : "ZZ");
 
     default:
-      return undefined;
+      return void 0;
   }
 };
 

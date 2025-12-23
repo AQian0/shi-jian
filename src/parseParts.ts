@@ -15,7 +15,7 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
   ];
   let pos = 0;
   const parsed: FilledPart[] = [];
-  let n: undefined | Part = undefined;
+  let n: undefined | Part = void 0;
   do {
     const [current, next] = advance(formatParts);
     n = next;
