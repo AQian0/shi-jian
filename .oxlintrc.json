@@ -17,7 +17,12 @@
     "no-empty-function": "error",
     "no-eq-null": "error",
     "no-iterator": "error",
-    "no-plusplus": "error",
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
     "no-proto": "error",
     "no-regex-spaces": "error",
     "no-undefined": "error",
