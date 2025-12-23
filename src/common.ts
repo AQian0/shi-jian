@@ -1,8 +1,8 @@
 import type { FormatPattern, FormatStyle, TimezoneToken } from "./types";
 
-export const MS_DAY = 86400000 as const;
+export const MS_DAY = 86400000;
 
-export const SPEC_DATE = "1999-03-04T02:05:01.000Z" as const;
+export const SPEC_DATE = "1999-03-04T02:05:01.000Z";
 
 export const STYLES = [
   "full",
