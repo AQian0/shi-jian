@@ -169,6 +169,6 @@ export function parse(
   // Create the date.
   const isoString = `${four(Y)}-${two(M + 1)}-${two(D)}T${two(h)}:${two(m)}:${two(s)}${offset}`;
   const d = new Date(isoString);
-  if (isFinite(+d)) return d;
+  if (Number.isFinite(+d)) return d;
   return invalid();
 }
