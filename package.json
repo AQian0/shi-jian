@@ -1,7 +1,6 @@
 {
   "name": "shi-jian",
   "type": "module",
-  "module": "index.ts",
   "devDependencies": {
     "@types/bun": "latest",
     "oxfmt": "^0.18.0",
