@@ -160,7 +160,10 @@ export const CLOCK_AGNOSTIC_PATTERNS = [
 
 export const normalizeStr = (part: Intl.DateTimeFormatPart): Intl.DateTimeFormatPart => {
   if (part.type === "literal") {
-    part.value = part.value.normalize("NFKC");
+    return {
+      ...part,
+      value: part.value.normalize("NFKC"),
+    };
   }
   return part;
 };
