@@ -1,6 +1,7 @@
 import type { FormatPattern, FormatStyle, TimezoneToken } from "./types";
 
 export const MS_DAY = 86400000;
+export const MINUTES_PER_HOUR = 60;
 
 export const SPEC_DATE = "1999-03-04T02:05:01.000Z";
 
@@ -169,8 +170,8 @@ export const normalizeStr = (part: Intl.DateTimeFormatPart): Intl.DateTimeFormat
 };
 
 export const minsToOffset = (timeDiffInMins: number, token: TimezoneToken = "Z"): string => {
-  const hours = String(Math.floor(Math.abs(timeDiffInMins / 60))).padStart(2, "0");
-  const mins = String(Math.abs(timeDiffInMins % 60)).padStart(2, "0");
+  const hours = two(Math.floor(Math.abs(timeDiffInMins / MINUTES_PER_HOUR)));
+  const mins = two(Math.abs(timeDiffInMins % MINUTES_PER_HOUR));
   const sign = timeDiffInMins < 0 ? "-" : "+";
   if (token === "ZZ") {
     return `${sign}${hours}${mins}`;
