@@ -10,7 +10,7 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
     Part,
     Part | undefined,
   ] => [
-    parts[i++] as Part,
+    parts[i += 1] as Part,
     parts[i],
   ];
   let pos = 0;
