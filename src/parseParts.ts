@@ -23,7 +23,7 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
     if (current.partName === "literal") {
       len = current.partValue.length;
     } else if (current.partName === "timeZoneName") {
-      len = fixedLengthByOffset(dateStr.substring(pos));
+      len = fixedLengthByOffset(dateStr.slice(pos));
     } else if (current.token in FIXED_LENGTH) {
       len = FIXED_LENGTH[current.token as keyof typeof FIXED_LENGTH];
     } else if (next) {
@@ -38,7 +38,7 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
           }
         }
       } else {
-        const nextChar = dateStr.substring(pos).search(/\d/);
+        const nextChar = dateStr.slice(pos).search(/\d/);
         if (nextChar !== -1) len = pos + nextChar;
       }
     } else {
@@ -46,7 +46,7 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
     }
     parsed.push({
       ...current,
-      value: dateStr.substring(pos, pos + len),
+      value: dateStr.slice(pos, pos + len),
     });
     pos += len;
   } while (n);

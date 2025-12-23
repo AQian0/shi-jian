@@ -55,7 +55,7 @@ const createPartMap = (
         .formatToParts(d)
         .map(normalizeStr),
     );
-    if (genitive && genitiveParts.length) {
+    if (genitive && genitiveParts.length > 0) {
       for (const part of genitiveParts) {
         let formattedParts: Intl.DateTimeFormatPart[] = [];
         switch (part.token) {
@@ -85,8 +85,8 @@ const createPartMap = (
     }
   };
 
-  if (hour12.length) addValues(hour12, true);
-  if (hour24.length) addValues(hour24);
+  if (hour12.length > 0) addValues(hour12, true);
+  if (hour24.length > 0) addValues(hour24);
 
   return valueParts.reduce(
     (map, part) => {

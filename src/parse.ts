@@ -13,7 +13,7 @@ import { range } from "./range";
 const validate = (parts: Part[]): Part[] | never => {
   let lastPart: Part | undefined = undefined;
   for (const part of parts) {
-    if (part.partName === "literal" && !isNaN(parseFloat(part.partValue))) {
+    if (part.partName === "literal" && !isNaN(Number.parseFloat(part.partValue))) {
       throw new Error(`Numbers in format (${part.partValue}).`);
     }
     if (lastPart && lastPart.partName !== "literal" && part.partName !== "literal") {
@@ -63,7 +63,7 @@ export function parse(
   if (format === "ISO8601") return normalizeDate(dateStr);
   const genitive = STYLES.includes(format as FormatStyle) || typeof format === "object";
   const formatParts = validate(parts(format, locale).filter(partFilter));
-  if (!formatParts.length) throw new Error("parse() requires a pattern.");
+  if (formatParts.length === 0) throw new Error("parse() requires a pattern.");
   let parsedParts;
   try {
     parsedParts = parseParts(dateStr, formatParts);

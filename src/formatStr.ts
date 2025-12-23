@@ -9,7 +9,7 @@ const escapeTokens = (str: string): string => {
     ...CLOCK_24_PATTERNS,
     ...CLOCK_12_PATTERNS,
   ]
-    .sort((a, b) => (a[0].length > b[0].length ? 1 : -1))
+    .toSorted((a, b) => (a[0].length > b[0].length ? 1 : -1))
     .reduce((target, part) => {
       return target.replace(part[0], `\\${part[0]}`);
     }, str);
