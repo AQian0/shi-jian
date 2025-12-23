@@ -140,10 +140,10 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
         part.type === "hour" ? hourType : void 0,
         options,
       );
-      if (!formatPattern) return;
+      if (!formatPattern) return void 0;
 
       const partValue = formatPattern[1][partName];
-      if (!partValue) return;
+      if (!partValue) return void 0;
 
       if (!formatPattern[2]) {
         formatPattern[2] = new RegExp(`${formatPattern[0]}`, "g");
