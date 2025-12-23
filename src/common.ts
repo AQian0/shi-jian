@@ -180,6 +180,8 @@ export const minsToOffset = (timeDiffInMins: number, token: TimezoneToken = "Z")
 
 const OFFSET_WITH_COLON_REGEX = /^[+-]\d{2}:\d{2}/;
 const OFFSET_WITHOUT_COLON_REGEX = /^[+-]\d{4}/;
+const OFFSET_Z_VALIDATION_REGEX = /^[+-][0-3]\d:[0-6]\d$/;
+const OFFSET_ZZ_VALIDATION_REGEX = /^[+-][0-3]\d[0-6]\d$/;
 
 export const fixedLengthByOffset = (offsetString: string): 6 | 5 => {
   if (OFFSET_WITH_COLON_REGEX.test(offsetString)) {
@@ -191,16 +193,14 @@ export const fixedLengthByOffset = (offsetString: string): 6 | 5 => {
   throw new Error("Invalid offset format");
 };
 
-export const validOffset = (offset: string, token: TimezoneToken = "Z") => {
-  const valid = ((token: TimezoneToken): boolean => {
-    switch (token) {
-      case "Z":
-        return /^([+-])[0-3][0-9]:[0-6][0-9]$/.test(offset);
-      case "ZZ":
-        return /^([+-])[0-3][0-9][0-6][0-9]$/.test(offset);
-    }
-  })(token);
-  if (!valid) throw new Error(`Invalid offset: ${offset}`);
+export const validOffset = (offset: string, token: TimezoneToken = "Z"): string => {
+  const valid =
+    token === "Z"
+      ? OFFSET_Z_VALIDATION_REGEX.test(offset)
+      : OFFSET_ZZ_VALIDATION_REGEX.test(offset);
+  if (!valid) {
+    throw new Error(`Invalid offset: ${offset}`);
+  }
   return offset;
 };
 
