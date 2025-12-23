@@ -1,16 +1,18 @@
 import { SPEC_DATE, normalizeStr } from "./common";
 
-const dayPeriodMap: Map<
-  string,
-  {
-    am?: string;
-    pm?: string;
-  }
-> = new Map();
+type DayPeriod = "am" | "pm";
+type LocaleDayPeriods = {
+  readonly am?: string;
+  readonly pm?: string;
+};
 
-export const ap = (ampm: "am" | "pm", locale: string): string => {
-  const l = dayPeriodMap.get(locale);
-  if (l && l[ampm]) return l[ampm] as string;
+const dayPeriodCache = new Map<string, LocaleDayPeriods>();
+
+export const ap = (ampm: DayPeriod, locale: string): string => {
+  const cached = dayPeriodCache.get(locale)?.[ampm];
+  if (cached) {
+    return cached;
+  }
   const specimen = new Date(SPEC_DATE);
   specimen.setUTCHours(ampm === "am" ? 5 : 20);
   const subparts = new Intl.DateTimeFormat(locale, {
@@ -22,16 +24,11 @@ export const ap = (ampm: "am" | "pm", locale: string): string => {
     .map(normalizeStr);
   const period = subparts.find(part => part.type === "dayPeriod");
   if (period) {
-    const localePeriods: {
-      am?: string;
-      pm?: string;
-    } = l || {};
-    dayPeriodMap.set(
-      locale,
-      Object.assign(localePeriods, {
-        [ampm]: period.value,
-      }),
-    );
+    const existingPeriods = dayPeriodCache.get(locale) || {};
+    dayPeriodCache.set(locale, {
+      ...existingPeriods,
+      [ampm]: period.value,
+    });
     return period.value;
   }
   return ampm;
