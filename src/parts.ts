@@ -43,7 +43,10 @@ export const parts = (format: Format, locale: string): Part[] => {
     f = f.replace(pattern[2], (_, prefix, actualMatch) => {
       if (prefix === "\\") return actualMatch;
       const prefixStr = typeof prefix === "string" ? prefix : "";
-      return `${prefixStr}{!${didAdd += 1 ? match : match += 1}!}`;
+      didAdd += 1;
+      const currentMatch = match;
+      match += 1;
+      return `${prefixStr}{!${currentMatch}!}`;
     });
     return didAdd > 0;
   };
