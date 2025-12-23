@@ -1,7 +1,42 @@
 import type { FormatPattern, FormatStyle, TimezoneToken } from "./types";
 
-export const MS_DAY = 86400000;
+export const MS_PER_SECOND = 1000;
+export const SECONDS_PER_MINUTE = 60;
+export const MS_PER_MINUTE = (MS_PER_SECOND * SECONDS_PER_MINUTE) as 60000;
 export const MINUTES_PER_HOUR = 60;
+export const MS_DAY = 86400000;
+
+export const MONTHS_PER_YEAR = 12;
+export const DAYS_IN_WEEK = 7;
+export const MAX_DAYS_IN_MONTH = 31;
+export const HOURS_PER_DAY_24H = 24;
+export const HOURS_PER_DAY_12H = 12;
+export const NOON = 12;
+export const MIDNIGHT = 0;
+export const MIDNIGHT_24H = 24;
+export const SATURDAY_INDEX = 6;
+
+export const MIN_MONTH = 1;
+export const MAX_MONTH = 12;
+export const MIN_DAY = 1;
+export const MAX_HOUR = 23;
+export const MAX_MINUTE = 59;
+export const MAX_SECOND = 59;
+export const SINGLE_DIGIT_MAX = 9;
+
+export const AM_TEST_HOUR = 5;
+export const PM_TEST_HOUR = 20;
+
+export const CENTURY = 100;
+export const YEAR_PREDICTION_THRESHOLD = 20;
+export const YEAR_RANGE = 120;
+
+export const OFFSET_LENGTH_WITH_COLON = 6;
+export const OFFSET_LENGTH_WITHOUT_COLON = 5;
+
+export const MAX_DAY_PERIOD_LENGTH = 4;
+export const FIRST_CHAR_INDEX = 0;
+export const SECOND_CHAR_INDEX = 1;
 
 export const SPEC_DATE = "1999-03-04T02:05:01.000Z";
 
@@ -186,10 +221,10 @@ const OFFSET_ZZ_VALIDATION_REGEX = /^[+-][0-3]\d[0-6]\d$/;
 
 export const fixedLengthByOffset = (offsetString: string): 6 | 5 => {
   if (OFFSET_WITH_COLON_REGEX.test(offsetString)) {
-    return 6;
+    return OFFSET_LENGTH_WITH_COLON;
   }
   if (OFFSET_WITHOUT_COLON_REGEX.test(offsetString)) {
-    return 5;
+    return OFFSET_LENGTH_WITHOUT_COLON;
   }
   throw new Error("Invalid offset format");
 };

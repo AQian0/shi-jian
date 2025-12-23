@@ -1,6 +1,6 @@
 import type { Part, FilledPart } from "./types";
 
-import { FIXED_LENGTH, fixedLengthByOffset } from "./common";
+import { FIXED_LENGTH, MAX_DAY_PERIOD_LENGTH, fixedLengthByOffset } from "./common";
 
 export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] => {
   let i = 0;
@@ -31,7 +31,7 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
         len = dateStr.indexOf(next.partValue, pos) - pos;
         if (len < 0) throw new Error();
       } else if (next.partName === "dayPeriod") {
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 1; i <= MAX_DAY_PERIOD_LENGTH; i++) {
           if (Number.isNaN(Number(dateStr.charAt(pos + i)))) {
             len = i;
             break;

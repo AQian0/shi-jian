@@ -1,7 +1,16 @@
 import type { ParseOptions, Format, Part, FormatStyle, FormatToken } from "./types";
 
 import { ap } from "./ap";
-import { FIXED_LENGTH, STYLES, four, two, validOffset } from "./common";
+import {
+  FIXED_LENGTH,
+  MIDNIGHT,
+  MIDNIGHT_24H,
+  NOON,
+  STYLES,
+  four,
+  two,
+  validOffset,
+} from "./common";
 import { normalizeDate } from "./date";
 import { formatStr } from "./formatStr";
 import { fourDigitYear } from "./fourDigitYear";
@@ -135,13 +144,13 @@ export function parse(
       }
     }
   });
-  let hours = parsed.get("HH") || 0;
+  let hours = parsed.get("HH") || MIDNIGHT;
   if (a === false) {
-    hours += hours === 12 ? 0 : 12;
-    parsed.set("HH", hours === 24 ? 0 : hours);
-  } else if (a === true && hours === 12) {
+    hours += hours === NOON ? MIDNIGHT : NOON;
+    parsed.set("HH", hours === MIDNIGHT_24H ? MIDNIGHT : hours);
+  } else if (a === true && hours === NOON) {
     // 12am === 00 in 24 hour clock.
-    parsed.set("HH", 0);
+    parsed.set("HH", MIDNIGHT);
   }
   parsed.set("MM", (parsed.get("MM") || 1) - 1);
   let [Y, M, D, h, m, s] = [

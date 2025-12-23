@@ -1,6 +1,6 @@
 import type { MaybeDateInput, TimezoneToken } from "./types";
 
-import { normalizeStr, minsToOffset } from "./common";
+import { MS_PER_SECOND, SECONDS_PER_MINUTE, minsToOffset, normalizeStr } from "./common";
 import { normalizeDate } from "./date";
 
 function relativeTime(d: Date, timeZone: string): Date {
@@ -42,6 +42,8 @@ export function offset(
   const d = normalizeDate(utcTime);
   const timeA = relativeTime(d, tzA);
   const timeB = relativeTime(d, tzB);
-  const timeDiffInMins = Math.round((timeB.getTime() - timeA.getTime()) / 1000 / 60);
+  const timeDiffInMins = Math.round(
+    (timeB.getTime() - timeA.getTime()) / MS_PER_SECOND / SECONDS_PER_MINUTE,
+  );
   return minsToOffset(timeDiffInMins, timeZoneToken);
 }

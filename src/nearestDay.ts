@@ -1,6 +1,7 @@
 import type { MaybeDateInput } from "./types";
 
 import { addDays } from "./addDays";
+import { SATURDAY_INDEX } from "./common";
 import { normalizeDate } from "./date";
 import { dayOfYear } from "./dayOfYear";
 import { monthDays } from "./monthDays";
@@ -21,7 +22,7 @@ export function nearestDay(
       break;
     case "week":
       decrements = d.getDay() + 1;
-      increments = 6 - d.getDay();
+      increments = SATURDAY_INDEX - d.getDay();
       break;
     case "year": {
       const total = yearDays(d);
