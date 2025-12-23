@@ -27,7 +27,7 @@ export const SINGLE_DIGIT_MAX = 9;
 export const AM_TEST_HOUR = 5;
 export const PM_TEST_HOUR = 20;
 
-export const CENTURY = 100;
+export const YEARS_PER_CENTURY = 100;
 export const YEAR_PREDICTION_THRESHOLD = 20;
 export const YEAR_RANGE = 120;
 
