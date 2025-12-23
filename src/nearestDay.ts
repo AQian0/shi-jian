@@ -23,12 +23,13 @@ export function nearestDay(
       decrements = d.getDay() + 1;
       increments = 6 - d.getDay();
       break;
-    case "year":
+    case "year": {
       const total = yearDays(d);
       const day = dayOfYear(d);
       decrements = day;
       increments = total - day;
       break;
+    }
     default:
       increments = decrements = constraint;
   }
