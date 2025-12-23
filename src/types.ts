@@ -95,7 +95,7 @@ export type FormatStyleObj =
       time: FormatStyle;
     };
 
-export type Format = FormatStyle | FormatStyleObj | (string & {});
+export type Format = FormatStyle | FormatStyleObj | string;
 
 /**
  * A union of all available formatting tokens.
