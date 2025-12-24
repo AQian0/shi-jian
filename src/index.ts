@@ -19,3 +19,8 @@ export * from "./range";
 export * from "./removeOffset";
 export * from "./types";
 export * from "./yearDays";
+export * from "./addHours";
+export * from "./addMinutes";
+export * from "./addMonths";
+export * from "./addSeconds";
+export * from "./addYears";
