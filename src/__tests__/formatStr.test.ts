@@ -3,8 +3,6 @@ import { describe, it, expect } from "vitest";
 import { format } from "../format";
 import { formatStr } from "../formatStr";
 
-process.env.TZ = "America/New_York";
-
 describe("formatStr", () => {
   it("can parse en locale full date format into parts", () => {
     expect(formatStr("full", "en")).toEqual("dddd, MMMM D, YYYY");

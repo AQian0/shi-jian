@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 
 import { normalizeDate } from "../date";
 
-process.env.TZ = "America/New_York";
 describe("normalizeDate", () => {
   it("qualifies and re-timezones a date", () => {
     expect(normalizeDate("2022-01-22 00:00:00").toISOString()).toBe("2022-01-22T05:00:00.000Z");

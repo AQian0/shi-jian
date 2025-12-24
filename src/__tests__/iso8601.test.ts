@@ -2,8 +2,6 @@ import { describe, it, expect } from "vitest";
 
 import { isIso8601 } from "../iso8601";
 
-process.env.TZ = "America/New_York";
-
 describe("validating ISO 8601", () => {
   it("validates full dates", () => expect(isIso8601("2022-01-22 00:00:00")).toBe(true));
   it("validates full dates with T", () => expect(isIso8601("2022-01-22T23:59:59")).toBe(true));

@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 
 import { normalizeDate } from "../date";
 import { monthEnd } from "../monthEnd";
-process.env.TZ = "America/New_York";
 
 describe("monthEnd", () => {
   it("gets the correct last day of Feb on leap years", () => {

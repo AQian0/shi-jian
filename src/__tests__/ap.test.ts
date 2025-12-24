@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 
 import { ap } from "../ap";
 
-process.env.TZ = "America/New_York";
 describe("ap", () => {
   it("should return AM period when ampm is 'am'", () => {
     const result = ap("am", "en-US");

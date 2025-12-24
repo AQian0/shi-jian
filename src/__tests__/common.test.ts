@@ -2,8 +2,6 @@ import { describe, it, expect } from "vitest";
 
 import { normalizeStr, minsToOffset, fixedLengthByOffset, validOffset, two, four } from "../common";
 
-process.env.TZ = "America/New_York";
-
 describe("normalizeStr", () => {
   it("should normalize literal part when type is literal", () => {
     const part: Intl.DateTimeFormatPart = {

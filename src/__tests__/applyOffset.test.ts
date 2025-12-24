@@ -2,8 +2,6 @@ import { describe, it, expect } from "vitest";
 
 import { applyOffset } from "../applyOffset";
 
-process.env.TZ = "America/New_York";
-
 describe("applyOffset", () => {
   it("can apply a negative offset to a date", () => {
     expect(applyOffset("2023-02-22T00:00:00Z", "-05:00").toISOString()).toBe(

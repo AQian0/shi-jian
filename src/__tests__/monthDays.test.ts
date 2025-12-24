@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 
 import { monthDays } from "../monthDays";
-process.env.TZ = "America/New_York";
 
 describe("monthDays", () => {
   it("gets the correct number of december days", () => {
