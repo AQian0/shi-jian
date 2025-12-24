@@ -6,7 +6,8 @@ export const fourDigitYear = (value: string): number => {
   const century = Math.floor(y / YEARS_PER_CENTURY);
   const parsedYear = Number(value);
   return (
-    (century + (parsedYear > currentYear + YEAR_PREDICTION_THRESHOLD ? -1 : 0)) * YEARS_PER_CENTURY +
+    (century + (parsedYear > currentYear + YEAR_PREDICTION_THRESHOLD ? -1 : 0)) *
+      YEARS_PER_CENTURY +
     parsedYear
   );
 };
