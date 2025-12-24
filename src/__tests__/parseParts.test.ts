@@ -1,9 +1,14 @@
 import { describe, it, expect } from "vitest";
 
 import type { Part } from "../types";
+
 import { parseParts } from "../parseParts";
 
-const createPart = (token: string, partName: Intl.DateTimeFormatPartTypes, partValue: string): Part => ({
+const createPart = (
+  token: string,
+  partName: Intl.DateTimeFormatPartTypes,
+  partValue: string,
+): Part => ({
   token,
   partName,
   partValue,
@@ -88,7 +93,9 @@ describe("parseParts", () => {
   });
 
   it("should parse to end of string when last part has no next part", () => {
-    const formatParts: Part[] = [createPart("YYYY", "year", "numeric")];
+    const formatParts: Part[] = [
+      createPart("YYYY", "year", "numeric"),
+    ];
 
     const result = parseParts("2024", formatParts);
 

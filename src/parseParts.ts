@@ -4,7 +4,12 @@ import { FIXED_LENGTH, MAX_DAY_PERIOD_LENGTH, fixedLengthByOffset } from "./comm
 
 export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] => {
   let index = 0;
-  const advance = (parts: Part[]): [Part, Part | undefined] => [
+  const advance = (
+    parts: Part[],
+  ): [
+    Part,
+    Part | undefined,
+  ] => [
     parts[index++] as Part,
     parts[index],
   ];
