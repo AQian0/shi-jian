@@ -3,22 +3,15 @@ import type { Part, FilledPart } from "./types";
 import { FIXED_LENGTH, MAX_DAY_PERIOD_LENGTH, fixedLengthByOffset } from "./common";
 
 export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] => {
-  let i = 0;
-  const advance = (
-    parts: Part[],
-  ): [
-    Part,
-    Part | undefined,
-  ] => [
-    parts[i++] as Part,
-    parts[i],
+  let index = 0;
+  const advance = (parts: Part[]): [Part, Part | undefined] => [
+    parts[index++] as Part,
+    parts[index],
   ];
   let pos = 0;
   const parsed: FilledPart[] = [];
-  let n: undefined | Part = void 0;
-  do {
+  while (index < formatParts.length) {
     const [current, next] = advance(formatParts);
-    n = next;
     let len = 1;
     if (current.partName === "literal") {
       len = current.partValue.length;
@@ -31,24 +24,24 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
         len = dateStr.indexOf(next.partValue, pos) - pos;
         if (len < 0) throw new Error();
       } else if (next.partName === "dayPeriod") {
-        for (let i = 1; i <= MAX_DAY_PERIOD_LENGTH; i++) {
-          if (Number.isNaN(Number(dateStr.charAt(pos + i)))) {
-            len = i;
+        for (let j = 1; j <= MAX_DAY_PERIOD_LENGTH; j++) {
+          if (Number.isNaN(Number(dateStr.charAt(pos + j)))) {
+            len = j;
             break;
           }
         }
       } else {
         const nextChar = dateStr.slice(pos).search(/\d/);
-        if (nextChar !== -1) len = pos + nextChar;
+        if (nextChar !== -1) len = nextChar;
       }
     } else {
-      len = dateStr.length;
+      len = dateStr.length - pos;
     }
     parsed.push({
       ...current,
       value: dateStr.slice(pos, pos + len),
     });
     pos += len;
-  } while (n);
+  }
   return parsed;
 };
