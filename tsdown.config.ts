@@ -1,5 +1,6 @@
 import { defineConfig } from "tsdown";
 
+// oxlint-disable-next-line no-default-export
 export default defineConfig([
   // for bundlers like vite, rollup, esbuild, webpack etc
   {
