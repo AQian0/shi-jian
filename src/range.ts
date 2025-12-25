@@ -15,7 +15,7 @@ import { format } from "./format";
 
 export const range = (token: FormatToken, locale = "en", genitive = false): string[] => {
   const r: (n: number, c: (index: number) => string | number) => string[] = (n, c) =>
-    Array(n)
+    new Array(n)
       .fill("")
       .map((_, i) => `${c(i)}`);
 
