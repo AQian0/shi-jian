@@ -227,6 +227,25 @@ const guessPattern = <T extends Intl.DateTimeFormatPartTypes>(
   }
 };
 
+const applyGenitiveMonth = (
+  locale: string,
+  style: "long" | "short",
+  date: Date,
+  segments: ReadonlyArray<Intl.DateTimeFormatPart>,
+): void => {
+  const genitiveFormattedParts = new Intl.DateTimeFormat(locale, {
+    dateStyle: style === "short" ? "medium" : "long",
+    timeZone: "UTC",
+  })
+    .formatToParts(date)
+    .map(normalizeStr);
+  const genitiveMonth = genitiveFormattedParts.find(part => part.type === "month");
+  const index = segments.findIndex(part => part.type === "month");
+  if (index > -1 && genitiveMonth) {
+    segments[index] = genitiveMonth;
+  }
+};
+
 const partStyle = (
   locale: string,
   part: keyof NamedFormats,
@@ -277,17 +296,7 @@ const partStyle = (
           .map(normalizeStr);
 
         if (style === "long" || style === "short") {
-          const genitiveFormattedParts = new Intl.DateTimeFormat(locale, {
-            dateStyle: style === "short" ? "medium" : "long",
-            timeZone: "UTC",
-          })
-            .formatToParts(date)
-            .map(normalizeStr);
-          const genitiveMonth = genitiveFormattedParts.find(part => part.type === "month");
-          const index = segments.findIndex(part => part.type === "month");
-          if (index > -1 && genitiveMonth) {
-            segments[index] = genitiveMonth;
-          }
+          applyGenitiveMonth(locale, style, date, segments);
         }
 
         segments.forEach(part => {
