@@ -1,5 +1,4 @@
 import type {
-  DateInput,
   FilledPart,
   Format,
   FormatOptions,
@@ -161,7 +160,7 @@ export function format(
   genitive: boolean | undefined = false,
   partFilter?: (part: Part) => boolean,
 ): string {
-  let tz: string | undefined, forceOffset: string | undefined;
+  let forceOffset: string | undefined, tz: string | undefined;
 
   if (
     inputDateOrOptions &&
