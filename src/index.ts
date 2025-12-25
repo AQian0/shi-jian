@@ -35,3 +35,4 @@ export * from "./hourStart";
 export * from "./hourEnd";
 export * from "./minuteStart";
 export * from "./minuteEnd";
+export * from "./tzDate";
