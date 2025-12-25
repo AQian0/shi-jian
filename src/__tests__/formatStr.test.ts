@@ -1,6 +1,5 @@
 import { describe, it, expect } from "vitest";
 
-import { format } from "../format";
 import { formatStr } from "../formatStr";
 
 describe("formatStr", () => {
