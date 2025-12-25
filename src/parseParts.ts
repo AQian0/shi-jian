@@ -19,6 +19,7 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
     Part,
     Part | undefined,
   ] => [
+    // eslint-disable-next-line no-plusplus
     parts[index++] as Part,
     parts[index],
   ];
