@@ -148,14 +148,14 @@ const getOffsetFormat = (format: Format): TimezoneToken => {
 
 export function format(options: FormatOptions): string;
 export function format(
-  inputDate: DateInput,
+  inputDate: MaybeDateInput,
   format?: Format,
   locale?: string,
   genitive?: boolean,
   partFilter?: (part: Part) => boolean,
 ): string;
 export function format(
-  inputDateOrOptions: DateInput | FormatOptions,
+  inputDateOrOptions: MaybeDateInput | FormatOptions,
   format: Format = "long",
   locale: string | undefined = "device",
   genitive: boolean | undefined = false,
@@ -163,7 +163,11 @@ export function format(
 ): string {
   let tz: string | undefined, forceOffset: string | undefined;
 
-  if (typeof inputDateOrOptions === "object" && !(inputDateOrOptions instanceof Date)) {
+  if (
+    inputDateOrOptions &&
+    typeof inputDateOrOptions === "object" &&
+    !(inputDateOrOptions instanceof Date)
+  ) {
     ({ date: inputDateOrOptions, format, locale, genitive, partFilter, tz } = inputDateOrOptions);
   }
   if (format === "ISO8601") return normalizeDate(inputDateOrOptions).toISOString();

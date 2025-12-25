@@ -159,7 +159,7 @@ export interface FormatOptions {
   /**
    * A date object or ISO 8601 string.
    */
-  date: DateInput;
+  date: MaybeDateInput;
   /**
    * A format string or object.
    */
