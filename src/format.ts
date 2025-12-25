@@ -74,6 +74,8 @@ const createPartMap = (
               .formatToParts(d)
               .map(normalizeStr);
             break;
+          default:
+            break;
         }
         const genitiveFormattedPart = formattedParts.find(p => p.type === part.partName);
         const index = valueParts.findIndex(p => p.type === part.partName);

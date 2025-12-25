@@ -25,6 +25,8 @@ export const applyOffset = (dateInput?: MaybeDateInput, offset = "+00:00"): Date
         return "ZZ";
       case OFFSET_LENGTH_WITH_COLON:
         return "Z";
+      default:
+        return "Z";
     }
   })();
   const timeDiffInMins = offsetToMins(offset, token);

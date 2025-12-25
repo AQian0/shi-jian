@@ -139,6 +139,8 @@ export function parse(
             case "MMMM":
               parsed.set("MM", index + 1);
               break;
+            default:
+              break;
           }
         }
       }
