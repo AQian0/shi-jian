@@ -231,7 +231,7 @@ const applyGenitiveMonth = (
   locale: string,
   style: "long" | "short",
   date: Date,
-  segments: ReadonlyArray<Intl.DateTimeFormatPart>,
+  segments: Intl.DateTimeFormatPart[],
 ): void => {
   const genitiveFormattedParts = new Intl.DateTimeFormat(locale, {
     dateStyle: style === "short" ? "medium" : "long",
