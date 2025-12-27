@@ -6,11 +6,17 @@ shi-jian，即时间，一个富有人体工学的现代日期库
 
 ## 安装
 
-`npm install shi-jian`
+```shell
+npm install shi-jian
+```
 
-`pnpm add shi-jian`
+```shell
+pnpm add shi-jian
+```
 
-`bun add shi-jian`
+```shell
+bun add shi-jian
+```
 
 ## 注意事项
 
