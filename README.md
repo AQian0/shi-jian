@@ -1,15 +1,35 @@
 # shi-jian
 
-To install dependencies:
+***该库仍在开发中***
 
-```bash
-bun install
-```
+shi-jian，即时间，一个富有人体工学的现代日期库
 
-To run:
+## 安装
 
-```bash
-bun run index.ts
-```
+`npm install shi-jian`
 
-This project was created using `bun init` in bun v1.3.5. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+`pnpm add shi-jian`
+
+`bun add shi-jian`
+
+## 注意事项
+
+- shi-jian的主要功能在于解析与格式化日期对象，目前暂不考虑helpers实现
+
+- shi-jian当前的测试内容极其不完善
+
+## 路线图
+
+- [ ] undefined、null与""处理优化
+
+- [ ] 函数性能优化
+
+- [ ] 类型声明优化，提高语义化
+
+- [ ] 测试功能完善
+
+- [ ] 文档
+
+## 致谢
+
+- [tempo](https://github.com/formkit/tempo): 灵感与设计来源，早期代码极大参考了该项目源码。
