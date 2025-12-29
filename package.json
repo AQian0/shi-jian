@@ -33,6 +33,11 @@
       }
     }
   },
+  "scripts": {
+    "build": "bunx tsdown",
+    "test": "bunx vitest",
+    "publint": "bunx publint"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "oxfmt": "^0.18.0",
