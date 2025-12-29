@@ -3,16 +3,16 @@ import type { Format, Part } from "./types";
 import { CLOCK_12_PATTERNS, CLOCK_24_PATTERNS, CLOCK_AGNOSTIC_PATTERNS } from "./common";
 import { parts } from "./parts";
 
+const SORTED_PATTERNS = [
+  ...CLOCK_AGNOSTIC_PATTERNS,
+  ...CLOCK_24_PATTERNS,
+  ...CLOCK_12_PATTERNS,
+].toSorted((a, b) => (a[0].length > b[0].length ? 1 : -1));
+
 const escapeTokens = (str: string): string => {
-  return [
-    ...CLOCK_AGNOSTIC_PATTERNS,
-    ...CLOCK_24_PATTERNS,
-    ...CLOCK_12_PATTERNS,
-  ]
-    .toSorted((a, b) => (a[0].length > b[0].length ? 1 : -1))
-    .reduce((target, part) => {
-      return target.replace(part[0], `\\${part[0]}`);
-    }, str);
+  return SORTED_PATTERNS.reduce((target, part) => {
+    return target.replace(part[0], `\\${part[0]}`);
+  }, str);
 };
 
 export const formatStr = (
