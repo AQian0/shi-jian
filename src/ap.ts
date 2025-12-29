@@ -1,4 +1,4 @@
-import { AM_TEST_HOUR, PM_TEST_HOUR, SPEC_DATE, normalizeStr } from "./common";
+import { AM_TEST_HOUR, PM_TEST_HOUR, normalizeStr } from "./common";
 
 type DayPeriod = "am" | "pm";
 type LocaleDayPeriods = {
@@ -13,8 +13,8 @@ export const ap = (ampm: DayPeriod, locale: string): string => {
   if (cached) {
     return cached;
   }
-  const specimen = new Date(SPEC_DATE);
-  specimen.setUTCHours(ampm === "am" ? AM_TEST_HOUR : PM_TEST_HOUR);
+  const specimen = new Date();
+  specimen.setUTCHours(ampm === "am" ? AM_TEST_HOUR : PM_TEST_HOUR, 0, 0, 0);
   const subparts = new Intl.DateTimeFormat(locale, {
     timeStyle: "full",
     timeZone: "UTC",

@@ -11,7 +11,6 @@ import type {
 import {
   STYLES,
   normalizeStr,
-  SPEC_DATE,
   CLOCK_AGNOSTIC_PATTERNS,
   CLOCK_24_PATTERNS,
   CLOCK_12_PATTERNS,
@@ -125,9 +124,8 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
   }
 
   const formatter = new Intl.DateTimeFormat(locale, options);
-  const segments = formatter.formatToParts(new Date(SPEC_DATE)).map(normalizeStr);
-  const HOUR_TYPE_TEST_DATE = "1999-04-05T23:05:01.000Z";
-  const hourTypeSegments = formatter.formatToParts(new Date(HOUR_TYPE_TEST_DATE)).map(normalizeStr);
+  const segments = formatter.formatToParts(new Date()).map(normalizeStr);
+  const hourTypeSegments = formatter.formatToParts(new Date()).map(normalizeStr);
   const hourPart = hourTypeSegments.find(segment => segment.type === "hour");
   const hourType = hourPart?.value === "23" ? 24 : 12;
   return segments
@@ -177,13 +175,13 @@ const guessPattern = <T extends Intl.DateTimeFormatPartTypes>(
       return tokens.get(length === 2 ? "YY" : "YYYY");
 
     case "month": {
-      if (isNumeric) return tokens.get(length === 1 ? "M" : "MM");
+      if (isNumeric) return tokens.get("M");
       const style = partStyle(locale, partName, partValue);
       return tokens.get(style === "long" ? "MMMM" : "MMM");
     }
 
     case "day":
-      return tokens.get(length === 1 ? "D" : "DD");
+      return tokens.get("D");
 
     case "weekday": {
       const style = partStyle(locale, partName, partValue);
@@ -198,14 +196,14 @@ const guessPattern = <T extends Intl.DateTimeFormatPartTypes>(
     }
 
     case "hour":
-      if (hour === 12) return tokens.get(length === 1 ? "h" : "hh");
-      return tokens.get(length === 1 ? "H" : "HH");
+      if (hour === 12) return tokens.get("h");
+      return tokens.get("H");
 
     case "minute":
-      return tokens.get(length === 1 ? "m" : "mm");
+      return tokens.get("mm");
 
     case "second":
-      return tokens.get(length === 1 ? "s" : "ss");
+      return tokens.get("ss");
 
     case "dayPeriod":
       return tokens.get(/^[A-Z]+$/u.test(partValue) ? "A" : "a");
@@ -252,7 +250,7 @@ const partStyle = (
   value: string,
 ): NamedFormatOption | undefined => {
   if (!memoParts.has(locale)) {
-    const date = new Date(SPEC_DATE);
+    const date = new Date();
     const WEEKDAYS = [
       3,
       8,

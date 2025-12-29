@@ -38,8 +38,6 @@ export const MAX_DAY_PERIOD_LENGTH = 4;
 export const FIRST_CHAR_INDEX = 0;
 export const SECOND_CHAR_INDEX = 1;
 
-export const SPEC_DATE = "1999-03-04T02:05:01.000Z";
-
 export const STYLES = [
   "full",
   "long",
