@@ -19,7 +19,16 @@ import { parseParts } from "./parseParts";
 import { parts } from "./parts";
 import { range } from "./range";
 
+const validationCache = new WeakMap<Part[], Part[]>();
+const NUMERIC_VALUES = new Set([
+  "numeric",
+  "2-digit",
+]);
 const validate = (parts: Part[]): Part[] | never => {
+  const cached = validationCache.get(parts);
+  if (cached) {
+    return cached;
+  }
   let lastPart: Part | undefined = void 0;
   for (const part of parts) {
     if (part.partName === "literal" && !Number.isNaN(Number.parseFloat(part.partValue))) {
@@ -29,18 +38,14 @@ const validate = (parts: Part[]): Part[] | never => {
       if (
         !(lastPart.token in FIXED_LENGTH) &&
         !(part.token in FIXED_LENGTH) &&
-        !(
-          [
-            "numeric",
-            "2-digit",
-          ].includes(lastPart.partValue) && part.token.toLowerCase() === "a"
-        )
+        !(NUMERIC_VALUES.has(lastPart.partValue) && part.token.toLowerCase() === "a")
       ) {
         throw new Error(`Illegal adjacent tokens (${lastPart.token}, ${part.token})`);
       }
     }
     lastPart = part;
   }
+  validationCache.set(parts, parts);
   return parts;
 };
 
