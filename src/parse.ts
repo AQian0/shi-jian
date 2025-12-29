@@ -24,6 +24,7 @@ const NUMERIC_VALUES = new Set([
   "numeric",
   "2-digit",
 ]);
+const defaultPartFilter = (): boolean => true;
 const validate = (parts: Part[]): Part[] | never => {
   const cached = validationCache.get(parts);
   if (cached) {
@@ -56,7 +57,7 @@ export function parse(
   format: Format = "ISO8601",
   locale = "device",
 ): Date | never {
-  let partFilter: (part: Part) => boolean = () => true;
+  let partFilter: (part: Part) => boolean = defaultPartFilter;
   let dateStr: string;
   let dateOverflow = "backward";
   if (typeof dateStrOrOptions === "object") {
@@ -65,7 +66,7 @@ export function parse(
       format = "ISO8601",
       locale = "device",
       dateOverflow = "backward",
-      partFilter = (): boolean => true,
+      partFilter = defaultPartFilter,
     } = dateStrOrOptions);
   } else {
     dateStr = dateStrOrOptions;

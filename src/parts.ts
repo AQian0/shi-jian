@@ -28,6 +28,30 @@ const tokens = new Map(
   ]),
 );
 
+const validate = (patterns: Part[]): Part[] => {
+  const parts = patterns.map(part => part.partName);
+  const deduped = new Set(parts);
+  if (parts.length > deduped.size) {
+    throw new Error(`Cannot reuse format tokens.`);
+  }
+  return patterns;
+};
+
+const createPart = (hour12: boolean, [token, option, exp]: FormatPattern): Part => {
+  const [partName, partValue] = Object.entries(option)[0] as [
+    Intl.DateTimeFormatPartTypes,
+    string,
+  ];
+  return {
+    option,
+    partName,
+    partValue,
+    token,
+    pattern: exp as RegExp,
+    hour12,
+  };
+};
+
 export const parts = (format: Format, locale: string): Part[] => {
   if (STYLES.includes(format as FormatStyle) || typeof format === "object") {
     return styleParts(format as FormatStyle | FormatStyleObj, locale);
@@ -49,47 +73,19 @@ export const parts = (format: Format, locale: string): Part[] => {
     });
     return didAdd > 0;
   };
-
-  const validate = (patterns: Part[]): Part[] => {
-    const parts = patterns.map(part => part.partName);
-    const deduped = new Set(parts);
-    if (parts.length > deduped.size) {
-      throw new Error(`Cannot reuse format tokens.`);
-    }
-    return patterns;
-  };
-
-  const createPart = (hour12: boolean, [token, option, exp]: FormatPattern): Part => {
-    const [partName, partValue] = Object.entries(option)[0] as [
-      Intl.DateTimeFormatPartTypes,
-      string,
-    ];
-    return {
-      option,
-      partName,
-      partValue,
-      token,
-      pattern: exp as RegExp,
-      hour12,
-    };
-  };
-
   const found24Patterns = [
     ...CLOCK_AGNOSTIC_PATTERNS.filter(pattern => testPattern(pattern)),
     ...CLOCK_24_PATTERNS.filter(pattern => testPattern(pattern)),
   ].map(pattern => createPart(false, pattern));
-
   const found12Patterns = CLOCK_12_PATTERNS.filter(pattern => testPattern(pattern)).map(pattern =>
     createPart(true, pattern),
   );
-
   const parts = validate([
     ...found24Patterns,
     ...found12Patterns,
   ]);
   const EXTRACT_INDEX = /^\{!(\d+)!\}$/;
   const EMPTY_PATTERN = new RegExp("");
-
   return f
     .split(/(\{!\d+!\})/)
     .map((match: string): Part => {
