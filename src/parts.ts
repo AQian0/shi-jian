@@ -280,14 +280,14 @@ const partStyle = (
 
       for (const style of PART_STYLES) {
         const formatOptions = PARTS.reduce(
-          (options, part) => ({
-            ...options,
-            [part]: style,
-          }),
+          (options, part) =>
+            Object.assign(options, {
+              [part]: style,
+            }),
           {
             hour12: true,
             timeZone: "UTC",
-          } as const,
+          } as Record<string, unknown>,
         );
         const segments = new Intl.DateTimeFormat(locale, formatOptions)
           .formatToParts(date)
