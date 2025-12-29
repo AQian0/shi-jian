@@ -15,10 +15,12 @@ import { format } from "./format";
 
 export const range = (token: FormatToken, locale = "en", genitive = false): string[] => {
   const r: (n: number, c: (index: number) => string | number) => string[] = (n, c) =>
-    new Array(n)
-      .fill("")
-      .map((_, i) => `${c(i)}`);
-
+    Array.from(
+      {
+        length: n,
+      },
+      _ => "",
+    ).map((_, i) => `${c(i)}`);
   if (token === "M") return r(MONTHS_PER_YEAR, i => i + 1);
   if (token === "MM")
     return r(MONTHS_PER_YEAR, i => {
