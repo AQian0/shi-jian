@@ -2,7 +2,14 @@
   "name": "shi-jian",
   "version": "0.0.0",
   "description": "The easiest way to work with dates in JavaScript and TypeScript.",
+  "bugs": {
+    "url": "https://github.com/AQian0/shi-jian/issues"
+  },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AQian0/shi-jian.git"
+  },
   "files": [
     "dist"
   ],
