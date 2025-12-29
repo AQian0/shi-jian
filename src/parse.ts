@@ -65,7 +65,7 @@ export function parse(
       format = "ISO8601",
       locale = "device",
       dateOverflow = "backward",
-      partFilter = () => true,
+      partFilter = (): boolean => true,
     } = dateStrOrOptions);
   } else {
     dateStr = dateStrOrOptions;

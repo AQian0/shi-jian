@@ -249,6 +249,6 @@ export const FIXED_LENGTH = {
   ss: 2,
 } as const;
 
-export const two = (n: number) => String(n).padStart(2, "0");
+export const two = (n: number): string => String(n).padStart(2, "0");
 
-export const four = (n: number) => String(n).padStart(4, "0");
+export const four = (n: number): string => String(n).padStart(4, "0");

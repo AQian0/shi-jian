@@ -34,7 +34,7 @@ export const parts = (format: Format, locale: string): Part[] => {
   }
   let f = format;
   let match = 0;
-  const testPattern = (pattern: FormatPattern) => {
+  const testPattern = (pattern: FormatPattern): boolean => {
     if (!pattern[2]) pattern[2] = new RegExp(`(.)?(${pattern[0]})`, "g");
     if (!pattern[2].test(f)) return false;
 

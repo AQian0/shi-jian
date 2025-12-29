@@ -25,7 +25,7 @@ const createPartMap = (
   const hour24 = parts.filter(part => !part.hour12);
   const valueParts: Intl.DateTimeFormatPart[] = [];
   const genitiveParts: Part[] = [];
-  const addValues = (requestedParts: Part[], hour12 = false) => {
+  const addValues = (requestedParts: Part[], hour12 = false): void => {
     const preciseLocale = `${locale}-u-hc-${hour12 ? "h12" : "h23"}`;
     valueParts.push(
       ...new Intl.DateTimeFormat(
@@ -107,7 +107,7 @@ const fill = (
 ): FilledPart[] => {
   const partMap = createPartMap(inputDate, parts, locale, genitive);
   const d = normalizeDate(inputDate);
-  const value = ({ partName, partValue, token }: Part) => {
+  const value = ({ partName, partValue, token }: Part): string => {
     if (partName === "literal") return partValue;
     const value = partMap[partName];
     if (partName === "hour" && token === "H") {
@@ -182,7 +182,7 @@ export function format(
   }
   return fill(
     inputDateOrOptions,
-    parts(format, locale).filter(part => (partFilter ?? (() => true))(part)),
+    parts(format, locale).filter(part => (partFilter ?? ((): boolean => true))(part)),
     locale,
     genitive,
     forceOffset,

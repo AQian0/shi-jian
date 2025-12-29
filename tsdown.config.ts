@@ -12,7 +12,11 @@ export default defineConfig([
     ],
     sourcemap: true,
     dts: true,
-    outExtensions: ({ format }) => ({
+    outExtensions: ({
+      format,
+    }): {
+      js: ".cjs" | ".mjs";
+    } => ({
       js: format === "cjs" ? ".cjs" : ".mjs",
     }),
   },
@@ -26,7 +30,11 @@ export default defineConfig([
     ],
     sourcemap: true,
     dts: true,
-    outExtensions: ({ format }) => ({
+    outExtensions: ({
+      format,
+    }): {
+      js: ".cjs" | ".mjs";
+    } => ({
       js: format === "cjs" ? ".cjs" : ".mjs",
     }),
   },
@@ -40,7 +48,11 @@ export default defineConfig([
     ],
     sourcemap: true,
     dts: true,
-    outExtensions: ({ format }) => ({
+    outExtensions: ({
+      format,
+    }): {
+      js: ".cjs" | ".mjs";
+    } => ({
       js: format === "cjs" ? ".cjs" : ".mjs",
     }),
   },
