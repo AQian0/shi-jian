@@ -21,7 +21,7 @@ export const ap = (ampm: DayPeriod, locale: string): string => {
     hour12: true,
   })
     .formatToParts(specimen)
-    .map(normalizeStr);
+    .map(part => normalizeStr(part));
   const period = subparts.find(part => part.type === "dayPeriod");
   if (period) {
     const existingPeriods = dayPeriodCache.get(locale) || {};

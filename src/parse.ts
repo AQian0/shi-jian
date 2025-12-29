@@ -71,7 +71,7 @@ export function parse(
   };
   if (format === "ISO8601") return normalizeDate(dateStr);
   const genitive = STYLES.includes(format as FormatStyle) || typeof format === "object";
-  const formatParts = validate(parts(format, locale).filter(partFilter));
+  const formatParts = validate(parts(format, locale).filter(part => partFilter(part)));
   if (formatParts.length === 0) throw new Error("parse() requires a pattern.");
   let parsedParts;
   try {

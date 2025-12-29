@@ -52,7 +52,7 @@ const createPartMap = (
         ),
       )
         .formatToParts(d)
-        .map(normalizeStr),
+        .map(part => normalizeStr(part)),
     );
     if (genitive && genitiveParts.length > 0) {
       for (const part of genitiveParts) {
@@ -64,7 +64,7 @@ const createPartMap = (
               timeZone: "UTC",
             })
               .formatToParts(d)
-              .map(normalizeStr);
+              .map(part => normalizeStr(part));
             break;
           case "MMM":
             formattedParts = new Intl.DateTimeFormat(preciseLocale, {
@@ -72,7 +72,7 @@ const createPartMap = (
               timeZone: "UTC",
             })
               .formatToParts(d)
-              .map(normalizeStr);
+              .map(part => normalizeStr(part));
             break;
           default:
             break;
@@ -182,7 +182,7 @@ export function format(
   }
   return fill(
     inputDateOrOptions,
-    parts(format, locale).filter(partFilter ?? (() => true)),
+    parts(format, locale).filter(part => (partFilter ?? (() => true))(part)),
     locale,
     genitive,
     forceOffset,

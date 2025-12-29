@@ -22,7 +22,7 @@ export const formatStr = (
   filterParts: (part: Part) => boolean = () => true,
 ): string => {
   return parts(format, locale)
-    .filter(filterParts)
+    .filter(part => filterParts(part))
     .reduce(
       (f, p) => (f += escapeLiterals && p.partName === "literal" ? escapeTokens(p.token) : p.token),
       "",

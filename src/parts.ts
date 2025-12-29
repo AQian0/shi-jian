@@ -75,11 +75,11 @@ export const parts = (format: Format, locale: string): Part[] => {
   };
 
   const found24Patterns = [
-    ...CLOCK_AGNOSTIC_PATTERNS.filter(testPattern),
-    ...CLOCK_24_PATTERNS.filter(testPattern),
+    ...CLOCK_AGNOSTIC_PATTERNS.filter(pattern => testPattern(pattern)),
+    ...CLOCK_24_PATTERNS.filter(pattern => testPattern(pattern)),
   ].map(pattern => createPart(false, pattern));
 
-  const found12Patterns = CLOCK_12_PATTERNS.filter(testPattern).map(pattern =>
+  const found12Patterns = CLOCK_12_PATTERNS.filter(pattern => testPattern(pattern)).map(pattern =>
     createPart(true, pattern),
   );
 
@@ -124,8 +124,8 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
   }
 
   const formatter = new Intl.DateTimeFormat(locale, options);
-  const segments = formatter.formatToParts(new Date()).map(normalizeStr);
-  const hourTypeSegments = formatter.formatToParts(new Date()).map(normalizeStr);
+  const segments = formatter.formatToParts(new Date()).map(part => normalizeStr(part));
+  const hourTypeSegments = formatter.formatToParts(new Date()).map(part => normalizeStr(part));
   const hourPart = hourTypeSegments.find(segment => segment.type === "hour");
   const hourType = hourPart?.value === "23" ? 24 : 12;
   return segments
@@ -236,7 +236,7 @@ const applyGenitiveMonth = (
     timeZone: "UTC",
   })
     .formatToParts(date)
-    .map(normalizeStr);
+    .map(part => normalizeStr(part));
   const genitiveMonth = genitiveFormattedParts.find(part => part.type === "month");
   const index = segments.findIndex(part => part.type === "month");
   if (index > -1 && genitiveMonth) {
@@ -291,7 +291,7 @@ const partStyle = (
         );
         const segments = new Intl.DateTimeFormat(locale, formatOptions)
           .formatToParts(date)
-          .map(normalizeStr);
+          .map(part => normalizeStr(part));
 
         if (style === "long" || style === "short") {
           applyGenitiveMonth(locale, style, date, segments);

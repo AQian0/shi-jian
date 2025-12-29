@@ -15,7 +15,7 @@ function relativeTime(d: Date, timeZone: string): Date {
     hourCycle: "h23",
   })
     .formatToParts(d)
-    .map(normalizeStr);
+    .map(part => normalizeStr(part));
   const parts: {
     year?: string;
     month?: string;
