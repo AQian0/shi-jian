@@ -162,30 +162,24 @@ export function format(
   genitive: boolean | undefined = false,
   partFilter?: (part: Part) => boolean,
 ): string {
+  if (!inputDateOrOptions) {
+    return "";
+  }
   let forceOffset: string | undefined, tz: string | undefined;
-
-  if (
-    inputDateOrOptions &&
-    typeof inputDateOrOptions === "object" &&
-    !(inputDateOrOptions instanceof Date)
-  ) {
+  if (typeof inputDateOrOptions === "object" && !(inputDateOrOptions instanceof Date)) {
     ({ date: inputDateOrOptions, format, locale, genitive, partFilter, tz } = inputDateOrOptions);
   }
   if (format === "ISO8601") return normalizeDate(inputDateOrOptions).toISOString();
-
   if (tz) {
     forceOffset = offset(inputDateOrOptions, "utc", tz, getOffsetFormat(format));
   }
-
   tz ??= Intl.DateTimeFormat().resolvedOptions().timeZone;
   if (tz?.toLowerCase() !== "utc") {
     inputDateOrOptions = removeOffset(inputDateOrOptions, offset(inputDateOrOptions, tz, "utc"));
   }
-
   if (!locale || locale === "device") {
     locale = Intl.DateTimeFormat().resolvedOptions().locale;
   }
-
   return fill(
     inputDateOrOptions,
     parts(format, locale).filter(partFilter ?? (() => true)),
