@@ -36,6 +36,7 @@
   "scripts": {
     "build": "bunx tsdown",
     "test": "bunx vitest",
+    "coverage": "bunx vitest run --coverage",
     "publint": "bunx publint",
     "size": "size-limit",
     "docs:dev": "vitepress dev docs",
@@ -45,6 +46,7 @@
   "devDependencies": {
     "@size-limit/preset-small-lib": "^12.0.0",
     "@types/bun": "latest",
+    "@vitest/coverage-v8": "^4.0.16",
     "jiti": "^2.6.1",
     "oxfmt": "^0.18.0",
     "oxlint": "^1.33.0",
