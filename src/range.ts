@@ -73,7 +73,7 @@ export const range = (token: FormatToken, locale = "en", genitive = false): stri
   } else if (token.startsWith("D")) {
     result = generateFormattedArray(
       MAX_DAYS_IN_MONTH,
-      i => `${token === "DD" && i <= SINGLE_DIGIT_MAX ? "0" : ""}${i + 1}`,
+      i => `${token === "DD" && i < SINGLE_DIGIT_MAX ? "0" : ""}${i + 1}`,
     );
   } else if (token.startsWith("H")) {
     result = generateFormattedArray(
@@ -83,7 +83,7 @@ export const range = (token: FormatToken, locale = "en", genitive = false): stri
   } else if (token.startsWith("h")) {
     result = generateFormattedArray(
       HOURS_PER_DAY_12H,
-      i => `${token === "hh" && i <= SINGLE_DIGIT_MAX ? "0" : ""}${i + 1}`,
+      i => `${token === "hh" && i < SINGLE_DIGIT_MAX ? "0" : ""}${i + 1}`,
     );
   } else if (token.startsWith("m") || token.startsWith("s")) {
     result = generateFormattedArray(
