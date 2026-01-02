@@ -6,11 +6,15 @@ import { monthDays } from "./monthDays";
 export const addYears = (inputDate?: MaybeDateInput, count = 1, dateOverflow = false): Date => {
   const d = normalizeDate(inputDate);
   const dayOfMonth = d.getDate();
-  if (!dateOverflow) d.setDate(1);
-  d.setFullYear(d.getFullYear() + count);
+
   if (!dateOverflow) {
+    d.setDate(1);
+    d.setFullYear(d.getFullYear() + count);
     const daysInMonth = monthDays(d);
     d.setDate(daysInMonth < dayOfMonth ? daysInMonth : dayOfMonth);
+  } else {
+    d.setFullYear(d.getFullYear() + count);
   }
+
   return d;
 };
