@@ -16,4 +16,7 @@ describe("addYear", () => {
   it("can overflow the day of the month on leap year", () => {
     expect(addYears("2000-02-29").toISOString()).toBe("2001-02-28T05:00:00.000Z");
   });
+  it("should allow date overflow when dateOverflow is true", () => {
+    expect(addYears("2000-02-29", 1, true).toISOString()).toBe("2001-03-01T05:00:00.000Z");
+  });
 });
