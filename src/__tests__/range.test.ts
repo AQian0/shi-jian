@@ -1,9 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { range } from "../range"
-
-export function r<T>(length: number, fill: (index: number) => T): T[] {
-  return new Array(length).fill("").map((_x, i) => fill(i))
-}
+import { generateFormattedArray, range } from "../range"
 
 const locales = [
   "ar",
@@ -268,37 +264,37 @@ describe("getRange", () => {
   })
   it("can return the single digit day of the month range", () => {
     expect(range("DD")).toEqual(
-      r(31, (i) => `${i + 1 < 10 ? "0" : ""}${i + 1}`)
+      generateFormattedArray(31, (i) => `${i + 1 < 10 ? "0" : ""}${i + 1}`)
     )
   })
   it("can return the single digit day of the month range", () => {
-    expect(range("D")).toEqual(r(31, (i) => `${i + 1}`))
+    expect(range("D")).toEqual(generateFormattedArray(31, (i) => `${i + 1}`))
   })
   it("can return the single digit 24 hours of a day", () => {
-    expect(range("H")).toEqual(r(24, (i) => `${i}`))
+    expect(range("H")).toEqual(generateFormattedArray(24, (i) => `${i}`))
   })
   it("can return the double digit 24 hours of a day", () => {
-    expect(range("HH")).toEqual(r(24, (i) => `${i < 10 ? "0" : ""}${i}`))
+    expect(range("HH")).toEqual(generateFormattedArray(24, (i) => `${i < 10 ? "0" : ""}${i}`))
   })
   it("can return the single digit 12 hours of a day", () => {
-    expect(range("h")).toEqual(r(12, (i) => `${i + 1}`))
+    expect(range("h")).toEqual(generateFormattedArray(12, (i) => `${i + 1}`))
   })
   it("can return the double digit 12 hours of a day", () => {
     expect(range("hh")).toEqual(
-      r(12, (i) => `${i + 1 < 10 ? "0" : ""}${i + 1}`)
+      generateFormattedArray(12, (i) => `${i + 1 < 10 ? "0" : ""}${i + 1}`)
     )
   })
   it("can return the single digit 59 minutes", () => {
-    expect(range("mm")).toEqual(r(60, (i) => `${i < 10 ? "0" : ""}${i}`))
+    expect(range("mm")).toEqual(generateFormattedArray(60, (i) => `${i < 10 ? "0" : ""}${i}`))
   })
   it("can return the double digit 59 minutes", () => {
-    expect(range("m")).toEqual(r(60, (i) => `${i}`))
+    expect(range("m")).toEqual(generateFormattedArray(60, (i) => `${i}`))
   })
   it("can return the single digit 59 seconds", () => {
-    expect(range("s")).toEqual(r(60, (i) => `${i}`))
+    expect(range("s")).toEqual(generateFormattedArray(60, (i) => `${i}`))
   })
   it("can return the double digit 59 minutes", () => {
-    expect(range("ss")).toEqual(r(60, (i) => `${i < 10 ? "0" : ""}${i}`))
+    expect(range("ss")).toEqual(generateFormattedArray(60, (i) => `${i < 10 ? "0" : ""}${i}`))
   })
 })
 

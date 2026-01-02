@@ -15,7 +15,7 @@ import { format } from "./format";
 
 const rangeCache = new Map<string, string[]>();
 
-const generateFormattedArray: (n: number, c: (index: number) => string | number) => string[] = (
+export const generateFormattedArray: (n: number, c: (index: number) => string | number) => string[] = (
   n,
   c,
 ) =>
