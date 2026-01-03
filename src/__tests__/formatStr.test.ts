@@ -112,4 +112,16 @@ describe("formatStr", () => {
       ),
     ).toBe("h:mm:ss A Z");
   });
+
+  it("should escape literal content when escapeLiterals is true", () => {
+    const resultWithEscape = formatStr("full", "en", true);
+    const resultWithoutEscape = formatStr("full", "en", false);
+    expect(resultWithEscape).toBeTruthy();
+    expect(resultWithoutEscape).toBeTruthy();
+  });
+
+  it("should filter parts based on custom filter function", () => {
+    const result = formatStr("YYYY-MM-DD", "en", false, (part) => part.partName !== "literal");
+    expect(result).not.toContain("-");
+  });
 });

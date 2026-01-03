@@ -20,4 +20,9 @@ describe("applyOffset", () => {
       "2023-04-13T16:15:00.000Z",
     );
   });
+
+  it("should handle default offset when no offset provided", () => {
+    const result = applyOffset("2023-02-22T00:00:00Z");
+    expect(result.toISOString()).toBe("2023-02-22T00:00:00.000Z");
+  });
 });

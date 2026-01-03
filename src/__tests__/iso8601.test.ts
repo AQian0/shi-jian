@@ -15,4 +15,8 @@ describe("validating ISO 8601", () => {
   it("does now allow 40 days", () => expect(isIso8601("2000-01-40 00:00:00")).toBe(false));
   it("allows a lot of decimals", () =>
     expect(isIso8601("2000-01-30 00:00:00.0000000000")).toBe(true));
+
+  it("should validate date without day component", () => {
+    expect(isIso8601("2022-01")).toBe(true);
+  });
 });

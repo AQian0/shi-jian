@@ -262,4 +262,18 @@ describe("parse", () => {
       ).toISOString(),
     ).toBe("1989-12-19T07:30:10.000Z");
   });
+
+  it("should return current date when parsing empty format", () => {
+    const result = parse({ date: "2023-01-01", format: "ISO8601" });
+    expect(result).toBeInstanceOf(Date);
+  });
+
+  it("should handle weekday token parsing", () => {
+    const result = parse("Mon 5", "ddd D");
+    expect(result.getDate()).toBe(5);
+  });
+
+  it("should return invalid when date cannot be created", () => {
+    expect(() => parse("invalid-99-99", "YYYY-MM-DD")).toThrow();
+  });
 });

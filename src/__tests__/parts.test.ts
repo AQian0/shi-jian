@@ -26,4 +26,28 @@ describe("parts", () => {
       ).find(p => p.partName === "timeZoneName")?.token,
     ).toBe("ZZ");
   });
+
+  it("should throw error when duplicate tokens are used", () => {
+    expect(() => parts("YYYY YYYY", "en")).toThrow();
+  });
+
+  it("should handle narrow weekday format", () => {
+    const result = parts("d", "en");
+    expect(result.find(p => p.partName === "weekday")?.token).toBe("d");
+  });
+
+  it("should handle short weekday format", () => {
+    const result = parts("ddd", "en");
+    expect(result.find(p => p.partName === "weekday")?.token).toBe("ddd");
+  });
+
+  it("should handle long weekday format", () => {
+    const result = parts("dddd", "en");
+    expect(result.find(p => p.partName === "weekday")?.token).toBe("dddd");
+  });
+
+  it("should return undefined for unknown part types", () => {
+    const result = parts("full", "en");
+    expect(result.every(p => p.partName !== "unknown")).toBe(true);
+  });
 });

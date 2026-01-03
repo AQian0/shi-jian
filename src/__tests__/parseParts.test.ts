@@ -111,4 +111,16 @@ describe("parseParts", () => {
 
     expect(() => parseParts("12-25", formatParts)).toThrow();
   });
+
+  it("should handle next part search with digit at position 0", () => {
+    const formatParts: Part[] = [
+      createPart("MMMM", "month", "long"),
+      createPart(" ", "literal", " "),
+      createPart("D", "day", "numeric"),
+    ];
+
+    const result = parseParts("January 5", formatParts);
+    expect(result.at(0)?.value).toBe("January");
+    expect(result.at(2)?.value).toBe("5");
+  });
 });

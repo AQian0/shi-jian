@@ -10,4 +10,8 @@ describe("normalizeDate", () => {
     expect(normalizeDate("2022-01-22T00:00-0300").toISOString()).toBe("2022-01-22T03:00:00.000Z");
     expect(normalizeDate("2022-01-22T00:00-03:24").toISOString()).toBe("2022-01-22T03:24:00.000Z");
   });
+
+  it("should throw error when passing non-ISO8601 string", () => {
+    expect(() => normalizeDate("not a date")).toThrow();
+  });
 });
