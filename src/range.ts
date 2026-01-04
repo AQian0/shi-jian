@@ -15,10 +15,10 @@ import { format } from "./format";
 
 const rangeCache = new Map<string, string[]>();
 
-export const generateFormattedArray: (n: number, c: (index: number) => string | number) => string[] = (
-  n,
-  c,
-) =>
+export const generateFormattedArray: (
+  n: number,
+  c: (index: number) => string | number,
+) => string[] = (n, c) =>
   Array.from(
     {
       length: n,

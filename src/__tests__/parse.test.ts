@@ -264,7 +264,10 @@ describe("parse", () => {
   });
 
   it("should return current date when parsing empty format", () => {
-    const result = parse({ date: "2023-01-01", format: "ISO8601" });
+    const result = parse({
+      date: "2023-01-01",
+      format: "ISO8601",
+    });
     expect(result).toBeInstanceOf(Date);
   });
 

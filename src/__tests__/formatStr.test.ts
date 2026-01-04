@@ -121,7 +121,7 @@ describe("formatStr", () => {
   });
 
   it("should filter parts based on custom filter function", () => {
-    const result = formatStr("YYYY-MM-DD", "en", false, (part) => part.partName !== "literal");
+    const result = formatStr("YYYY-MM-DD", "en", false, part => part.partName !== "literal");
     expect(result).not.toContain("-");
   });
 });

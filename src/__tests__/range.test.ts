@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest"
-import { generateFormattedArray, range } from "../range"
+import { describe, it, expect } from "vitest";
+
+import { generateFormattedArray, range } from "../range";
 
 const locales = [
   "ar",
@@ -38,54 +39,44 @@ const locales = [
   "uz",
   "tr",
   "vi",
-]
+];
 
 describe("month ranges", () => {
   it('generates "short" months in each locale that matches dates date dateStyle "short" months.', () => {
-    const monthRanges = locales.map((locale) =>
-      range("MMM", locale, true).map((m) => m.toLowerCase())
-    )
-    const renderedMonthRanges: string[][] = []
-    locales.forEach((locale) => {
-      const monthNames = []
+    const monthRanges = locales.map(locale => range("MMM", locale, true).map(m => m.toLowerCase()));
+    const renderedMonthRanges: string[][] = [];
+    locales.forEach(locale => {
+      const monthNames = [];
       for (let month = 1; month <= 12; month++) {
-        const date = new Date(
-          `2020-${String(month).padStart(2, "0")}-01T00:00:00`
-        )
+        const date = new Date(`2020-${String(month).padStart(2, "0")}-01T00:00:00`);
         const parts = new Intl.DateTimeFormat(locale, {
           dateStyle: "medium",
-        }).formatToParts(date)
-        monthNames.push(
-          parts.find((part) => part.type === "month")!.value.toLowerCase()
-        )
+        }).formatToParts(date);
+        monthNames.push(parts.find(part => part.type === "month")!.value.toLowerCase());
       }
-      renderedMonthRanges.push(monthNames)
-    })
-    expect(monthRanges).toEqual(renderedMonthRanges)
-  })
+      renderedMonthRanges.push(monthNames);
+    });
+    expect(monthRanges).toEqual(renderedMonthRanges);
+  });
   it('generates "long" months in each locale that matches dates date dateStyle "long" months.', () => {
-    const monthRanges = locales.map((locale) =>
-      range("MMMM", locale, true).map((m) => m.toLowerCase())
-    )
-    const renderedMonthRanges: string[][] = []
-    locales.forEach((locale) => {
-      const monthNames = []
+    const monthRanges = locales.map(locale =>
+      range("MMMM", locale, true).map(m => m.toLowerCase()),
+    );
+    const renderedMonthRanges: string[][] = [];
+    locales.forEach(locale => {
+      const monthNames = [];
       for (let month = 1; month <= 12; month++) {
-        const date = new Date(
-          `2020-${String(month).padStart(2, "0")}-01T00:00:00`
-        )
+        const date = new Date(`2020-${String(month).padStart(2, "0")}-01T00:00:00`);
         const parts = new Intl.DateTimeFormat(locale, {
           dateStyle: "long",
-        }).formatToParts(date)
-        monthNames.push(
-          parts.find((part) => part.type === "month")!.value.toLowerCase()
-        )
+        }).formatToParts(date);
+        monthNames.push(parts.find(part => part.type === "month")!.value.toLowerCase());
       }
-      renderedMonthRanges.push(monthNames)
-    })
-    expect(monthRanges).toEqual(renderedMonthRanges)
-  })
-})
+      renderedMonthRanges.push(monthNames);
+    });
+    expect(monthRanges).toEqual(renderedMonthRanges);
+  });
+});
 
 describe("getRange", () => {
   it("can return single digit month ranges", () => {
@@ -102,8 +93,8 @@ describe("getRange", () => {
       "10",
       "11",
       "12",
-    ])
-  })
+    ]);
+  });
   it("can return double digit month ranges", () => {
     expect(range("MM")).toEqual([
       "01",
@@ -118,8 +109,8 @@ describe("getRange", () => {
       "10",
       "11",
       "12",
-    ])
-  })
+    ]);
+  });
   it("can return short month ranges", () => {
     expect(range("MMM")).toEqual([
       "Jan",
@@ -134,8 +125,8 @@ describe("getRange", () => {
       "Oct",
       "Nov",
       "Dec",
-    ])
-  })
+    ]);
+  });
   it("can return long month ranges", () => {
     expect(range("MMMM")).toEqual([
       "January",
@@ -150,8 +141,8 @@ describe("getRange", () => {
       "October",
       "November",
       "December",
-    ])
-  })
+    ]);
+  });
   it("can return long month ranges in italian", () => {
     expect(range("MMMM", "it")).toEqual([
       "gennaio",
@@ -166,8 +157,8 @@ describe("getRange", () => {
       "ottobre",
       "novembre",
       "dicembre",
-    ])
-  })
+    ]);
+  });
   it("can return long month ranges in russian", () => {
     expect(range("MMMM", "ru")).toEqual([
       "январь",
@@ -182,8 +173,8 @@ describe("getRange", () => {
       "октябрь",
       "ноябрь",
       "декабрь",
-    ])
-  })
+    ]);
+  });
   it("can return short month ranges in russian", () => {
     expect(range("MMM", "ru")).toEqual([
       "янв.",
@@ -198,8 +189,8 @@ describe("getRange", () => {
       "окт.",
       "нояб.",
       "дек.",
-    ])
-  })
+    ]);
+  });
   it("can return all the short days in english", () => {
     expect(range("ddd", "en")).toEqual([
       "Sun",
@@ -209,8 +200,8 @@ describe("getRange", () => {
       "Thu",
       "Fri",
       "Sat",
-    ])
-  })
+    ]);
+  });
   it("can return all the short days in french", () => {
     expect(range("ddd", "fr")).toEqual([
       "dim.",
@@ -220,8 +211,8 @@ describe("getRange", () => {
       "jeu.",
       "ven.",
       "sam.",
-    ])
-  })
+    ]);
+  });
   it("can return all the long days in english", () => {
     expect(range("dddd", "en")).toEqual([
       "Sunday",
@@ -231,74 +222,90 @@ describe("getRange", () => {
       "Thursday",
       "Friday",
       "Saturday",
-    ])
-  })
+    ]);
+  });
   it("can return all the short days in english", () => {
-    expect(range("d", "en")).toEqual(["S", "M", "T", "W", "T", "F", "S"])
-  })
+    expect(range("d", "en")).toEqual([
+      "S",
+      "M",
+      "T",
+      "W",
+      "T",
+      "F",
+      "S",
+    ]);
+  });
   it("can return a 100 year range starting from the current year in 2 digits", () => {
-    const year = new Date().getFullYear()
-    const years = []
+    const year = new Date().getFullYear();
+    const years = [];
     for (let i = -120; i < 120; i++) {
-      years.push(`${year + i}`.substring(2))
+      years.push(`${year + i}`.substring(2));
     }
-    expect(range("YY")).toEqual(years)
-  })
+    expect(range("YY")).toEqual(years);
+  });
   it("can return a 100 year range starting from the current year in 4 digits", () => {
-    const year = new Date().getFullYear()
-    const years = []
+    const year = new Date().getFullYear();
+    const years = [];
     for (let i = -120; i < 120; i++) {
-      years.push(`${year + i}`)
+      years.push(`${year + i}`);
     }
-    expect(range("YYYY")).toEqual(years)
-  })
+    expect(range("YYYY")).toEqual(years);
+  });
 
   it("can be return the am/pm range", () => {
-    expect(range("a")).toEqual(["am", "pm"])
-  })
+    expect(range("a")).toEqual([
+      "am",
+      "pm",
+    ]);
+  });
   it("can be return the am/pm range", () => {
-    expect(range("A")).toEqual(["AM", "PM"])
-  })
+    expect(range("A")).toEqual([
+      "AM",
+      "PM",
+    ]);
+  });
   it("can be return the am/pm range in japan", () => {
-    expect(range("A", "ja")).toEqual(["午前", "午後"])
-  })
+    expect(range("A", "ja")).toEqual([
+      "午前",
+      "午後",
+    ]);
+  });
   it("can return the single digit day of the month range", () => {
     expect(range("DD")).toEqual(
-      generateFormattedArray(31, (i) => `${i + 1 < 10 ? "0" : ""}${i + 1}`)
-    )
-  })
+      generateFormattedArray(31, i => `${i + 1 < 10 ? "0" : ""}${i + 1}`),
+    );
+  });
   it("can return the single digit day of the month range", () => {
-    expect(range("D")).toEqual(generateFormattedArray(31, (i) => `${i + 1}`))
-  })
+    expect(range("D")).toEqual(generateFormattedArray(31, i => `${i + 1}`));
+  });
   it("can return the single digit 24 hours of a day", () => {
-    expect(range("H")).toEqual(generateFormattedArray(24, (i) => `${i}`))
-  })
+    expect(range("H")).toEqual(generateFormattedArray(24, i => `${i}`));
+  });
   it("can return the double digit 24 hours of a day", () => {
-    expect(range("HH")).toEqual(generateFormattedArray(24, (i) => `${i < 10 ? "0" : ""}${i}`))
-  })
+    expect(range("HH")).toEqual(generateFormattedArray(24, i => `${i < 10 ? "0" : ""}${i}`));
+  });
   it("can return the single digit 12 hours of a day", () => {
-    expect(range("h")).toEqual(generateFormattedArray(12, (i) => `${i + 1}`))
-  })
+    expect(range("h")).toEqual(generateFormattedArray(12, i => `${i + 1}`));
+  });
   it("can return the double digit 12 hours of a day", () => {
     expect(range("hh")).toEqual(
-      generateFormattedArray(12, (i) => `${i + 1 < 10 ? "0" : ""}${i + 1}`)
-    )
-  })
+      generateFormattedArray(12, i => `${i + 1 < 10 ? "0" : ""}${i + 1}`),
+    );
+  });
   it("can return the single digit 59 minutes", () => {
-    expect(range("mm")).toEqual(generateFormattedArray(60, (i) => `${i < 10 ? "0" : ""}${i}`))
-  })
+    expect(range("mm")).toEqual(generateFormattedArray(60, i => `${i < 10 ? "0" : ""}${i}`));
+  });
   it("can return the double digit 59 minutes", () => {
-    expect(range("m")).toEqual(generateFormattedArray(60, (i) => `${i}`))
-  })
+    expect(range("m")).toEqual(generateFormattedArray(60, i => `${i}`));
+  });
   it("can return the single digit 59 seconds", () => {
-    expect(range("s")).toEqual(generateFormattedArray(60, (i) => `${i}`))
-  })
+    expect(range("s")).toEqual(generateFormattedArray(60, i => `${i}`));
+  });
   it("can return the double digit 59 minutes", () => {
-    expect(range("ss")).toEqual(generateFormattedArray(60, (i) => `${i < 10 ? "0" : ""}${i}`))
-  })
+    expect(range("ss")).toEqual(generateFormattedArray(60, i => `${i < 10 ? "0" : ""}${i}`));
+  });
 
   it("should return empty array for unknown token", () => {
-    expect(range("X" as any)).toEqual([])
-  })
-})
-
+    expect(range("X" as any)).toEqual([]);
+  });
+});
