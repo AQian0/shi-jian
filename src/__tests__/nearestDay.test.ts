@@ -92,6 +92,6 @@ describe("nearestDay", () => {
     find.setMilliseconds(0)
     const search = (d: Date) => d.getDate() == 28
     //
-    expect(nearestDay(null, search, "month")).toEqual(find)
+    expect(nearestDay(undefined, search, "month")).toEqual(find)
   })
 })

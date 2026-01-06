@@ -112,7 +112,7 @@ export function parse(
       0,
     ],
   ]);
-  let a: null | boolean = null;
+  let a: undefined | boolean = undefined;
   let offset = "";
   parsedParts.forEach((part): void | never => {
     if (part.partName === "literal") return;

@@ -7,11 +7,11 @@ import { dayOfYear } from "./dayOfYear";
 import { monthDays } from "./monthDays";
 import { yearDays } from "./yearDays";
 
-export function nearestDay(
+export const nearestDay = (
   date: MaybeDateInput,
   search: (date: Date) => boolean,
   constraint: number | "month" | "week" | "year" = 7,
-): Date | null {
+): Date | undefined => {
   let increments: number;
   let decrements: number;
   const d = normalizeDate(date);
@@ -45,5 +45,5 @@ export function nearestDay(
       if (search(prev)) return prev;
     }
   }
-  return null;
+  return void 0;
 }

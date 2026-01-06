@@ -103,7 +103,7 @@ const fill = (
   parts: Part[],
   locale: string,
   genitive = false,
-  offset: string | null = null,
+  offset: string | undefined,
 ): FilledPart[] => {
   const partMap = createPartMap(inputDate, parts, locale, genitive);
   const d = normalizeDate(inputDate);
