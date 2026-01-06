@@ -122,8 +122,8 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
   const formatter = new Intl.DateTimeFormat(locale, options);
   const segments = formatter.formatToParts(new Date()).map(part => normalizeStr(part));
   const resolvedOptions = formatter.resolvedOptions();
-  const hourCycle = resolvedOptions.hourCycle ?? (resolvedOptions.hour12 === false ? 'h23' : 'h12');
-  const hourType = (hourCycle === 'h23' || hourCycle === 'h24') ? 24 : 12;
+  const hourCycle = resolvedOptions.hourCycle ?? (resolvedOptions.hour12 === false ? "h23" : "h12");
+  const hourType = hourCycle === "h23" || hourCycle === "h24" ? 24 : 12;
   return segments
     .map((part): Part | undefined => {
       const partName = part.type;
