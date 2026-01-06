@@ -72,8 +72,8 @@ export type FormatToken =
 
 export interface ParseOptions {
   date: string;
-  format: Format;
-  locale: string;
+  format?: Format;
+  locale?: string;
   partFilter?: (part: Part) => boolean;
   dateOverflow?: "forward" | "backward" | "throw";
 }
