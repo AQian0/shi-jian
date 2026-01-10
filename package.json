@@ -10,18 +10,13 @@
   "bugs": {
     "url": "https://github.com/AQian0/shi-jian/issues"
   },
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AQian0/shi-jian.git"
   },
-  "files": [
-    "dist"
-  ],
+  "license": "MIT",
   "type": "module",
   "main": "dist/index.mjs",
-  "types": "dist/index.d.mts",
-  "unpkg": "dist/bundle.mjs",
   "exports": {
     ".": {
       "browser": {
@@ -38,6 +33,11 @@
       }
     }
   },
+  "unpkg": "dist/bundle.mjs",
+  "types": "dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "bunx tsdown",
     "test": "bunx vitest",

@@ -46,4 +46,4 @@ export const nearestDay = (
     }
   }
   return void 0;
-}
+};
