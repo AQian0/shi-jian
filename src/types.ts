@@ -1,6 +1,4 @@
-export type DateInput = Date | string;
-
-export type MaybeDateInput = DateInput | undefined;
+export type MaybeDateInput = Date | string | undefined;
 
 export type NamedFormatOption = "long" | "short" | "narrow";
 
