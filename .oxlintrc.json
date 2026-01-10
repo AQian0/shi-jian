@@ -36,7 +36,7 @@
     "import/unambiguous": "error",
     "node/no-new-require": "error",
     "oxc/bad-bitwise-operator": "error",
-    "oxc/no-barrel-file": "error",
+    "oxc/no-barrel-file": "warn",
     "oxc/no-const-enum": "error",
     "promise/catch-orerturn": "warn",
     "promise/spec-only": "warn",
