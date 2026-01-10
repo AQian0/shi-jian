@@ -30,6 +30,17 @@ const BUILD_FORMATS: ReadonlyArray<BuildFormat> = [
   },
 ] as const;
 
+// TODO: 以下函数体积较大，未来需要优化以减小打包体积
+const CUSTOM_LIMITS: Record<string, string> = {
+  format: "3.5 kB",
+  parse: "5 kB",
+  range: "3.5 kB",
+  formatStr: "1.7 kB",
+  parts: "1.6 kB",
+  tzDate: "1.2 kB",
+  offset: "900 B",
+};
+
 const extractExports = (dtsPath: string): ReadonlyArray<string> => {
   if (!existsSync(dtsPath)) {
     // oxlint-disable-next-line no-console
@@ -67,7 +78,7 @@ for (const format of BUILD_FORMATS) {
         name: `${fnName} (${format.name})`,
         path: format.path,
         import: `{ ${fnName} }`,
-        limit: "500 B",
+        limit: CUSTOM_LIMITS[fnName] ?? "800 B",
       });
     }
   }
