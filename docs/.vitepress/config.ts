@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
+// oxlint-disable-next-line no-default-export
 export default defineConfig({
   title: "My Awesome Project",
   description: "A VitePress Site",

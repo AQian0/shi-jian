@@ -32,12 +32,14 @@ const BUILD_FORMATS: ReadonlyArray<BuildFormat> = [
 
 const extractExports = (dtsPath: string): ReadonlyArray<string> => {
   if (!existsSync(dtsPath)) {
+    // oxlint-disable-next-line no-console
     console.warn(`Warning: ${dtsPath} does not exist, skipping...`);
     return [];
   }
   const dtsContent = readFileSync(dtsPath, "utf-8");
   const exportMatch = dtsContent.match(/export \{([^}]+)\}/);
   if (!exportMatch) {
+    // oxlint-disable-next-line no-console
     console.warn(`Warning: Cannot find exports in ${dtsPath}`);
     return [];
   }
@@ -54,6 +56,7 @@ const configs: SizeLimitConfig = [];
 
 for (const format of BUILD_FORMATS) {
   if (!existsSync(format.path)) {
+    // oxlint-disable-next-line no-console
     console.warn(`Warning: ${format.path} does not exist, skipping...`);
     continue;
   }
