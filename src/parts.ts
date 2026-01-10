@@ -91,7 +91,12 @@ export const parts = (format: Format, locale: string): Part[] => {
     .map((match: string): Part => {
       const hasIndex = match.match(EXTRACT_INDEX);
       if (hasIndex) {
-        return parts[Number(hasIndex[1])]!;
+        const index = Number(hasIndex[1]);
+        const part = parts[index];
+        if (!part) {
+          throw new Error(`Invalid part index: ${index}`);
+        }
+        return part;
       }
       return {
         option: {
@@ -271,7 +276,10 @@ const partStyle = (
 
     for (let i = 0; i < MONTHS_COUNT; i++) {
       date.setMonth(i);
-      if (i in WEEKDAYS) date.setDate(WEEKDAYS[i]!);
+      if (i < WEEKDAYS.length) {
+        const weekday = WEEKDAYS[i];
+        if (weekday !== void 0) date.setDate(weekday);
+      }
       date.setUTCHours(8 + i);
 
       for (const style of PART_STYLES) {

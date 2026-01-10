@@ -161,21 +161,16 @@ export function parse(
     parsed.set("HH", MIDNIGHT);
   }
   parsed.set("MM", (parsed.get("MM") || 1) - 1);
-  let [Y, M, D, h, m, s] = [
-    "YYYY",
-    "MM",
-    "DD",
-    "HH",
-    "mm",
-    "ss",
-  ].map(k => parsed.get(k)!) as [
-    number,
-    number,
-    number,
-    number,
-    number,
-    number,
-  ];
+  const Y = parsed.get("YYYY");
+  const M = parsed.get("MM");
+  let D = parsed.get("DD");
+  const h = parsed.get("HH");
+  const m = parsed.get("mm");
+  const s = parsed.get("ss");
+  
+  if (Y === void 0 || M === void 0 || D === void 0 || h === void 0 || m === void 0 || s === void 0) {
+    throw new Error(`Missing required date parts`);
+  }
 
   // Determine if the date is valid for the month.
   const maxDaysInMonth = monthDays(new Date(`${four(Y)}-${two(M + 1)}-10`));

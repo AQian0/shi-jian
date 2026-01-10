@@ -12,7 +12,11 @@ import { normalizeDate } from "./date";
 
 const offsetToMins = (offset: string, token: TimezoneToken): number => {
   validOffset(offset, token);
-  const [_, sign, hours, mins] = offset.match(/([+-])([0-3][0-9]):?([0-6][0-9])/)!;
+  const match = offset.match(/([+-])([0-3][0-9]):?([0-6][0-9])/);
+  if (!match) {
+    throw new Error(`Invalid offset format: ${offset}`);
+  }
+  const [_, sign, hours, mins] = match;
   const offsetInMins = Number(hours) * MINUTES_PER_HOUR + Number(mins);
   return sign === "+" ? offsetInMins : -offsetInMins;
 };

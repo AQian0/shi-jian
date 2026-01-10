@@ -52,7 +52,11 @@ describe("month ranges", () => {
         const parts = new Intl.DateTimeFormat(locale, {
           dateStyle: "medium",
         }).formatToParts(date);
-        monthNames.push(parts.find(part => part.type === "month")!.value.toLowerCase());
+        const monthPart = parts.find(part => part.type === "month");
+        if (!monthPart) {
+          throw new Error(`Month part not found for locale ${locale}`);
+        }
+        monthNames.push(monthPart.value.toLowerCase());
       }
       renderedMonthRanges.push(monthNames);
     });
@@ -70,7 +74,11 @@ describe("month ranges", () => {
         const parts = new Intl.DateTimeFormat(locale, {
           dateStyle: "long",
         }).formatToParts(date);
-        monthNames.push(parts.find(part => part.type === "month")!.value.toLowerCase());
+        const monthPart = parts.find(part => part.type === "month");
+        if (!monthPart) {
+          throw new Error(`Month part not found for locale ${locale}`);
+        }
+        monthNames.push(monthPart.value.toLowerCase());
       }
       renderedMonthRanges.push(monthNames);
     });
@@ -239,7 +247,7 @@ describe("getRange", () => {
     const year = new Date().getFullYear();
     const years = [];
     for (let i = -120; i < 120; i++) {
-      years.push(`${year + i}`.substring(2));
+      years.push(`${year + i}`.slice(2));
     }
     expect(range("YY")).toEqual(years);
   });
