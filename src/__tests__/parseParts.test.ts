@@ -123,4 +123,27 @@ describe("parseParts", () => {
     expect(result.at(0)?.value).toBe("January");
     expect(result.at(2)?.value).toBe("5");
   });
+
+  it("should find day period length correctly when followed by non-digit", () => {
+    const formatParts: Part[] = [
+      createPart("h", "hour", "numeric"),
+      createPart(" ", "literal", " "),
+      createPart("A", "dayPeriod", "narrow"),
+    ];
+
+    const result = parseParts("3 PM", formatParts);
+    expect(result.at(2)?.value).toBe("PM");
+  });
+
+  it("should handle variable length with nextChar not found", () => {
+    const formatParts: Part[] = [
+      createPart("MMMM", "month", "long"),
+      createPart(" ", "literal", " "),
+      createPart("YYYY", "year", "numeric"),
+    ];
+
+    const result = parseParts("December 2024", formatParts);
+    expect(result.at(0)?.value).toBe("December");
+    expect(result.at(2)?.value).toBe("2024");
+  });
 });

@@ -25,4 +25,8 @@ describe("applyOffset", () => {
     const result = applyOffset("2023-02-22T00:00:00Z");
     expect(result.toISOString()).toBe("2023-02-22T00:00:00.000Z");
   });
+
+  it("should throw error when offset format is invalid", () => {
+    expect(() => applyOffset("2023-02-22T00:00:00Z", "invalid")).toThrow("Invalid offset format");
+  });
 });

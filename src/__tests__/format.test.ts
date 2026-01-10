@@ -167,6 +167,15 @@ describe("format", () => {
       "Checkin: Dec 17, 2040",
     );
   });
+
+  it("should return empty string when input is null", () => {
+    expect(format(null as unknown as Date)).toBe("");
+  });
+
+  it("should format ISO8601 when format is ISO8601", () => {
+    const date = new Date("2023-05-05T10:30:00.000Z");
+    expect(format(date, "ISO8601")).toBe("2023-05-05T10:30:00.000Z");
+  });
 });
 
 describe("format with a timezone", () => {

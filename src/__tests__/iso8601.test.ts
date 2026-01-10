@@ -19,4 +19,8 @@ describe("validating ISO 8601", () => {
   it("should validate date without day component", () => {
     expect(isIso8601("2022-01")).toBe(true);
   });
+
+  it("should reject date with day 0", () => {
+    expect(isIso8601("2022-01-00 00:00:00")).toBe(false);
+  });
 });

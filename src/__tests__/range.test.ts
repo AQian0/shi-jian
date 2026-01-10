@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 
+import type { FormatToken } from "../types";
+
 import { generateFormattedArray, range } from "../range";
 
 const locales = [
@@ -311,5 +313,15 @@ describe("getRange", () => {
   });
   it("can return the double digit 59 minutes", () => {
     expect(range("ss")).toEqual(generateFormattedArray(60, i => `${i < 10 ? "0" : ""}${i}`));
+  });
+
+  it("should return empty array for unknown token", () => {
+    expect(range("xyz" as unknown as FormatToken)).toEqual([]);
+  });
+
+  it("should use cache for repeated calls", () => {
+    const first = range("MM", "en", false);
+    const second = range("MM", "en", false);
+    expect(first).toBe(second); // 应该是同一个引用
   });
 });
