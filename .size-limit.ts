@@ -78,4 +78,5 @@ for (const format of BUILD_FORMATS) {
   });
 }
 
+// oxlint-disable-next-line no-default-export
 export default configs;
