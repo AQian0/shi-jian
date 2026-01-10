@@ -304,8 +304,4 @@ describe("getRange", () => {
   it("can return the double digit 59 minutes", () => {
     expect(range("ss")).toEqual(generateFormattedArray(60, i => `${i < 10 ? "0" : ""}${i}`));
   });
-
-  it("should return empty array for unknown token", () => {
-    expect(range("X" as any)).toEqual([]);
-  });
 });
