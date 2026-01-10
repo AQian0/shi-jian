@@ -167,8 +167,15 @@ export function parse(
   const h = parsed.get("HH");
   const m = parsed.get("mm");
   const s = parsed.get("ss");
-  
-  if (Y === void 0 || M === void 0 || D === void 0 || h === void 0 || m === void 0 || s === void 0) {
+
+  if (
+    Y === void 0 ||
+    M === void 0 ||
+    D === void 0 ||
+    h === void 0 ||
+    m === void 0 ||
+    s === void 0
+  ) {
     throw new Error(`Missing required date parts`);
   }
 
