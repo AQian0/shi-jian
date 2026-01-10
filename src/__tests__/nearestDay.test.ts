@@ -101,8 +101,7 @@ describe("nearestDay", () => {
     const find = new Date();
     find.setDate(28);
     find.setMilliseconds(0);
-    const search = (d: Date) => d.getDate() == 28;
-    //
+    const search = (d: Date) => d.getDate() === 28;
     expect(nearestDay(undefined, search, "month")).toEqual(find);
   });
 });
