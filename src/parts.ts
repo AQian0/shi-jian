@@ -15,6 +15,7 @@ import {
   CLOCK_24_PATTERNS,
   CLOCK_12_PATTERNS,
   MONTHS_PER_YEAR,
+  getGenitiveMonth,
 } from "./common";
 
 const WEEKDAY_TEST_DATES = [
@@ -254,13 +255,7 @@ const applyGenitiveMonth = (
   date: Date,
   segments: Intl.DateTimeFormatPart[],
 ): void => {
-  const genitiveFormattedParts = new Intl.DateTimeFormat(locale, {
-    dateStyle: style === "short" ? "medium" : "long",
-    timeZone: "UTC",
-  })
-    .formatToParts(date)
-    .map(part => normalizeStr(part));
-  const genitiveMonth = genitiveFormattedParts.find(part => part.type === "month");
+  const genitiveMonth = getGenitiveMonth(date, locale, style);
   const index = segments.findIndex(part => part.type === "month");
   if (index > -1 && genitiveMonth) {
     segments[index] = genitiveMonth;

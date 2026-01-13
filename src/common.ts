@@ -252,3 +252,18 @@ export const FIXED_LENGTH = {
 export const two = (n: number): string => String(n).padStart(2, "0");
 
 export const four = (n: number): string => String(n).padStart(4, "0");
+
+export const getGenitiveMonth = (
+  date: Date,
+  locale: string,
+  style: "long" | "short",
+): Intl.DateTimeFormatPart | undefined => {
+  const dateStyle = style === "short" ? "medium" : "long";
+  const parts = new Intl.DateTimeFormat(locale, {
+    dateStyle,
+    timeZone: "UTC",
+  })
+    .formatToParts(date)
+    .map(part => normalizeStr(part));
+  return parts.find(part => part.type === "month");
+};

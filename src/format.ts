@@ -8,7 +8,7 @@ import type {
 } from "./types";
 
 import { ap } from "./ap";
-import { minsToOffset, normalizeStr } from "./common";
+import { minsToOffset, normalizeStr, getGenitiveMonth } from "./common";
 import { normalizeDate } from "./date";
 import { offset } from "./offset";
 import { parts } from "./parts";
@@ -56,28 +56,17 @@ const createPartMap = (
     );
     if (genitive && genitiveParts.length > 0) {
       for (const part of genitiveParts) {
-        let formattedParts: Intl.DateTimeFormatPart[] = [];
+        let genitiveFormattedPart: Intl.DateTimeFormatPart | undefined;
         switch (part.token) {
           case "MMMM":
-            formattedParts = new Intl.DateTimeFormat(preciseLocale, {
-              dateStyle: "long",
-              timeZone: "UTC",
-            })
-              .formatToParts(d)
-              .map(part => normalizeStr(part));
+            genitiveFormattedPart = getGenitiveMonth(d, locale, "long");
             break;
           case "MMM":
-            formattedParts = new Intl.DateTimeFormat(preciseLocale, {
-              dateStyle: "medium",
-              timeZone: "UTC",
-            })
-              .formatToParts(d)
-              .map(part => normalizeStr(part));
+            genitiveFormattedPart = getGenitiveMonth(d, locale, "short");
             break;
           default:
             break;
         }
-        const genitiveFormattedPart = formattedParts.find(p => p.type === part.partName);
         const index = valueParts.findIndex(p => p.type === part.partName);
         if (genitiveFormattedPart && index > -1) {
           valueParts[index] = genitiveFormattedPart;
