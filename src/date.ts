@@ -7,7 +7,9 @@ export const normalizeDate = (date?: MaybeDateInput): Date => {
     return new Date();
   }
   if (date instanceof Date) {
-    return new Date(new Date(date).setMilliseconds(0));
+    const d = new Date(date);
+    d.setMilliseconds(0);
+    return d;
   }
   if (isIso8601(date)) {
     const matches = date.match(ISO8601_PATTERN);
