@@ -14,7 +14,29 @@ import {
   CLOCK_AGNOSTIC_PATTERNS,
   CLOCK_24_PATTERNS,
   CLOCK_12_PATTERNS,
+  MONTHS_PER_YEAR,
 } from "./common";
+
+const WEEKDAY_TEST_DATES = [
+  3,
+  8,
+  9,
+  7,
+  6,
+  4,
+  3,
+] as const;
+const NAMED_FORMAT_PARTS: ReadonlyArray<keyof NamedFormats> = [
+  "weekday",
+  "month",
+  "dayPeriod",
+];
+const NAMED_FORMAT_STYLES: ReadonlyArray<NamedFormatOption> = [
+  "long",
+  "short",
+  "narrow",
+];
+const UTC_HOUR_BASE = 8;
 
 const memoParts: Map<string, NamedFormats> = new Map();
 const tokens = new Map(
@@ -252,38 +274,18 @@ const partStyle = (
 ): NamedFormatOption | undefined => {
   if (!memoParts.has(locale)) {
     const date = new Date();
-    const WEEKDAYS = [
-      3,
-      8,
-      9,
-      7,
-      6,
-      4,
-      3,
-    ] as const;
-    const PARTS = [
-      "weekday",
-      "month",
-      "dayPeriod",
-    ] as const;
-    const PART_STYLES: ReadonlyArray<NamedFormatOption> = [
-      "long",
-      "short",
-      "narrow",
-    ];
-    const MONTHS_COUNT = 12;
     const formats: Partial<NamedFormats> = {};
 
-    for (let i = 0; i < MONTHS_COUNT; i++) {
+    for (let i = 0; i < MONTHS_PER_YEAR; i++) {
       date.setMonth(i);
-      if (i < WEEKDAYS.length) {
-        const weekday = WEEKDAYS[i];
+      if (i < WEEKDAY_TEST_DATES.length) {
+        const weekday = WEEKDAY_TEST_DATES[i];
         if (weekday !== void 0) date.setDate(weekday);
       }
-      date.setUTCHours(8 + i);
+      date.setUTCHours(UTC_HOUR_BASE + i);
 
-      for (const style of PART_STYLES) {
-        const formatOptions = PARTS.reduce(
+      for (const style of NAMED_FORMAT_STYLES) {
+        const formatOptions = NAMED_FORMAT_PARTS.reduce(
           (options, part) =>
             Object.assign(options, {
               [part]: style,
