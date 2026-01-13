@@ -23,8 +23,8 @@ export const generateFormattedArray: (
     {
       length: n,
     },
-    _ => "",
-  ).map((_, i) => `${c(i)}`);
+    (_, i) => `${c(i)}`,
+  );
 
 export const range = (token: FormatToken, locale = "en", genitive = false): string[] => {
   const cacheKey = `${token}|${locale}|${genitive ? 1 : 0}`;
