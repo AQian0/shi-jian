@@ -1,4 +1,11 @@
-import type { ParseOptions, Format, Part, FormatStyle, FormatToken, DateOverflowStrategy } from "./types";
+import type {
+  ParseOptions,
+  Format,
+  Part,
+  FormatStyle,
+  FormatToken,
+  DateOverflowStrategy,
+} from "./types";
 
 import { ap } from "./ap";
 import {
