@@ -26,14 +26,15 @@ import { parseParts } from "./parseParts";
 import { parts } from "./parts";
 import { range } from "./range";
 
-const validationCache = new WeakMap<Part[], Part[]>();
+const validationCache = new Map<string, Part[]>();
 const NUMERIC_VALUES = new Set([
   "numeric",
   "2-digit",
 ]);
 const defaultPartFilter = (): boolean => true;
 const validate = (parts: Part[]): Part[] | never => {
-  const cached = validationCache.get(parts);
+  const cacheKey = parts.map(p => `${p.token}:${p.partName}`).join("|");
+  const cached = validationCache.get(cacheKey);
   if (cached) {
     return cached;
   }
@@ -53,7 +54,7 @@ const validate = (parts: Part[]): Part[] | never => {
     }
     lastPart = part;
   }
-  validationCache.set(parts, parts);
+  validationCache.set(cacheKey, parts);
   return parts;
 };
 
