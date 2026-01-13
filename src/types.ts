@@ -2,20 +2,20 @@ export type MaybeDateInput = Date | string | undefined;
 
 export type NamedFormatOption = "long" | "short" | "narrow";
 
-export interface NamedFormats {
+export type NamedFormats = {
   weekday: Record<string, NamedFormatOption>;
   month: Record<string, NamedFormatOption>;
   dayPeriod: Record<string, NamedFormatOption>;
-}
+};
 
-export interface Part {
+export type Part = {
   option: FormatPattern[1];
   partName: Intl.DateTimeFormatPartTypes;
   partValue: string;
   token: string;
   pattern: RegExp;
   hour12: boolean;
-}
+};
 
 export type FilledPart = Part & {
   value: string;
@@ -68,21 +68,23 @@ export type FormatToken =
   | "ZZ"
   | "Z";
 
-export interface ParseOptions {
+export type DateOverflowStrategy = "forward" | "backward" | "throw";
+
+export type ParseOptions = {
   date: string;
   format?: Format;
   locale?: string;
   partFilter?: (part: Part) => boolean;
-  dateOverflow?: "forward" | "backward" | "throw";
-}
+  dateOverflow?: DateOverflowStrategy;
+};
 
-export interface FormatOptions {
+export type FormatOptions = {
   date: MaybeDateInput;
   format: Format;
   locale?: string;
   genitive?: boolean;
   tz?: string;
   partFilter?: (part: Part) => boolean;
-}
+};
 
 export type TimezoneToken = "Z" | "ZZ";

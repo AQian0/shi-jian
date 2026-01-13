@@ -1,4 +1,4 @@
-import type { ParseOptions, Format, Part, FormatStyle, FormatToken } from "./types";
+import type { ParseOptions, Format, Part, FormatStyle, FormatToken, DateOverflowStrategy } from "./types";
 
 import { ap } from "./ap";
 import {
@@ -59,7 +59,7 @@ export function parse(
 ): Date | never {
   let partFilter: (part: Part) => boolean = defaultPartFilter;
   let dateStr: string;
-  let dateOverflow = "backward";
+  let dateOverflow: DateOverflowStrategy = "backward";
   if (typeof dateStrOrOptions === "object") {
     ({
       date: dateStr,
