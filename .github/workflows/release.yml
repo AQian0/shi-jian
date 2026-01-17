@@ -10,10 +10,17 @@ permissions:
   id-token: write
 
 jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
+  build:
+    uses: ./.github/workflows/build.yml
+
   publish:
+    needs: [test, build]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Bun
@@ -23,9 +30,6 @@ jobs:
 
       - name: Install dependencies
         run: bun install
-
-      - name: Run tests
-        run: bun run test
 
       - name: Build package
         run: bun run build
