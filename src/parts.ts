@@ -75,6 +75,15 @@ const createPart = (hour12: boolean, [token, option, exp]: FormatPattern): Part 
   };
 };
 
+/**
+ * 将格式选项解析为格式化部分数组。
+ * @param format - 格式选项，支持预定义样式或自定义格式字符串
+ * @param locale - 语言环境
+ * @returns 格式化部分数组
+ * @example
+ * parts('YYYY-MM-DD', 'en')
+ * // [{ token: 'YYYY', ... }, { token: '-', ... }, { token: 'MM', ... }, ...]
+ */
 export const parts = (format: Format, locale: string): Part[] => {
   if (STYLES.includes(format as FormatStyle) || typeof format === "object") {
     return styleParts(format as FormatStyle | FormatStyleObj, locale);

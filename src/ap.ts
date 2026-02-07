@@ -8,6 +8,15 @@ type LocaleDayPeriods = {
 
 const dayPeriodCache = new Map<string, LocaleDayPeriods>();
 
+/**
+ * 获取指定语言环境下的上午/下午标识。
+ * @param ampm - 日间时段，'am' 或 'pm'
+ * @param locale - 语言环境
+ * @returns 本地化的上午/下午标识字符串
+ * @example
+ * ap('am', 'en') // 'AM'
+ * ap('pm', 'zh-CN') // '下午'
+ */
 export const ap = (ampm: DayPeriod, locale: string): string => {
   const cached = dayPeriodCache.get(locale)?.[ampm];
   if (cached) {

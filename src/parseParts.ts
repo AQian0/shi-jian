@@ -11,6 +11,12 @@ const findDayPeriodLength = (dateStr: string, pos: number): number => {
   return 1;
 };
 
+/**
+ * 根据格式部分解析日期字符串。
+ * @param dateStr - 要解析的日期字符串
+ * @param formatParts - 格式化部分数组
+ * @returns 填充了实际值的格式化部分数组
+ */
 export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] => {
   let index = 0;
   const advance = (

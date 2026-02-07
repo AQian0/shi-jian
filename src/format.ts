@@ -136,7 +136,26 @@ const getOffsetFormat = (format: Format): TimezoneToken => {
   return "time" in format && format.time === "full" ? "Z" : "ZZ";
 };
 
+/**
+ * 将日期格式化为指定格式的字符串。
+ * @param options - 格式化选项对象
+ * @returns 格式化后的日期字符串
+ * @example
+ * format({ date: new Date('2024-01-15'), format: 'YYYY-MM-DD' }) // '2024-01-15'
+ */
 export function format(options: FormatOptions): string;
+/**
+ * 将日期格式化为指定格式的字符串。
+ * @param inputDate - 输入日期，支持 Date 对象、ISO 8601 格式字符串或 undefined
+ * @param format - 输出格式，支持预定义样式（'full'|'long'|'medium'|'short'）或自定义格式字符串；默认为 'long'
+ * @param locale - 语言环境，默认为 'device'（设备语言）
+ * @param genitive - 是否使用属格形式（某些语言中月份名称会变化）；默认为 false
+ * @param partFilter - 部分过滤器函数，用于筛选输出的日期部分
+ * @returns 格式化后的日期字符串
+ * @example
+ * format(new Date('2024-01-15'), 'YYYY年MM月DD日') // '2024年01月15日'
+ * format('2024-01-15', 'long', 'zh-CN') // '2024年1月15日'
+ */
 export function format(
   inputDate: MaybeDateInput,
   format?: Format,

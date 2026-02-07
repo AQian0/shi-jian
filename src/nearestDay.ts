@@ -7,6 +7,16 @@ import { dayOfYear } from "./dayOfYear";
 import { monthDays } from "./monthDays";
 import { yearDays } from "./yearDays";
 
+/**
+ * 在指定范围内查找满足条件的最近日期。
+ * @param date - 输入日期，支持 Date 对象、ISO 8601 格式字符串或 undefined
+ * @param search - 搜索条件函数，返回 true 表示找到目标日期
+ * @param constraint - 搜索范围约束，可以是数字（天数）或 'month'、'week'、'year'；默认为 7
+ * @returns 满足条件的最近日期，若未找到则返回 undefined
+ * @example
+ * // 查找最近的周日
+ * nearestDay(new Date('2024-01-15'), (d) => d.getDay() === 0, 'week')
+ */
 export const nearestDay = (
   date: MaybeDateInput,
   search: (date: Date) => boolean,
