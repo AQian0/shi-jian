@@ -4,9 +4,6 @@ import { isIso8601, ISO8601_PATTERN } from "./iso8601";
 
 /**
  * 将输入转换为标准化的 Date 对象。
- * @param date - 输入日期，支持 Date 对象、ISO 8601 格式字符串或 undefined（默认为当前时间）
- * @returns 标准化的 Date 对象（毫秒归零）
- * @throws 当输入字符串不符合 ISO 8601 格式时抛出错误
  * @example
  * normalizeDate(new Date()) // 当前时间
  * normalizeDate('2024-01-15') // 2024-01-15T00:00:00

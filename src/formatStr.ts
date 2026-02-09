@@ -17,11 +17,6 @@ const escapeTokens = (str: string): string => {
 
 /**
  * 将格式选项转换为格式字符串。
- * @param format - 格式选项，支持预定义样式或自定义格式字符串
- * @param locale - 语言环境，默认为 'en'
- * @param escapeLiterals - 是否转义字面量中的令牌，默认为 false
- * @param filterParts - 部分过滤器函数
- * @returns 格式字符串
  * @example
  * formatStr('long', 'en') // 'MMMM D, YYYY'
  * formatStr({ date: 'short' }, 'zh-CN') // 'YYYY/M/D'

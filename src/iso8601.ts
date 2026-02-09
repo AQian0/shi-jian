@@ -5,8 +5,6 @@ export const ISO8601_PATTERN =
 
 /**
  * 检查字符串是否为有效的 ISO 8601 日期格式。
- * @param date - 要检查的日期字符串
- * @returns 若为有效的 ISO 8601 格式则返回 true，否则返回 false
  * @example
  * isIso8601('2024-01-15') // true
  * isIso8601('2024-01-15T10:30:00Z') // true

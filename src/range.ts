@@ -28,10 +28,6 @@ export const generateFormattedArray: (
 
 /**
  * 获取指定格式令牌的所有可能值。
- * @param token - 格式化令牌，如 'MM'、'MMMM'、'ddd' 等
- * @param locale - 语言环境，默认为 'en'
- * @param genitive - 是否使用属格形式，默认为 false
- * @returns 该令牌的所有可能值数组
  * @example
  * range('MM', 'en') // ['01', '02', ..., '12']
  * range('MMMM', 'zh-CN') // ['一月', '二月', ..., '十二月']

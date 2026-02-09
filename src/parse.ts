@@ -60,20 +60,12 @@ const validate = (parts: Part[]): Part[] | never => {
 
 /**
  * 将日期字符串解析为 Date 对象。
- * @param options - 解析选项对象
- * @returns 解析后的 Date 对象
- * @throws 当日期字符串与格式不匹配时抛出错误
  * @example
  * parse({ date: '2024-01-15', format: 'YYYY-MM-DD' })
  */
 export function parse(options: ParseOptions): Date | never;
 /**
  * 将日期字符串解析为 Date 对象。
- * @param dateStr - 要解析的日期字符串
- * @param format - 日期格式，默认为 'ISO8601'
- * @param locale - 语言环境，默认为 'device'
- * @returns 解析后的 Date 对象
- * @throws 当日期字符串与格式不匹配时抛出错误
  * @example
  * parse('2024-01-15', 'YYYY-MM-DD')
  * parse('15/01/2024', 'DD/MM/YYYY')

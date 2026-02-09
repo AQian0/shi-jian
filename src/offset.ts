@@ -34,11 +34,6 @@ function relativeTime(d: Date, timeZone: string): Date {
 
 /**
  * 计算两个时区之间的偏移量。
- * @param utcTime - 输入日期，支持 Date 对象、ISO 8601 格式字符串或 undefined（默认为当前时间）
- * @param tzA - 源时区，默认为 'UTC'
- * @param tzB - 目标时区，默认为 'device'（设备时区）
- * @param timeZoneToken - 时区偏移输出格式，'Z' 表示带冒号（+08:00），'ZZ' 表示不带冒号（+0800）；默认为 'Z'
- * @returns 时区偏移字符串
  * @example
  * offset(new Date(), 'UTC', 'Asia/Shanghai') // '+08:00'
  * offset(new Date(), 'UTC', 'America/New_York', 'ZZ') // '-0500'
