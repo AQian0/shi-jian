@@ -4,7 +4,7 @@ import { MS_DAY } from "./common";
 import { normalizeDate } from "./date";
 
 /**
- * 获取指定日期所在年份的天数。
+ * @description 获取指定日期所在年份的天数。
  * @example
  * yearDays(new Date('2024-06-15')) // 366（闰年）
  * yearDays(new Date('2023-06-15')) // 365

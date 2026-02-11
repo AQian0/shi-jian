@@ -4,7 +4,7 @@ import { MS_DAY } from "./common";
 import { normalizeDate } from "./date";
 
 /**
- * 获取指定日期是当年的第几天。
+ * @description 获取指定日期是当年的第几天。
  * @example
  * dayOfYear(new Date('2024-01-01')) // 1
  * dayOfYear(new Date('2024-12-31')) // 366（闰年）

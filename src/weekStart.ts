@@ -3,7 +3,7 @@ import type { MaybeDateInput } from "./types";
 import { normalizeDate } from "./date";
 
 /**
- * 获取指定日期所在周的起始日期（00:00:00）。
+ * @description 获取指定日期所在周的起始日期（00:00:00）。
  * @example
  * weekStart(new Date('2024-01-15')) // 2024-01-14（周日）
  * weekStart(new Date('2024-01-15'), 1) // 2024-01-15（周一）

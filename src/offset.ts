@@ -33,7 +33,7 @@ function relativeTime(d: Date, timeZone: string): Date {
 }
 
 /**
- * 计算两个时区之间的偏移量。
+ * @description 计算两个时区之间的偏移量。
  * @example
  * offset(new Date(), 'UTC', 'Asia/Shanghai') // '+08:00'
  * offset(new Date(), 'UTC', 'America/New_York', 'ZZ') // '-0500'

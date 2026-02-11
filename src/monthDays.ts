@@ -3,7 +3,7 @@ import type { MaybeDateInput } from "./types";
 import { monthEnd } from "./monthEnd";
 
 /**
- * 获取指定日期所在月份的天数。
+ * @description 获取指定日期所在月份的天数。
  * @example
  * monthDays(new Date('2024-02-15')) // 29（闰年）
  * monthDays(new Date('2023-02-15')) // 28

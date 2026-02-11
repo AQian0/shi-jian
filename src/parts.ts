@@ -76,7 +76,7 @@ const createPart = (hour12: boolean, [token, option, exp]: FormatPattern): Part 
 };
 
 /**
- * 将格式选项解析为格式化部分数组。
+ * @description 将格式选项解析为格式化部分数组。
  * @example
  * parts('YYYY-MM-DD', 'en')
  * // [{ token: 'YYYY', ... }, { token: '-', ... }, { token: 'MM', ... }, ...]

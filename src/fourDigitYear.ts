@@ -1,7 +1,7 @@
 import { YEARS_PER_CENTURY, YEAR_PREDICTION_THRESHOLD } from "./common";
 
 /**
- * 将两位年份转换为四位年份。
+ * @description 将两位年份转换为四位年份。
  * 若输入值大于当前年份加 20，则视为上个世纪。
  * @example
  * fourDigitYear('24') // 2024（假设当前年份为 2024 年）

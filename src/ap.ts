@@ -9,7 +9,7 @@ type LocaleDayPeriods = {
 const dayPeriodCache = new Map<string, LocaleDayPeriods>();
 
 /**
- * 获取指定语言环境下的上午/下午标识。
+ * @description 获取指定语言环境下的上午/下午标识。
  * @example
  * ap('am', 'en') // 'AM'
  * ap('pm', 'zh-CN') // '下午'

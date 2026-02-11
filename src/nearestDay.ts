@@ -8,7 +8,7 @@ import { monthDays } from "./monthDays";
 import { yearDays } from "./yearDays";
 
 /**
- * 在指定范围内查找满足条件的最近日期。
+ * @description 在指定范围内查找满足条件的最近日期。
  * @example
  * // 查找最近的周日
  * nearestDay(new Date('2024-01-15'), (d) => d.getDay() === 0, 'week')

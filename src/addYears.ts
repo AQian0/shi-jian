@@ -4,7 +4,7 @@ import { normalizeDate } from "./date";
 import { monthDays } from "./monthDays";
 
 /**
- * 在指定日期基础上增加或减少年数。
+ * @description 在指定日期基础上增加或减少年数。
  * 当 dateOverflow 设置为 false 时，若目标年份该月天数少于原日期的日，则自动调整至该月最后一天。
  * 例如：2024年2月29日（闰年）加1年将得到2025年2月28日
  * @example

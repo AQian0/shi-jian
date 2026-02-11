@@ -22,7 +22,7 @@ const offsetToMins = (offset: string, token: TimezoneToken): number => {
 };
 
 /**
- * 将时区偏移应用到日期上。
+ * @description 将时区偏移应用到日期上。
  * @example
  * applyOffset(new Date('2024-01-15T00:00:00Z'), '+08:00') // 2024-01-15T08:00:00Z
  */

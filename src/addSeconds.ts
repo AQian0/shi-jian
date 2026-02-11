@@ -3,7 +3,7 @@ import type { MaybeDateInput } from "./types";
 import { normalizeDate } from "./date";
 
 /**
- * 在指定日期基础上增加或减少秒数。
+ * @description 在指定日期基础上增加或减少秒数。
  * @example
  * addSeconds(new Date('2024-01-01T10:30:00'), 30) // 2024-01-01T10:30:30
  * addSeconds('2024-01-01T00:00:10', -20) // 2023-12-31T23:59:50

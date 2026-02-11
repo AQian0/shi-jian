@@ -27,7 +27,7 @@ export const generateFormattedArray: (
   );
 
 /**
- * 获取指定格式令牌的所有可能值。
+ * @description 获取指定格式令牌的所有可能值。
  * @example
  * range('MM', 'en') // ['01', '02', ..., '12']
  * range('MMMM', 'zh-CN') // ['一月', '二月', ..., '十二月']

@@ -4,7 +4,7 @@ import { normalizeDate } from "./date";
 import { monthDays } from "./monthDays";
 
 /**
- * 在指定日期基础上增加或减少月数。
+ * @description 在指定日期基础上增加或减少月数。
  * 当 dateOverflow 设置为 false 时，若目标月份天数少于原日期的日，则自动调整至该月最后一天。
  * 例如：1月31日加1个月将得到2月28日（或闰年2月29日）
  * @example

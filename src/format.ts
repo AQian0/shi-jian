@@ -137,13 +137,13 @@ const getOffsetFormat = (format: Format): TimezoneToken => {
 };
 
 /**
- * 将日期格式化为指定格式的字符串。
+ * @description 将日期格式化为指定格式的字符串。
  * @example
  * format({ date: new Date('2024-01-15'), format: 'YYYY-MM-DD' }) // '2024-01-15'
  */
 export function format(options: FormatOptions): string;
 /**
- * 将日期格式化为指定格式的字符串。
+ * @description 将日期格式化为指定格式的字符串。
  * @example
  * format(new Date('2024-01-15'), 'YYYY年MM月DD日') // '2024年01月15日'
  * format('2024-01-15', 'long', 'zh-CN') // '2024年1月15日'
