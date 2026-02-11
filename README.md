@@ -1,5 +1,7 @@
 # shi-jian
 
+中文 | [English](./README.en.md)
+
 > ⚠️ **该库仍在开发中，API 可能会发生变更**
 
 shi-jian（时间），一个富有人体工学的现代 JavaScript 日期处理库。
@@ -27,22 +29,22 @@ shi-jian 不包含任何生产依赖，可以安全地导入到项目中，无�
 ### 安装
 
 ```shell
-npm install shi-jian
+npm install @aqian0/shi-jian
 ```
 
 ```shell
-pnpm add shi-jian
+pnpm add @aqian0/shi-jian
 ```
 
 ```shell
-bun add shi-jian
+bun add @aqian0/shi-jian
 ```
 
 ## 理念
 
 ### `null` vs `undefined`
 
-优先采用undefined作为标准faisy。一方面null在实现上先天具有一定劣势，在诸多方法上需要进行额外的判定与处理，而undefined在不涉及到数据库与类的前端场景下，无疑更加通用。另一方面从现实意义的角度上进行考量，无论如何日期都是存在的，当用户在获取日期的时候，要么获取到未定义为日期的值，要么获取到真实日期对应的值，不可能出现日期为空这种情况。
+优先采用undefined作为标准falsy。一方面null在实现上先天具有一定劣势，在诸多方法上需要进行额外的判定与处理，而undefined在不涉及到数据库与类的前端场景下，无疑更加通用。另一方面从现实意义的角度上进行考量，无论如何日期都是存在的，当用户在获取日期的时候，要么获取到未定义为日期的值，要么获取到真实日期对应的值，不可能出现日期为空这种情况。
 
 ### 错误处理
 
@@ -50,7 +52,7 @@ bun add shi-jian
 
 ## 路线图
 
-- [x] faisy值处理规范化
+- [x] falsy值处理规范化
 
 - [ ] 异常与错误处理优化
 
@@ -68,8 +70,14 @@ bun add shi-jian
 - [x] 测试功能完善
 
 - [ ] 文档
+  - [x] JSDoc
+
+  - [x] 英文版本
 
 - [ ] CI/CD
+  - [x] 审查
+
+  - [ ] 发布
 
 ## 致谢
 
