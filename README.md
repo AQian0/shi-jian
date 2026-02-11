@@ -27,15 +27,15 @@ shi-jian 不包含任何生产依赖，可以安全地导入到项目中，无�
 ### 安装
 
 ```shell
-npm install shi-jian
+npm install @aqian0/shi-jian
 ```
 
 ```shell
-pnpm add shi-jian
+pnpm add @aqian0/shi-jian
 ```
 
 ```shell
-bun add shi-jian
+bun add @aqian0/shi-jian
 ```
 
 ## 理念
@@ -68,8 +68,14 @@ bun add shi-jian
 - [x] 测试功能完善
 
 - [ ] 文档
+  - [x] JSDoc
+
+  - [ ] 英文版本
 
 - [ ] CI/CD
+  - [x] 审查
+
+  - [ ] 发布
 
 ## 致谢
 
