@@ -1,5 +1,7 @@
 # shi-jian
 
+中文 | [English](./README.en.md)
+
 > ⚠️ **该库仍在开发中，API 可能会发生变更**
 
 shi-jian（时间），一个富有人体工学的现代 JavaScript 日期处理库。
@@ -70,7 +72,7 @@ bun add @aqian0/shi-jian
 - [ ] 文档
   - [x] JSDoc
 
-  - [ ] 英文版本
+  - [x] 英文版本
 
 - [ ] CI/CD
   - [x] 审查
