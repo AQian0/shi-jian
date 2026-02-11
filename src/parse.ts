@@ -58,7 +58,18 @@ const validate = (parts: Part[]): Part[] | never => {
   return parts;
 };
 
+/**
+ * @description Parse date string into a Date object.
+ * @example
+ * parse({ date: '2024-01-15', format: 'YYYY-MM-DD' })
+ */
 export function parse(options: ParseOptions): Date | never;
+/**
+ * @description Parse date string into a Date object.
+ * @example
+ * parse('2024-01-15', 'YYYY-MM-DD')
+ * parse('15/01/2024', 'DD/MM/YYYY')
+ */
 export function parse(dateStr: string, format?: Format, locale?: string): Date | never;
 export function parse(
   dateStrOrOptions: string | ParseOptions,

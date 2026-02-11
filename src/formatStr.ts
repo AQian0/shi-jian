@@ -15,6 +15,12 @@ const escapeTokens = (str: string): string => {
   }, str);
 };
 
+/**
+ * @description Convert format options into a format string.
+ * @example
+ * formatStr('long', 'en') // 'MMMM D, YYYY'
+ * formatStr({ date: 'short' }, 'zh-CN') // 'YYYY/M/D'
+ */
 export const formatStr = (
   format: Format,
   locale = "en",

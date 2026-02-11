@@ -21,6 +21,11 @@ const offsetToMins = (offset: string, token: TimezoneToken): number => {
   return sign === "+" ? offsetInMins : -offsetInMins;
 };
 
+/**
+ * @description Apply timezone offset to a date.
+ * @example
+ * applyOffset(new Date('2024-01-15T00:00:00Z'), '+08:00') // 2024-01-15T08:00:00Z
+ */
 export const applyOffset = (dateInput?: MaybeDateInput, offset = "+00:00"): Date => {
   const d = normalizeDate(dateInput);
   const token = ((): TimezoneToken => {

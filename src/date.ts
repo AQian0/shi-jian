@@ -2,6 +2,13 @@ import type { MaybeDateInput } from "./types";
 
 import { isIso8601, ISO8601_PATTERN } from "./iso8601";
 
+/**
+ * @description Convert input to a normalized Date object.
+ * @example
+ * normalizeDate(new Date()) // Current time
+ * normalizeDate('2024-01-15') // 2024-01-15T00:00:00
+ * normalizeDate('2024-01-15T10:30:00') // 2024-01-15T10:30:00
+ */
 export const normalizeDate = (date?: MaybeDateInput): Date => {
   if (!date) {
     return new Date();

@@ -26,6 +26,13 @@ export const generateFormattedArray: (
     (_, i) => `${c(i)}`,
   );
 
+/**
+ * @description Get all possible values for the specified format token.
+ * @example
+ * range('MM', 'en') // ['01', '02', ..., '12']
+ * range('MMMM', 'zh-CN') // ['一月', '二月', ..., '十二月']
+ * range('ddd', 'en') // ['Sun', 'Mon', ..., 'Sat']
+ */
 export const range = (token: FormatToken, locale = "en", genitive = false): string[] => {
   const cacheKey = `${token}|${locale}|${genitive ? 1 : 0}`;
   const cached = rangeCache.get(cacheKey);
@@ -94,7 +101,7 @@ export const range = (token: FormatToken, locale = "en", genitive = false): stri
     result = [];
   }
 
-  // 将结果缓存起来
+  // Cache the result
   rangeCache.set(cacheKey, result);
   return result;
 };

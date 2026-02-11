@@ -75,6 +75,12 @@ const createPart = (hour12: boolean, [token, option, exp]: FormatPattern): Part 
   };
 };
 
+/**
+ * @description Parse format options into an array of formatting parts.
+ * @example
+ * parts('YYYY-MM-DD', 'en')
+ * // [{ token: 'YYYY', ... }, { token: '-', ... }, { token: 'MM', ... }, ...]
+ */
 export const parts = (format: Format, locale: string): Part[] => {
   if (STYLES.includes(format as FormatStyle) || typeof format === "object") {
     return styleParts(format as FormatStyle | FormatStyleObj, locale);

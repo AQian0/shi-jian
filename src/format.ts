@@ -136,7 +136,18 @@ const getOffsetFormat = (format: Format): TimezoneToken => {
   return "time" in format && format.time === "full" ? "Z" : "ZZ";
 };
 
+/**
+ * @description Format date as a string in the specified format.
+ * @example
+ * format({ date: new Date('2024-01-15'), format: 'YYYY-MM-DD' }) // '2024-01-15'
+ */
 export function format(options: FormatOptions): string;
+/**
+ * @description Format date as a string in the specified format.
+ * @example
+ * format(new Date('2024-01-15'), 'YYYY年MM月DD日') // '2024年01月15日'
+ * format('2024-01-15', 'long', 'zh-CN') // '2024年1月15日'
+ */
 export function format(
   inputDate: MaybeDateInput,
   format?: Format,

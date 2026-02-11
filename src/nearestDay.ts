@@ -7,6 +7,12 @@ import { dayOfYear } from "./dayOfYear";
 import { monthDays } from "./monthDays";
 import { yearDays } from "./yearDays";
 
+/**
+ * @description Find the nearest date within the specified range that satisfies the condition.
+ * @example
+ * // Find the nearest Sunday
+ * nearestDay(new Date('2024-01-15'), (d) => d.getDay() === 0, 'week')
+ */
 export const nearestDay = (
   date: MaybeDateInput,
   search: (date: Date) => boolean,

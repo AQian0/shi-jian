@@ -8,6 +8,12 @@ type LocaleDayPeriods = {
 
 const dayPeriodCache = new Map<string, LocaleDayPeriods>();
 
+/**
+ * @description Get the AM/PM identifier for the specified locale.
+ * @example
+ * ap('am', 'en') // 'AM'
+ * ap('pm', 'zh-CN') // '下午'
+ */
 export const ap = (ampm: DayPeriod, locale: string): string => {
   const cached = dayPeriodCache.get(locale)?.[ampm];
   if (cached) {
