@@ -3,10 +3,10 @@ import type { MaybeDateInput } from "./types";
 import { weekStart } from "./weekStart";
 
 /**
- * @description 获取指定日期所在周的结束日期（23:59:59.999）。
+ * @description Get the end date of the week (23:59:59.999) for the specified date.
  * @example
- * weekEnd(new Date('2024-01-15')) // 2024-01-20T23:59:59.999（周六）
- * weekEnd(new Date('2024-01-15'), 1) // 2024-01-21T23:59:59.999（周日）
+ * weekEnd(new Date('2024-01-15')) // 2024-01-20T23:59:59.999 (Saturday)
+ * weekEnd(new Date('2024-01-15'), 1) // 2024-01-21T23:59:59.999 (Sunday)
  */
 export const weekEnd = (inputDate?: MaybeDateInput, startOfWeekDay = 0): Date => {
   const d = weekStart(inputDate, startOfWeekDay);

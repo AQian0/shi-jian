@@ -4,12 +4,13 @@ import { normalizeDate } from "./date";
 import { monthDays } from "./monthDays";
 
 /**
- * @description 在指定日期基础上增加或减少月数。
- * 当 dateOverflow 设置为 false 时，若目标月份天数少于原日期的日，则自动调整至该月最后一天。
- * 例如：1月31日加1个月将得到2月28日（或闰年2月29日）
+ * @description Add or subtract months from the specified date.
+ * When dateOverflow is set to false, if the target month has fewer days than the original date's day,
+ * it automatically adjusts to the last day of that month.
+ * For example: January 31 plus 1 month will result in February 28 (or February 29 in a leap year)
  * @example
- * addMonths(new Date('2024-01-31'), 1) // 2024-02-29（闰年）
- * addMonths(new Date('2024-01-31'), 1, true) // 2024-03-02（溢出至3月）
+ * addMonths(new Date('2024-01-31'), 1) // 2024-02-29 (leap year)
+ * addMonths(new Date('2024-01-31'), 1, true) // 2024-03-02 (overflow to March)
  */
 export const addMonths = (inputDate?: MaybeDateInput, count = 1, dateOverflow = false): Date => {
   const d = normalizeDate(inputDate);

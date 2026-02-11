@@ -3,7 +3,7 @@ import type { MaybeDateInput } from "./types";
 import { normalizeDate } from "./date";
 
 /**
- * @description 获取指定日期当前小时的起始时刻（分秒归零）。
+ * @description Get the start moment of the current hour (minutes and seconds reset to zero) for the specified date.
  * @example
  * hourStart(new Date('2024-01-15T14:30:45')) // 2024-01-15T14:00:00
  */

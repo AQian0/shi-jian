@@ -3,7 +3,7 @@ import type { MaybeDateInput } from "./types";
 import { normalizeDate } from "./date";
 
 /**
- * @description 获取指定日期当前小时的结束时刻（XX:59:59.999）。
+ * @description Get the end moment of the current hour (XX:59:59.999) for the specified date.
  * @example
  * hourEnd(new Date('2024-01-15T14:30:45')) // 2024-01-15T14:59:59.999
  */

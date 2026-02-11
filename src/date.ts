@@ -3,9 +3,9 @@ import type { MaybeDateInput } from "./types";
 import { isIso8601, ISO8601_PATTERN } from "./iso8601";
 
 /**
- * @description 将输入转换为标准化的 Date 对象。
+ * @description Convert input to a normalized Date object.
  * @example
- * normalizeDate(new Date()) // 当前时间
+ * normalizeDate(new Date()) // Current time
  * normalizeDate('2024-01-15') // 2024-01-15T00:00:00
  * normalizeDate('2024-01-15T10:30:00') // 2024-01-15T10:30:00
  */

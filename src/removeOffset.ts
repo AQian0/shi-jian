@@ -4,7 +4,7 @@ import { applyOffset } from "./applyOffset";
 import { FIRST_CHAR_INDEX } from "./common";
 
 /**
- * @description 从日期中移除时区偏移。
+ * @description Remove timezone offset from a date.
  * @example
  * removeOffset(new Date('2024-01-15T08:00:00Z'), '+08:00') // 2024-01-15T00:00:00Z
  */

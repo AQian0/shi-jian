@@ -8,9 +8,9 @@ import { monthDays } from "./monthDays";
 import { yearDays } from "./yearDays";
 
 /**
- * @description 在指定范围内查找满足条件的最近日期。
+ * @description Find the nearest date within the specified range that satisfies the condition.
  * @example
- * // 查找最近的周日
+ * // Find the nearest Sunday
  * nearestDay(new Date('2024-01-15'), (d) => d.getDay() === 0, 'week')
  */
 export const nearestDay = (

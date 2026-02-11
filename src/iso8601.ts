@@ -4,7 +4,7 @@ export const ISO8601_PATTERN =
   /^([0-9]{4})-([0-1][0-9])(?:-([0-3][0-9]))?(?:[T ]?([0-2][0-9])(?::([0-5][0-9]))?(?::([0-5][0-9]))?)?(?:\.[0-9]+)?(Z|(?:\+|-)[0-9]{2}:?[0-9]{2})?$/;
 
 /**
- * @description 检查字符串是否为有效的 ISO 8601 日期格式。
+ * @description Check if a string is a valid ISO 8601 date format.
  * @example
  * isIso8601('2024-01-15') // true
  * isIso8601('2024-01-15T10:30:00Z') // true

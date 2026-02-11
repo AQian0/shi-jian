@@ -16,7 +16,7 @@ const escapeTokens = (str: string): string => {
 };
 
 /**
- * @description 将格式选项转换为格式字符串。
+ * @description Convert format options into a format string.
  * @example
  * formatStr('long', 'en') // 'MMMM D, YYYY'
  * formatStr({ date: 'short' }, 'zh-CN') // 'YYYY/M/D'

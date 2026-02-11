@@ -322,6 +322,6 @@ describe("getRange", () => {
   it("should use cache for repeated calls", () => {
     const first = range("MM", "en", false);
     const second = range("MM", "en", false);
-    expect(first).toBe(second); // 应该是同一个引用
+    expect(first).toBe(second); // Should be the same reference
   });
 });

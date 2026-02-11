@@ -1,10 +1,10 @@
 import { YEARS_PER_CENTURY, YEAR_PREDICTION_THRESHOLD } from "./common";
 
 /**
- * @description 将两位年份转换为四位年份。
- * 若输入值大于当前年份加 20，则视为上个世纪。
+ * @description Convert a two-digit year to a four-digit year.
+ * If the input value is greater than the current year plus 20, it is considered as the previous century.
  * @example
- * fourDigitYear('24') // 2024（假设当前年份为 2024 年）
+ * fourDigitYear('24') // 2024 (assuming current year is 2024)
  * fourDigitYear('99') // 1999
  */
 export const fourDigitYear = (value: string): number => {

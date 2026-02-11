@@ -3,7 +3,7 @@ import type { MaybeDateInput } from "./types";
 import { normalizeDate } from "./date";
 
 /**
- * @description 获取指定日期当天的起始时刻（00:00:00）。
+ * @description Get the start moment of the day (00:00:00) for the specified date.
  * @example
  * dayStart(new Date('2024-01-15T14:30:00')) // 2024-01-15T00:00:00
  */

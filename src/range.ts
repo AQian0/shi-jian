@@ -27,7 +27,7 @@ export const generateFormattedArray: (
   );
 
 /**
- * @description 获取指定格式令牌的所有可能值。
+ * @description Get all possible values for the specified format token.
  * @example
  * range('MM', 'en') // ['01', '02', ..., '12']
  * range('MMMM', 'zh-CN') // ['一月', '二月', ..., '十二月']
@@ -101,7 +101,7 @@ export const range = (token: FormatToken, locale = "en", genitive = false): stri
     result = [];
   }
 
-  // 将结果缓存起来
+  // Cache the result
   rangeCache.set(cacheKey, result);
   return result;
 };
