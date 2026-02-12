@@ -22,7 +22,12 @@ export const generateFormattedArray = (
   length: number,
   formatter: (index: number) => string | number,
 ): string[] =>
-  Array.from({ length }, (_, i) => `${formatter(i)}`);
+  Array.from(
+    {
+      length,
+    },
+    (_, i) => `${formatter(i)}`,
+  );
 
 /**
  * Pad number with leading zero if needed
@@ -64,17 +69,21 @@ const EXACT_GENERATORS: Partial<Record<FormatToken, RangeGenerator>> = {
   ss: () => generateFormattedArray(MAX_MINUTE + 1, i => padZero(i, true)),
 
   // AM/PM
-  a: (locale) => [ap("am", locale).toLowerCase(), ap("pm", locale).toLowerCase()],
-  A: (locale) => [ap("am", locale).toUpperCase(), ap("pm", locale).toUpperCase()],
+  a: locale => [
+    ap("am", locale).toLowerCase(),
+    ap("pm", locale).toLowerCase(),
+  ],
+  A: locale => [
+    ap("am", locale).toUpperCase(),
+    ap("pm", locale).toUpperCase(),
+  ],
 };
 
 /**
  * Generate month ranges (MMM, MMMM)
  */
 const generateMonthRange = (token: FormatToken, locale: string, genitive: boolean): string[] =>
-  range("MM", locale, genitive).map(m =>
-    format(`2000-${m}-05`, token, locale, genitive),
-  );
+  range("MM", locale, genitive).map(m => format(`2000-${m}-05`, token, locale, genitive));
 
 /**
  * Generate weekday ranges (d, ddd, dddd)
@@ -89,7 +98,9 @@ const generateWeekdayRange = (token: FormatToken, locale: string): string[] =>
  */
 const generateYearRange = (token: FormatToken, locale: string): string[] => {
   const currentYear = new Date().getFullYear();
-  const result: string[] = [format(`${currentYear}-06-06`, token, locale)];
+  const result: string[] = [
+    format(`${currentYear}-06-06`, token, locale),
+  ];
 
   for (let i = 1; i <= YEAR_RANGE; i++) {
     if (i !== YEAR_RANGE) {
@@ -104,7 +115,10 @@ const generateYearRange = (token: FormatToken, locale: string): string[] => {
 /**
  * Prefix-based generators for dynamic tokens
  */
-const PREFIX_HANDLERS: Record<string, (token: FormatToken, locale: string, genitive: boolean) => string[]> = {
+const PREFIX_HANDLERS: Record<
+  string,
+  (token: FormatToken, locale: string, genitive: boolean) => string[]
+> = {
   M: generateMonthRange,
   d: generateWeekdayRange,
   Y: generateYearRange,
