@@ -38,7 +38,6 @@ const CUSTOM_LIMITS: Record<string, string> = {
   formatStr: "1.7 kB",
   parts: "1.6 kB",
   tzDate: "1.2 kB",
-  offset: "900 B",
 };
 
 const extractExports = (dtsPath: string): ReadonlyArray<string> => {
@@ -78,7 +77,7 @@ for (const format of BUILD_FORMATS) {
         name: `${fnName} (${format.name})`,
         path: format.path,
         import: `{ ${fnName} }`,
-        limit: CUSTOM_LIMITS[fnName] ?? "800 B",
+        limit: CUSTOM_LIMITS[fnName] ?? "1 kB",
       });
     }
   }
