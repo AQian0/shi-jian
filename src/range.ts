@@ -145,7 +145,7 @@ export const range = (token: FormatToken, locale = "en", genitive = false): stri
   } else {
     // Try prefix match
     const prefix = token[0];
-    const prefixHandler = prefix ? PREFIX_HANDLERS[prefix] : undefined;
+    const prefixHandler = prefix ? PREFIX_HANDLERS[prefix] : void 0;
     result = prefixHandler?.(token, locale, genitive) ?? [];
   }
 
