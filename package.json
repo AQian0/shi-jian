@@ -15,6 +15,7 @@
     "url": "git+https://github.com/AQian0/shi-jian.git"
   },
   "license": "MIT",
+  "sideEffects": false,
   "type": "module",
   "main": "dist/index.mjs",
   "exports": {
