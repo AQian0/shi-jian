@@ -11,11 +11,11 @@ function parse(options: ParseOptions): Date
 
 ## 参数
 
-| 参数 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| `dateStr` | `string` | - | 要解析的日期字符串 |
-| `format` | `Format` | `'ISO8601'` | 格式模板 |
-| `locale` | `string` | `'device'` | 区域设置 |
+| 参数      | 类型     | 默认值      | 描述               |
+| --------- | -------- | ----------- | ------------------ |
+| `dateStr` | `string` | -           | 要解析的日期字符串 |
+| `format`  | `Format` | `'ISO8601'` | 格式模板           |
+| `locale`  | `string` | `'device'`  | 区域设置           |
 
 ## 返回值
 

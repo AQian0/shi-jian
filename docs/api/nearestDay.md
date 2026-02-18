@@ -10,10 +10,10 @@ function nearestDay(date: MaybeDateInput, day: number): Date
 
 ## 参数
 
-| 参数 | 类型 | 描述 |
-| --- | --- | --- |
-| `date` | `MaybeDateInput` | 日期 |
-| `day` | `number` | 目标星期（0=周日，1=周一，...，6=周六） |
+| 参数   | 类型             | 描述                                    |
+| ------ | ---------------- | --------------------------------------- |
+| `date` | `MaybeDateInput` | 日期                                    |
+| `day`  | `number`         | 目标星期（0=周日，1=周一，...，6=周六） |
 
 ## 返回值
 

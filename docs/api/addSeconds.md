@@ -10,10 +10,10 @@ function addSeconds(date?: MaybeDateInput, count?: number): Date
 
 ## 参数
 
-| 参数 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| `date` | `MaybeDateInput` | `new Date()` | 日期 |
-| `count` | `number` | `1` | 秒数（负数为减少） |
+| 参数    | 类型             | 默认值       | 描述               |
+| ------- | ---------------- | ------------ | ------------------ |
+| `date`  | `MaybeDateInput` | `new Date()` | 日期               |
+| `count` | `number`         | `1`          | 秒数（负数为减少） |
 
 ## 返回值
 

@@ -11,11 +11,11 @@ function format(options: FormatOptions): string
 
 ## 参数
 
-| 参数 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| `date` | `MaybeDateInput` | - | 要格式化的日期 |
-| `format` | `Format` | `'long'` | 格式模板 |
-| `locale` | `string` | `'device'` | 区域设置 |
+| 参数     | 类型             | 默认值     | 描述           |
+| -------- | ---------------- | ---------- | -------------- |
+| `date`   | `MaybeDateInput` | -          | 要格式化的日期 |
+| `format` | `Format`         | `'long'`   | 格式模板       |
+| `locale` | `string`         | `'device'` | 区域设置       |
 
 ## 返回值
 

@@ -10,9 +10,9 @@ function parts(format: Format, locale?: string): Part[]
 
 ## 参数
 
-| 参数 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| `format` | `Format` | - | 格式模板 |
+| 参数     | 类型     | 默认值     | 描述     |
+| -------- | -------- | ---------- | -------- |
+| `format` | `Format` | -          | 格式模板 |
 | `locale` | `string` | `'device'` | 区域设置 |
 
 ## 返回值

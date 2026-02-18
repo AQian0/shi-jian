@@ -10,9 +10,9 @@ function formatStr(format: Format, locale?: string): string
 
 ## 参数
 
-| 参数 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| `format` | `Format` | - | 格式类型 |
+| 参数     | 类型     | 默认值     | 描述     |
+| -------- | -------- | ---------- | -------- |
+| `format` | `Format` | -          | 格式类型 |
 | `locale` | `string` | `'device'` | 区域设置 |
 
 ## 返回值

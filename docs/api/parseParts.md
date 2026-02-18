@@ -10,10 +10,10 @@ function parseParts(dateStr: string, parts: Part[]): FilledPart[]
 
 ## 参数
 
-| 参数 | 类型 | 描述 |
-| --- | --- | --- |
+| 参数      | 类型     | 描述               |
+| --------- | -------- | ------------------ |
 | `dateStr` | `string` | 要解析的日期字符串 |
-| `parts` | `Part[]` | 格式部分定义 |
+| `parts`   | `Part[]` | 格式部分定义       |
 
 ## 返回值
 

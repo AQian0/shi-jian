@@ -10,11 +10,11 @@ function range(token: FormatToken, locale?: string, genitive?: boolean): string[
 
 ## 参数
 
-| 参数 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| `token` | `FormatToken` | - | 格式化 Token |
-| `locale` | `string` | `'device'` | 区域设置 |
-| `genitive` | `boolean` | `false` | 是否使用所有格形式 |
+| 参数       | 类型          | 默认值     | 描述               |
+| ---------- | ------------- | ---------- | ------------------ |
+| `token`    | `FormatToken` | -          | 格式化 Token       |
+| `locale`   | `string`      | `'device'` | 区域设置           |
+| `genitive` | `boolean`     | `false`    | 是否使用所有格形式 |
 
 ## 返回值
 

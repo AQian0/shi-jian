@@ -10,8 +10,8 @@ function fourDigitYear(year: string | number): number
 
 ## 参数
 
-| 参数 | 类型 | 描述 |
-| --- | --- | --- |
+| 参数   | 类型               | 描述     |
+| ------ | ------------------ | -------- |
 | `year` | `string \| number` | 2 位年份 |
 
 ## 返回值

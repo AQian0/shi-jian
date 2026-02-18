@@ -10,10 +10,10 @@ function ap(period: 'am' | 'pm', locale?: string): string
 
 ## 参数
 
-| 参数 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
-| `period` | `'am' \| 'pm'` | - | 时间段 |
-| `locale` | `string` | `'device'` | 区域设置 |
+| 参数     | 类型           | 默认值     | 描述     |
+| -------- | -------------- | ---------- | -------- |
+| `period` | `'am' \| 'pm'` | -          | 时间段   |
+| `locale` | `string`       | `'device'` | 区域设置 |
 
 ## 返回值
 

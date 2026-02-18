@@ -10,10 +10,10 @@ function tzDate(date: MaybeDateInput, tz: string): Date
 
 ## 参数
 
-| 参数 | 类型 | 描述 |
-| --- | --- | --- |
-| `date` | `MaybeDateInput` | 日期 |
-| `tz` | `string` | 时区标识 |
+| 参数   | 类型             | 描述     |
+| ------ | ---------------- | -------- |
+| `date` | `MaybeDateInput` | 日期     |
+| `tz`   | `string`         | 时区标识 |
 
 ## 返回值
 

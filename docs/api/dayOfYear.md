@@ -10,8 +10,8 @@ function dayOfYear(date?: MaybeDateInput): number
 
 ## 参数
 
-| 参数 | 类型 | 默认值 | 描述 |
-| --- | --- | --- | --- |
+| 参数   | 类型             | 默认值       | 描述 |
+| ------ | ---------------- | ------------ | ---- |
 | `date` | `MaybeDateInput` | `new Date()` | 日期 |
 
 ## 返回值
