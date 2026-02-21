@@ -28,7 +28,7 @@ describe("parts", () => {
   });
 
   it("should throw error when duplicate tokens are used", () => {
-    expect(() => parts("YYYY YYYY", "en")).toThrow();
+    expect(() => parts("YYYY YYYY", "en")).toThrow("Duplicate tokens are not allowed");
   });
 
   it("should handle narrow weekday format", () => {

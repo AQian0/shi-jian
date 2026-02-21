@@ -13,13 +13,17 @@ describe("parse", () => {
     );
   });
   it("throws when two variable length string tokens are next to each other", () => {
-    expect(() => parse("MonJan15,2000", "dddMMM,DD,YYYY")).toThrow();
+    expect(() => parse("MonJan15,2000", "dddMMM,DD,YYYY")).toThrow(
+      "Variable length string tokens cannot be adjacent",
+    );
   });
   it("throws when two variable length numbers are next to each other", () => {
-    expect(() => parse("11122", "MDYY")).toThrow();
+    expect(() => parse("11122", "MDYY")).toThrow(
+      "Variable length number tokens cannot be adjacent",
+    );
   });
   it("throws when the delimiters are numbers", () => {
-    expect(() => parse("1101122", "M0D1YY")).toThrow();
+    expect(() => parse("1101122", "M0D1YY")).toThrow("Numeric delimiters are not allowed");
   });
   it("can parse MM/DD/YYYY", () => {
     expect(parse("12/17/1903", "MM/DD/YYYY").toISOString()).toBe("1903-12-17T05:00:00.000Z");
@@ -151,8 +155,8 @@ describe("parse", () => {
       parse("", {
         date: "long",
       }),
-    ).toThrow();
-    expect(() => parse("", "ISO8601")).toThrow();
+    ).toThrow("Cannot parse empty string");
+    expect(() => parse("", "ISO8601")).toThrow("Cannot parse empty string");
   });
   it("throws when parsing an date with a placeholder month", () => {
     expect(() =>
@@ -163,7 +167,7 @@ describe("parse", () => {
         },
         "en",
       ),
-    ).toThrow();
+    ).toThrow("Invalid month placeholder");
   });
   it("can parse a full date with a timezone offset", () => {
     expect(
@@ -235,7 +239,7 @@ describe("parse", () => {
         locale: "en",
         dateOverflow: "throw",
       }).toISOString(),
-    ).toThrow();
+    ).toThrow("Date out of range");
   });
   it("should throws an error if the Z token is specified and [+-]HHmm", () => {
     expect(() => parse("1994-06-22T04:22:32-0900", "YYYY-MM-DDTHH:mm:ssZ")).toThrow(
@@ -277,6 +281,6 @@ describe("parse", () => {
   });
 
   it("should return invalid when date cannot be created", () => {
-    expect(() => parse("invalid-99-99", "YYYY-MM-DD")).toThrow();
+    expect(() => parse("invalid-99-99", "YYYY-MM-DD")).toThrow("Invalid date");
   });
 });
