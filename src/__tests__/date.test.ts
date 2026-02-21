@@ -12,6 +12,6 @@ describe("normalizeDate", () => {
   });
 
   it("should throw error when passing non-ISO8601 string", () => {
-    expect(() => normalizeDate("not a date")).toThrow("Invalid date string");
+    expect(() => normalizeDate("not a date")).toThrow("Non ISO 8601 compliant date");
   });
 });
