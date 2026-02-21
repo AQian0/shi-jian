@@ -109,7 +109,7 @@ describe("parseParts", () => {
       createPart("D", "day", "numeric"),
     ];
 
-    expect(() => parseParts("12-25", formatParts)).toThrow();
+    expect(() => parseParts("12-25", formatParts)).toThrow("");
   });
 
   it("should handle next part search with digit at position 0", () => {

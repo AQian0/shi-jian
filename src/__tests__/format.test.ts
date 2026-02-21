@@ -84,7 +84,7 @@ describe("format", () => {
     expect(format("2022-10-10 17:07:05", "a")).toEqual("pm");
   });
   it("throws an error when two month format are used", () => {
-    expect(() => format("2020-01-01", "MM MMMM")).toThrow();
+    expect(() => format("2020-01-01", "MM MMMM")).toThrow("Cannot reuse format tokens");
   });
   it("can format a standard US style date", () => {
     expect(format("1986-03-17T06:44:15", "MM/DD/YYYY")).toBe("03/17/1986");
