@@ -6,6 +6,7 @@ export default defineConfig({
   title: "shi-jian",
   description: "现代 JavaScript 日期处理库",
   lang: "zh-CN",
+  base: "/shi-jian/",
   themeConfig: {
     nav: [
       {
