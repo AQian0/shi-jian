@@ -13,7 +13,7 @@ export const fourDigitYear = (value: string): number => {
   const century = Math.floor(y / YEARS_PER_CENTURY);
   const parsedYear = Number(value);
   if (Number.isNaN(parsedYear)) {
-    throw new Error(`Invalid year value (${value}).`);
+    throw new TypeError(`Invalid year value (${value}).`);
   }
   return (
     (century + (parsedYear > currentYear + YEAR_PREDICTION_THRESHOLD ? -1 : 0)) *
