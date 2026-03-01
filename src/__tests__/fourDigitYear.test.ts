@@ -38,4 +38,8 @@ describe("fourDigitYear", () => {
     const expected = (Math.floor(currentYear / 100) - 1) * 100 + Number(testYear);
     expect(result).toBe(expected);
   });
+
+  it("should throw error when value is not numeric", () => {
+    expect(() => fourDigitYear("abc")).toThrow("Invalid year value (abc).");
+  });
 });
