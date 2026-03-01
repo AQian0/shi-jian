@@ -19,7 +19,7 @@ const createPartMap = (
   parts: Part[],
   locale: string,
   genitive = false,
-): Record<keyof Intl.DateTimeFormatPartTypesRegistry, string> => {
+): Partial<Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>> => {
   const d = normalizeDate(inputDate);
   const hour12 = parts.filter(part => part.hour12);
   const hour24 = parts.filter(part => !part.hour12);
@@ -83,7 +83,7 @@ const createPartMap = (
       map[part.type] = part.value;
       return map;
     },
-    {} as Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>,
+    {} as Partial<Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>>,
   );
 };
 
@@ -98,7 +98,17 @@ const fill = (
   const d = normalizeDate(inputDate);
   const value = ({ partName, partValue, token }: Part): string => {
     if (partName === "literal") return partValue;
+    if (partName === "dayPeriod") {
+      const p = ap(d.getUTCHours() < 12 ? "am" : "pm", locale);
+      return token === "A" ? p.toUpperCase() : p.toLowerCase();
+    }
+    if (partName === "timeZoneName") {
+      return offset ?? minsToOffset(-1 * d.getTimezoneOffset(), token as TimezoneToken);
+    }
     const value = partMap[partName];
+    if (value === void 0) {
+      throw new Error(`Missing Intl formatted value for part (${partName}).`);
+    }
     if (partName === "hour" && token === "H") {
       return value.replace(/^0/, "") || "0";
     }
@@ -111,13 +121,6 @@ const fill = (
       value.length === 1
     ) {
       return `0${value}`;
-    }
-    if (partName === "dayPeriod") {
-      const p = ap(d.getUTCHours() < 12 ? "am" : "pm", locale);
-      return token === "A" ? p.toUpperCase() : p.toLowerCase();
-    }
-    if (partName === "timeZoneName") {
-      return offset ?? minsToOffset(-1 * d.getTimezoneOffset(), token as TimezoneToken);
     }
     return value;
   };

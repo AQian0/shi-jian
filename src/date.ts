@@ -20,6 +20,12 @@ export const normalizeDate = (date?: MaybeDateInput): Date => {
   }
   if (isIso8601(date)) {
     const matches = date.match(ISO8601_PATTERN);
+    if (matches?.[3]) {
+      const daysInMonth = new Date(Number(matches[1]), Number(matches[2]), 0).getDate();
+      if (Number(matches[3]) > daysInMonth) {
+        throw new Error(`Invalid ISO 8601 date (${date}).`);
+      }
+    }
     return new Date(matches && !matches[4] ? date.concat("T00:00:00") : date);
   }
   throw new Error(`Non ISO 8601 compliant date (${date}).`);

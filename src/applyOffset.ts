@@ -1,4 +1,4 @@
-import type { MaybeDateInput, TimezoneToken } from "./types";
+import type { MaybeDateInput, OffsetString, TimezoneToken } from "./types";
 
 import {
   MS_PER_MINUTE,
@@ -10,7 +10,7 @@ import {
 } from "./common";
 import { normalizeDate } from "./date";
 
-const offsetToMins = (offset: string, token: TimezoneToken): number => {
+const offsetToMins = (offset: OffsetString, token: TimezoneToken): number => {
   validOffset(offset, token);
   const match = offset.match(/([+-])([0-3][0-9]):?([0-6][0-9])/);
   if (!match) {
@@ -26,7 +26,7 @@ const offsetToMins = (offset: string, token: TimezoneToken): number => {
  * @example
  * applyOffset(new Date('2024-01-15T00:00:00Z'), '+08:00') // 2024-01-15T08:00:00Z
  */
-export const applyOffset = (dateInput?: MaybeDateInput, offset = "+00:00"): Date => {
+export const applyOffset = (dateInput?: MaybeDateInput, offset: OffsetString = "+00:00"): Date => {
   const d = normalizeDate(dateInput);
   const token = ((): TimezoneToken => {
     switch (fixedLengthByOffset(offset)) {

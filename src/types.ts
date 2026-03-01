@@ -88,3 +88,5 @@ export type FormatOptions = {
 };
 
 export type TimezoneToken = "Z" | "ZZ";
+
+export type OffsetString = `+${string}` | `-${string}`;

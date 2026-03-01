@@ -14,4 +14,16 @@ describe("normalizeDate", () => {
   it("should throw error when passing non-ISO8601 string", () => {
     expect(() => normalizeDate("not a date")).toThrow("Non ISO 8601 compliant date");
   });
+
+  it("should throw error when day overflows the month", () => {
+    expect(() => normalizeDate("2024-02-30")).toThrow("Invalid ISO 8601 date");
+    expect(() => normalizeDate("2023-02-29")).toThrow("Invalid ISO 8601 date");
+    expect(() => normalizeDate("2024-04-31")).toThrow("Invalid ISO 8601 date");
+  });
+
+  it("should accept valid edge-case dates", () => {
+    expect(normalizeDate("2024-02-29")).toBeInstanceOf(Date);
+    expect(normalizeDate("2024-01-31")).toBeInstanceOf(Date);
+    expect(normalizeDate("2024-12-31")).toBeInstanceOf(Date);
+  });
 });

@@ -20,4 +20,9 @@ describe("removeOffset", () => {
       "2023-04-13T14:15:00.000Z",
     );
   });
+
+  it("should throw error when offset format is invalid", () => {
+    // @ts-expect-error: Testing runtime guard for non-TS consumers passing invalid offset.
+    expect(() => removeOffset("2023-02-22T00:00:00Z", "invalid")).toThrow("Invalid offset format");
+  });
 });
