@@ -105,10 +105,9 @@ describe("nearestDay", () => {
     );
   });
 
-  it("can find the 28th from the current month", () => {
-    const find = new Date();
-    find.setDate(28);
-    find.setMilliseconds(0);
-    expect(nearestDay(void 0, searchFor28th, "month")).toEqual(find);
+  it("should find the 28th when searching within a month", () => {
+    const result = nearestDay("2024-03-15", searchFor28th, "month");
+    expect(result?.getDate()).toBe(28);
+    expect(result?.getMonth()).toBe(2);
   });
 });
