@@ -1,4 +1,4 @@
-import type { FormatPattern, FormatStyle, TimezoneToken } from "./types";
+import type { FormatPattern, FormatStyle, OffsetString, TimezoneToken } from "./types";
 
 export const MS_PER_SECOND = 1000;
 export const SECONDS_PER_MINUTE = 60;
@@ -202,10 +202,10 @@ export const normalizeStr = (part: Intl.DateTimeFormatPart): Intl.DateTimeFormat
   return part;
 };
 
-export const minsToOffset = (timeDiffInMins: number, token: TimezoneToken = "Z"): string => {
+export const minsToOffset = (timeDiffInMins: number, token: TimezoneToken = "Z"): OffsetString => {
   const hours = two(Math.floor(Math.abs(timeDiffInMins / MINUTES_PER_HOUR)));
   const mins = two(Math.abs(timeDiffInMins % MINUTES_PER_HOUR));
-  const sign = timeDiffInMins < 0 ? "-" : "+";
+  const sign: "+" | "-" = timeDiffInMins < 0 ? "-" : "+";
   if (token === "ZZ") {
     return `${sign}${hours}${mins}`;
   }
@@ -227,7 +227,7 @@ export const fixedLengthByOffset = (offsetString: string): 6 | 5 => {
   throw new Error("Invalid offset format");
 };
 
-export const validOffset = (offset: string, token: TimezoneToken = "Z"): string => {
+export const validOffset = (offset: string, token: TimezoneToken = "Z"): OffsetString => {
   const valid =
     token === "Z"
       ? OFFSET_Z_VALIDATION_REGEX.test(offset)
@@ -235,7 +235,7 @@ export const validOffset = (offset: string, token: TimezoneToken = "Z"): string 
   if (!valid) {
     throw new Error(`Invalid offset: ${offset}`);
   }
-  return offset;
+  return offset as OffsetString;
 };
 
 export const FIXED_LENGTH = {

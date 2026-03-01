@@ -1,4 +1,4 @@
-import type { MaybeDateInput, TimezoneToken } from "./types";
+import type { MaybeDateInput, OffsetString, TimezoneToken } from "./types";
 
 import { MS_PER_SECOND, SECONDS_PER_MINUTE, minsToOffset, normalizeStr } from "./common";
 import { normalizeDate } from "./date";
@@ -48,7 +48,7 @@ export function offset(
   tzA = "UTC",
   tzB = "device",
   timeZoneToken: TimezoneToken = "Z",
-): string {
+): OffsetString {
   tzB = tzB === "device" ? (Intl.DateTimeFormat().resolvedOptions().timeZone ?? "utc") : tzB;
   const d = normalizeDate(utcTime);
   const timeA = relativeTime(d, tzA);
