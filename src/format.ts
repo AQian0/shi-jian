@@ -106,7 +106,7 @@ const fill = (
       return offset ?? minsToOffset(-1 * d.getTimezoneOffset(), token as TimezoneToken);
     }
     const value = partMap[partName];
-    if (value === undefined) {
+    if (value === void 0) {
       throw new Error(`Missing Intl formatted value for part (${partName}).`);
     }
     if (partName === "hour" && token === "H") {
