@@ -14,10 +14,10 @@ const findDayPeriodLength = (dateStr: string, pos: number): number => {
 /**
  * @description Parse date string based on format parts.
  */
-export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] => {
+export const parseParts = (dateStr: string, formatParts: ReadonlyArray<Part>): FilledPart[] => {
   let index = 0;
   const advance = (
-    parts: Part[],
+    parts: ReadonlyArray<Part>,
   ): [
     Part,
     Part | undefined,

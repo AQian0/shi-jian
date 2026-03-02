@@ -8,6 +8,7 @@ import type {
   NamedFormatOption,
 } from "./types";
 
+import { createLRUCache } from "./cache";
 import {
   STYLES,
   normalizeStr,
@@ -40,7 +41,7 @@ const NAMED_FORMAT_STYLES: ReadonlyArray<NamedFormatOption> = [
 ];
 const UTC_HOUR_BASE = 8;
 
-const memoParts: Map<string, NamedFormats> = new Map();
+const memoParts = createLRUCache<string, NamedFormats>(20);
 const tokens = new Map(
   [
     ...CLOCK_AGNOSTIC_PATTERNS,

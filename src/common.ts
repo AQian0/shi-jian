@@ -192,8 +192,9 @@ export const CLOCK_AGNOSTIC_PATTERNS = [
   ],
 ] as const satisfies ReadonlyArray<FormatPattern>;
 
-const formatterCache = new Map<string, Intl.DateTimeFormat>();
-const MAX_FORMATTER_CACHE_SIZE = 50;
+import { createLRUCache } from "./cache";
+
+const formatterCache = createLRUCache<string, Intl.DateTimeFormat>(50);
 
 /**
  * @description Get cached Intl.DateTimeFormat instance to avoid repeated instantiation.
@@ -205,10 +206,6 @@ export const getFormatter = (
   const key = `${locale}|${JSON.stringify(options)}`;
   let formatter = formatterCache.get(key);
   if (!formatter) {
-    if (formatterCache.size >= MAX_FORMATTER_CACHE_SIZE) {
-      const firstKey = formatterCache.keys().next().value as string;
-      formatterCache.delete(firstKey);
-    }
     formatter = new Intl.DateTimeFormat(locale, options);
     formatterCache.set(key, formatter);
   }

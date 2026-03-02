@@ -1,6 +1,7 @@
 import type { FormatToken } from "./types";
 
 import { ap } from "./ap";
+import { createLRUCache } from "./cache";
 import {
   DAYS_IN_WEEK,
   HOURS_PER_DAY_12H,
@@ -13,7 +14,7 @@ import {
 } from "./common";
 import { format } from "./format";
 
-const rangeCache = new Map<string, string[]>();
+const rangeCache = createLRUCache<string, ReadonlyArray<string>>(100);
 
 /**
  * Generate array with formatted values
@@ -131,12 +132,16 @@ const PREFIX_HANDLERS: Record<
  * range('MMMM', 'zh-CN') // ['一月', '二月', ..., '十二月']
  * range('ddd', 'en') // ['Sun', 'Mon', ..., 'Sat']
  */
-export const range = (token: FormatToken, locale = "en", genitive = false): string[] => {
+export const range = (
+  token: FormatToken,
+  locale = "en",
+  genitive = false,
+): ReadonlyArray<string> => {
   const cacheKey = `${token}|${locale}|${genitive ? 1 : 0}`;
   const cached = rangeCache.get(cacheKey);
   if (cached) return cached;
 
-  let result: string[];
+  let result: ReadonlyArray<string>;
 
   // Try exact match first
   const exactGenerator = EXACT_GENERATORS[token];
