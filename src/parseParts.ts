@@ -40,7 +40,11 @@ export const parseParts = (dateStr: string, formatParts: Part[]): FilledPart[] =
     } else if (next) {
       if (next.partName === "literal") {
         len = dateStr.indexOf(next.partValue, pos) - pos;
-        if (len < 0) throw new Error();
+        if (len < 0) {
+          throw new Error(
+            `Expected literal "${next.partValue}" at position ${pos}, but got "${dateStr.slice(pos, pos + 20)}${dateStr.length > pos + 20 ? "..." : ""}"`,
+          );
+        }
       } else if (next.partName === "dayPeriod") {
         len = findDayPeriodLength(dateStr, pos);
       } else {

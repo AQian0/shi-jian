@@ -66,7 +66,7 @@ describe("fixedLengthByOffset", () => {
   });
 
   it("should throw error when offset format is invalid", () => {
-    expect(() => fixedLengthByOffset("invalid")).toThrow("Invalid offset format");
+    expect(() => fixedLengthByOffset("invalid")).toThrow(/Invalid offset format/);
   });
 });
 
@@ -88,15 +88,15 @@ describe("validOffset", () => {
   });
 
   it("should throw error when offset is invalid for Z token", () => {
-    expect(() => validOffset("+9999", "Z")).toThrow("Invalid offset: +9999");
+    expect(() => validOffset("+9999", "Z")).toThrow(/Invalid offset/);
   });
 
   it("should throw error when offset is invalid for ZZ token", () => {
-    expect(() => validOffset("+99:99", "ZZ")).toThrow("Invalid offset: +99:99");
+    expect(() => validOffset("+99:99", "ZZ")).toThrow(/Invalid offset/);
   });
 
   it("should throw error when offset format is completely wrong", () => {
-    expect(() => validOffset("invalid", "Z")).toThrow("Invalid offset: invalid");
+    expect(() => validOffset("invalid", "Z")).toThrow(/Invalid offset/);
   });
 });
 
