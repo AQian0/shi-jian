@@ -192,6 +192,29 @@ export const CLOCK_AGNOSTIC_PATTERNS = [
   ],
 ] as const satisfies ReadonlyArray<FormatPattern>;
 
+const formatterCache = new Map<string, Intl.DateTimeFormat>();
+const MAX_FORMATTER_CACHE_SIZE = 50;
+
+/**
+ * @description Get cached Intl.DateTimeFormat instance to avoid repeated instantiation.
+ */
+export const getFormatter = (
+  locale: string,
+  options: Intl.DateTimeFormatOptions,
+): Intl.DateTimeFormat => {
+  const key = `${locale}|${JSON.stringify(options)}`;
+  let formatter = formatterCache.get(key);
+  if (!formatter) {
+    if (formatterCache.size >= MAX_FORMATTER_CACHE_SIZE) {
+      const firstKey = formatterCache.keys().next().value as string;
+      formatterCache.delete(firstKey);
+    }
+    formatter = new Intl.DateTimeFormat(locale, options);
+    formatterCache.set(key, formatter);
+  }
+  return formatter;
+};
+
 export const normalizeStr = (part: Intl.DateTimeFormatPart): Intl.DateTimeFormatPart => {
   if (part.type === "literal") {
     return {
@@ -260,11 +283,10 @@ export const getGenitiveMonth = (
   style: "long" | "short",
 ): Intl.DateTimeFormatPart | undefined => {
   const dateStyle = style === "short" ? "medium" : "long";
-  const parts = new Intl.DateTimeFormat(locale, {
+  const formatter = getFormatter(locale, {
     dateStyle,
     timeZone: "UTC",
-  })
-    .formatToParts(date)
-    .map(part => normalizeStr(part));
+  });
+  const parts = formatter.formatToParts(date).map(part => normalizeStr(part));
   return parts.find(part => part.type === "month");
 };

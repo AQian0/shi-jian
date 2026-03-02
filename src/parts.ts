@@ -16,6 +16,7 @@ import {
   CLOCK_12_PATTERNS,
   MONTHS_PER_YEAR,
   getGenitiveMonth,
+  getFormatter,
 } from "./common";
 
 const WEEKDAY_TEST_DATES = [
@@ -156,7 +157,7 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
   let formatter: Intl.DateTimeFormat;
   let segments: ReadonlyArray<Intl.DateTimeFormatPart>;
   try {
-    formatter = new Intl.DateTimeFormat(locale, options);
+    formatter = getFormatter(locale, options);
     segments = formatter.formatToParts(new Date()).map(part => normalizeStr(part));
   } catch (error) {
     const reason = error instanceof Error ? error.message : "Unknown error";
@@ -310,9 +311,8 @@ const partStyle = (
         );
         let segments: Array<Intl.DateTimeFormatPart>;
         try {
-          segments = new Intl.DateTimeFormat(locale, formatOptions)
-            .formatToParts(date)
-            .map(part => normalizeStr(part));
+          const formatter = getFormatter(locale, formatOptions as Intl.DateTimeFormatOptions);
+          segments = formatter.formatToParts(date).map(part => normalizeStr(part));
         } catch (error) {
           const reason = error instanceof Error ? error.message : "Unknown error";
           throw new Error(
