@@ -57,7 +57,9 @@ const createPartMap = (
       );
     } catch (error) {
       const reason = error instanceof Error ? error.message : "Unknown error";
-      throw new Error(`Failed to format date with locale "${preciseLocale}". ${reason}`, { cause: error });
+      throw new Error(`Failed to format date with locale "${preciseLocale}". ${reason}`, {
+        cause: error,
+      });
     }
     if (genitive && genitiveParts.length > 0) {
       for (const part of genitiveParts) {

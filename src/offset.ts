@@ -20,7 +20,9 @@ function relativeTime(d: Date, timeZone: string): Date {
       .map(part => normalizeStr(part));
   } catch (error) {
     const reason = error instanceof Error ? error.message : "Unknown error";
-    throw new Error(`Invalid timezone "${timeZone}". ${reason}`, { cause: error });
+    throw new Error(`Invalid timezone "${timeZone}". ${reason}`, {
+      cause: error,
+    });
   }
   const parts: {
     year?: string;

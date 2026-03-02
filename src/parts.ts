@@ -161,7 +161,10 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
   } catch (error) {
     const reason = error instanceof Error ? error.message : "Unknown error";
     throw new Error(
-      `Failed to create DateTimeFormat for locale "${locale}" with format ${JSON.stringify(format)}. ${reason}`, { cause: error },
+      `Failed to create DateTimeFormat for locale "${locale}" with format ${JSON.stringify(format)}. ${reason}`,
+      {
+        cause: error,
+      },
     );
   }
   const resolvedOptions = formatter.resolvedOptions();
@@ -313,7 +316,10 @@ const partStyle = (
         } catch (error) {
           const reason = error instanceof Error ? error.message : "Unknown error";
           throw new Error(
-            `Failed to format parts for locale "${locale}" with style "${style}". ${reason}`, { cause: error },
+            `Failed to format parts for locale "${locale}" with style "${style}". ${reason}`,
+            {
+              cause: error,
+            },
           );
         }
 
