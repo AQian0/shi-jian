@@ -308,7 +308,7 @@ const partStyle = (
             timeZone: "UTC",
           } as Record<string, unknown>,
         );
-        let segments: ReadonlyArray<Intl.DateTimeFormatPart>;
+        let segments: Array<Intl.DateTimeFormatPart>;
         try {
           segments = new Intl.DateTimeFormat(locale, formatOptions)
             .formatToParts(date)
