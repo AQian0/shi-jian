@@ -14,30 +14,32 @@ const BUILD_FORMATS: ReadonlyArray<BuildFormat> = [
     name: "ESM",
     path: "./dist/index.mjs",
     dtsPath: "./dist/index.d.mts",
-    limit: "6 kB",
+    limit: "7 kB",
   },
   {
     name: "CJS",
     path: "./dist/index.cjs",
     dtsPath: "./dist/index.d.cts",
-    limit: "6 kB",
+    limit: "7 kB",
   },
   {
     name: "Browser",
     path: "./dist/bundle.mjs",
     dtsPath: "./dist/bundle.d.mts",
-    limit: "6 kB",
+    limit: "7 kB",
   },
 ] as const;
 
 // TODO: 以下函数体积较大，未来需要优化以减小打包体积
+// Note: 尺寸增长主要来自改进的错误处理和更详细的错误消息
 const CUSTOM_LIMITS: Record<string, string> = {
   format: "3.5 kB",
-  parse: "5 kB",
-  range: "3.5 kB",
-  formatStr: "1.7 kB",
-  parts: "1.6 kB",
-  tzDate: "1.2 kB",
+  parse: "5.1 kB",
+  range: "3.8 kB",
+  formatStr: "1.8 kB",
+  parts: "1.8 kB",
+  tzDate: "1.4 kB",
+  offset: "1.05 kB",
 };
 
 const extractExports = (dtsPath: string): ReadonlyArray<string> => {
