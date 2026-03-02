@@ -1,4 +1,13 @@
-import { MAX_DAYS_IN_MONTH, MAX_HOUR, MAX_MONTH, MIN_DAY, MIN_MONTH, MIDNIGHT } from "./common";
+import {
+  MAX_DAYS_IN_MONTH,
+  MAX_HOUR,
+  MAX_MINUTE,
+  MAX_MONTH,
+  MAX_SECOND,
+  MIN_DAY,
+  MIN_MONTH,
+  MIDNIGHT,
+} from "./common";
 
 export const ISO8601_PATTERN =
   /^([0-9]{4})-([0-1][0-9])(?:-([0-3][0-9]))?(?:[T ]?([0-2][0-9])(?::([0-5][0-9]))?(?::([0-5][0-9]))?)?(?:\.[0-9]+)?(Z|(?:\+|-)[0-9]{2}:?[0-9]{2})?$/;
@@ -31,6 +40,20 @@ export const isIso8601 = (date: string): boolean => {
   if (matches[4]) {
     const hours = Number(matches[4]);
     if (hours < MIDNIGHT || hours > MAX_HOUR) {
+      return false;
+    }
+  }
+
+  if (matches[5]) {
+    const minutes = Number(matches[5]);
+    if (minutes < 0 || minutes > MAX_MINUTE) {
+      return false;
+    }
+  }
+
+  if (matches[6]) {
+    const seconds = Number(matches[6]);
+    if (seconds < 0 || seconds > MAX_SECOND) {
       return false;
     }
   }

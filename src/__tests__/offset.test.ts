@@ -16,14 +16,10 @@ describe("offset", () => {
   });
 
   it("should throw error when invalid timezone is provided", () => {
-    expect(() => offset("2024-01-15T00:00:00Z", "Invalid/Timezone")).toThrow(
-      "Invalid timezone (Invalid/Timezone).",
-    );
+    expect(() => offset("2024-01-15T00:00:00Z", "Invalid/Timezone")).toThrow(/Invalid timezone/);
   });
 
   it("should throw error when tzB is an invalid timezone", () => {
-    expect(() => offset("2024-01-15T00:00:00Z", "UTC", "Foo/Bar")).toThrow(
-      "Invalid timezone (Foo/Bar).",
-    );
+    expect(() => offset("2024-01-15T00:00:00Z", "UTC", "Foo/Bar")).toThrow(/Invalid timezone/);
   });
 });

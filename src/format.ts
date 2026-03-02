@@ -27,33 +27,40 @@ const createPartMap = (
   const genitiveParts: Part[] = [];
   const addValues = (requestedParts: Part[], hour12 = false): void => {
     const preciseLocale = `${locale}-u-hc-${hour12 ? "h12" : "h23"}`;
-    valueParts.push(
-      ...new Intl.DateTimeFormat(
-        preciseLocale,
-        requestedParts.reduce(
-          (options, part) => {
-            if (part.partName === "literal") return options;
-            if (
-              genitive &&
-              [
-                "MMMM",
-                "MMM",
-                "dddd",
-                "ddd",
-              ].includes(part.token)
-            ) {
-              genitiveParts.push(part);
-            }
-            return Object.assign(options, part.option);
-          },
-          {
-            timeZone: "UTC",
-          } as Intl.DateTimeFormatOptions,
-        ),
-      )
-        .formatToParts(d)
-        .map(part => normalizeStr(part)),
-    );
+    try {
+      valueParts.push(
+        ...new Intl.DateTimeFormat(
+          preciseLocale,
+          requestedParts.reduce(
+            (options, part) => {
+              if (part.partName === "literal") return options;
+              if (
+                genitive &&
+                [
+                  "MMMM",
+                  "MMM",
+                  "dddd",
+                  "ddd",
+                ].includes(part.token)
+              ) {
+                genitiveParts.push(part);
+              }
+              return Object.assign(options, part.option);
+            },
+            {
+              timeZone: "UTC",
+            } as Intl.DateTimeFormatOptions,
+          ),
+        )
+          .formatToParts(d)
+          .map(part => normalizeStr(part)),
+      );
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : "Unknown error";
+      throw new Error(`Failed to format date with locale "${preciseLocale}". ${reason}`, {
+        cause: error,
+      });
+    }
     if (genitive && genitiveParts.length > 0) {
       for (const part of genitiveParts) {
         let genitiveFormattedPart: Intl.DateTimeFormatPart | undefined;

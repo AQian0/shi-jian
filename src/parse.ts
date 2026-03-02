@@ -91,8 +91,15 @@ export function parse(
     dateStr = dateStrOrOptions;
   }
   if (!dateStr) throw new Error("parse() requires a date string.");
-  const invalid = (): never => {
-    throw new Error(`Date (${dateStr}) does not match format (${formatStr(format, locale)})`);
+  const invalid = (cause?: unknown): never => {
+    const baseMessage = `Date (${dateStr}) does not match format (${formatStr(format, locale)})`;
+    if (cause instanceof Error) {
+      throw new TypeError(`${baseMessage}. Cause: ${cause.message}`);
+    }
+    if (cause !== void 0) {
+      throw new Error(`${baseMessage}. Cause: ${String(cause)}`);
+    }
+    throw new Error(baseMessage);
   };
   if (format === "ISO8601") return normalizeDate(dateStr);
   const genitive = STYLES.includes(format as FormatStyle) || typeof format === "object";
@@ -101,8 +108,8 @@ export function parse(
   let parsedParts;
   try {
     parsedParts = parseParts(dateStr, formatParts);
-  } catch {
-    return invalid();
+  } catch (error) {
+    return invalid(error);
   }
   const now = new Date();
   const parsed = new Map([

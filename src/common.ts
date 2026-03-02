@@ -224,7 +224,7 @@ export const fixedLengthByOffset = (offsetString: string): 6 | 5 => {
   if (OFFSET_WITHOUT_COLON_REGEX.test(offsetString)) {
     return OFFSET_LENGTH_WITHOUT_COLON;
   }
-  throw new Error("Invalid offset format");
+  throw new Error(`Invalid offset format: "${offsetString}". Expected +/-HH:MM or +/-HHMM format.`);
 };
 
 export const validOffset = (offset: string, token: TimezoneToken = "Z"): OffsetString => {
@@ -233,7 +233,8 @@ export const validOffset = (offset: string, token: TimezoneToken = "Z"): OffsetS
       ? OFFSET_Z_VALIDATION_REGEX.test(offset)
       : OFFSET_ZZ_VALIDATION_REGEX.test(offset);
   if (!valid) {
-    throw new Error(`Invalid offset: ${offset}`);
+    const expected = token === "Z" ? "+/-HH:MM" : "+/-HHMM";
+    throw new Error(`Invalid offset: "${offset}". Expected ${expected} format (token: ${token}).`);
   }
   return offset as OffsetString;
 };

@@ -14,7 +14,10 @@ const offsetToMins = (offset: OffsetString, token: TimezoneToken): number => {
   validOffset(offset, token);
   const match = offset.match(/([+-])([0-3][0-9]):?([0-6][0-9])/);
   if (!match) {
-    throw new Error(`Invalid offset format: ${offset}`);
+    const expected = token === "Z" ? "+/-HH:MM" : "+/-HHMM";
+    throw new Error(
+      `Failed to parse offset "${offset}" with token "${token}". Expected format: ${expected}.`,
+    );
   }
   const [_, sign, hours, mins] = match;
   const offsetInMins = Number(hours) * MINUTES_PER_HOUR + Number(mins);

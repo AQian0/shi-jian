@@ -239,7 +239,7 @@ describe("parse", () => {
   });
   it("should throws an error if the Z token is specified and [+-]HHmm", () => {
     expect(() => parse("1994-06-22T04:22:32-0900", "YYYY-MM-DDTHH:mm:ssZ")).toThrow(
-      "Invalid offset: -0900",
+      /Invalid offset/,
     );
   });
   it("should throws an error when a FormatStyle is specified for [+-]HHmm", () => {
@@ -248,7 +248,7 @@ describe("parse", () => {
         date: "full",
         time: "full",
       }),
-    ).toThrow("Invalid offset: -0600");
+    ).toThrow(/Invalid offset/);
   });
   it("parses a long time format by using the ZZ token", () => {
     expect(

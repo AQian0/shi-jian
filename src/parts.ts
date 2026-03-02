@@ -153,8 +153,20 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
     if ("time" in format) options.timeStyle = format.time;
   }
 
-  const formatter = new Intl.DateTimeFormat(locale, options);
-  const segments = formatter.formatToParts(new Date()).map(part => normalizeStr(part));
+  let formatter: Intl.DateTimeFormat;
+  let segments: ReadonlyArray<Intl.DateTimeFormatPart>;
+  try {
+    formatter = new Intl.DateTimeFormat(locale, options);
+    segments = formatter.formatToParts(new Date()).map(part => normalizeStr(part));
+  } catch (error) {
+    const reason = error instanceof Error ? error.message : "Unknown error";
+    throw new Error(
+      `Failed to create DateTimeFormat for locale "${locale}" with format ${JSON.stringify(format)}. ${reason}`,
+      {
+        cause: error,
+      },
+    );
+  }
   const resolvedOptions = formatter.resolvedOptions();
   const hourCycle = resolvedOptions.hourCycle ?? (resolvedOptions.hour12 === false ? "h23" : "h12");
   const hourType = hourCycle === "h23" || hourCycle === "h24" ? 24 : 12;
@@ -296,9 +308,20 @@ const partStyle = (
             timeZone: "UTC",
           } as Record<string, unknown>,
         );
-        const segments = new Intl.DateTimeFormat(locale, formatOptions)
-          .formatToParts(date)
-          .map(part => normalizeStr(part));
+        let segments: Array<Intl.DateTimeFormatPart>;
+        try {
+          segments = new Intl.DateTimeFormat(locale, formatOptions)
+            .formatToParts(date)
+            .map(part => normalizeStr(part));
+        } catch (error) {
+          const reason = error instanceof Error ? error.message : "Unknown error";
+          throw new Error(
+            `Failed to format parts for locale "${locale}" with style "${style}". ${reason}`,
+            {
+              cause: error,
+            },
+          );
+        }
 
         if (style === "long" || style === "short") {
           applyGenitiveMonth(locale, style, date, segments);
