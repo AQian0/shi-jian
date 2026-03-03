@@ -20,7 +20,7 @@ export const createLRUCache = <TKey, TValue>(maxSize: number): LRUCache<TKey, TV
   return {
     get: (key: TKey): TValue | undefined => {
       if (!cache.has(key)) {
-        return undefined;
+        return void 0;
       }
       const value = cache.get(key);
       // LRU: Move accessed item to the end (most recently used)

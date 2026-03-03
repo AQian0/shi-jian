@@ -104,7 +104,7 @@ describe("createLRUCache", () => {
   it("should properly handle undefined values", () => {
     const cache = createLRUCache<string, number | undefined>(3);
 
-    cache.set("a", undefined);
+    cache.set("a", void 0);
     cache.set("b", 2);
 
     expect(cache.has("a")).toBe(true);
