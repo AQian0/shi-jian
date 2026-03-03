@@ -11,16 +11,21 @@ type LRUCache<TKey, TValue> = {
  * When the cache exceeds maxSize, the least recently accessed item is removed.
  */
 export const createLRUCache = <TKey, TValue>(maxSize: number): LRUCache<TKey, TValue> => {
+  if (!Number.isInteger(maxSize) || maxSize <= 0) {
+    throw new RangeError(`maxSize must be a positive integer, got: ${maxSize}`);
+  }
+
   const cache = new Map<TKey, TValue>();
 
   return {
     get: (key: TKey): TValue | undefined => {
-      const value = cache.get(key);
-      if (value !== void 0) {
-        // LRU: Move accessed item to the end (most recently used)
-        cache.delete(key);
-        cache.set(key, value);
+      if (!cache.has(key)) {
+        return undefined;
       }
+      const value = cache.get(key);
+      // LRU: Move accessed item to the end (most recently used)
+      cache.delete(key);
+      cache.set(key, value as TValue);
       return value;
     },
     set: (key: TKey, value: TValue): void => {

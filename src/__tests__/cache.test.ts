@@ -3,6 +3,13 @@ import { describe, expect, it } from "vitest";
 import { createLRUCache } from "../cache";
 
 describe("createLRUCache", () => {
+  it("should throw RangeError when maxSize is not a positive integer", () => {
+    expect(() => createLRUCache<string, number>(0)).toThrow(RangeError);
+    expect(() => createLRUCache<string, number>(-1)).toThrow(RangeError);
+    expect(() => createLRUCache<string, number>(1.5)).toThrow(RangeError);
+    expect(() => createLRUCache<string, number>(NaN)).toThrow(RangeError);
+  });
+
   it("should cache and retrieve values", () => {
     const cache = createLRUCache<string, number>(3);
 
@@ -92,5 +99,28 @@ describe("createLRUCache", () => {
     expect(cache.size).toBe(0);
     expect(cache.get("a")).toBeUndefined();
     expect(cache.get("b")).toBeUndefined();
+  });
+
+  it("should properly handle undefined values", () => {
+    const cache = createLRUCache<string, number | undefined>(3);
+
+    cache.set("a", undefined);
+    cache.set("b", 2);
+
+    expect(cache.has("a")).toBe(true);
+    expect(cache.get("a")).toBeUndefined();
+    expect(cache.has("b")).toBe(true);
+    expect(cache.get("b")).toBe(2);
+
+    // Access 'a' to move it to most recently used
+    cache.get("a");
+    cache.set("c", 3);
+    cache.set("d", 4);
+
+    // 'b' should be evicted, 'a' (undefined) should still be present
+    expect(cache.has("a")).toBe(true);
+    expect(cache.has("b")).toBe(false);
+    expect(cache.has("c")).toBe(true);
+    expect(cache.has("d")).toBe(true);
   });
 });

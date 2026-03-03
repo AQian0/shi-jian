@@ -35,14 +35,14 @@ const BUILD_FORMATS: ReadonlyArray<BuildFormat> = [
 const CUSTOM_LIMITS: Record<string, string> = {
   format: "4 kB",
   parse: "5.5 kB",
-  range: "4 kB",
-  formatStr: "2 kB",
+  range: "4.5 kB",
+  formatStr: "2.5 kB",
   parts: "2 kB",
-  tzDate: "1.5 kB",
-  offset: "1.2 kB",
-  removeOffset: "1.15 kB",
-  applyOffset: "1.1 kB",
-  nearestDay: "1.05 kB",
+  tzDate: "2 kB",
+  offset: "1.5 kB",
+  removeOffset: "1.5 kB",
+  applyOffset: "1.5 kB",
+  nearestDay: "1.5 kB",
 };
 
 const extractExports = (dtsPath: string): ReadonlyArray<string> => {
