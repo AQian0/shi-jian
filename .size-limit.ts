@@ -33,13 +33,16 @@ const BUILD_FORMATS: ReadonlyArray<BuildFormat> = [
 // TODO: 以下函数体积较大，未来需要优化以减小打包体积
 // Note: 尺寸增长主要来自改进的错误处理和更详细的错误消息
 const CUSTOM_LIMITS: Record<string, string> = {
-  format: "3.5 kB",
-  parse: "5.1 kB",
-  range: "3.8 kB",
-  formatStr: "1.8 kB",
-  parts: "1.8 kB",
-  tzDate: "1.4 kB",
-  offset: "1.05 kB",
+  format: "4 kB",
+  parse: "5.5 kB",
+  range: "4.5 kB",
+  formatStr: "2.5 kB",
+  parts: "2 kB",
+  tzDate: "2 kB",
+  offset: "1.5 kB",
+  removeOffset: "1.5 kB",
+  applyOffset: "1.5 kB",
+  nearestDay: "1.5 kB",
 };
 
 const extractExports = (dtsPath: string): ReadonlyArray<string> => {

@@ -10,6 +10,7 @@ import type {
 import { ap } from "./ap";
 import { minsToOffset, normalizeStr, getGenitiveMonth } from "./common";
 import { normalizeDate } from "./date";
+import { getFormatter } from "./getFormatter";
 import { offset } from "./offset";
 import { parts } from "./parts";
 import { removeOffset } from "./removeOffset";
@@ -28,33 +29,28 @@ const createPartMap = (
   const addValues = (requestedParts: Part[], hour12 = false): void => {
     const preciseLocale = `${locale}-u-hc-${hour12 ? "h12" : "h23"}`;
     try {
-      valueParts.push(
-        ...new Intl.DateTimeFormat(
-          preciseLocale,
-          requestedParts.reduce(
-            (options, part) => {
-              if (part.partName === "literal") return options;
-              if (
-                genitive &&
-                [
-                  "MMMM",
-                  "MMM",
-                  "dddd",
-                  "ddd",
-                ].includes(part.token)
-              ) {
-                genitiveParts.push(part);
-              }
-              return Object.assign(options, part.option);
-            },
-            {
-              timeZone: "UTC",
-            } as Intl.DateTimeFormatOptions,
-          ),
-        )
-          .formatToParts(d)
-          .map(part => normalizeStr(part)),
+      const formatOptions = requestedParts.reduce(
+        (options, part) => {
+          if (part.partName === "literal") return options;
+          if (
+            genitive &&
+            [
+              "MMMM",
+              "MMM",
+              "dddd",
+              "ddd",
+            ].includes(part.token)
+          ) {
+            genitiveParts.push(part);
+          }
+          return Object.assign(options, part.option);
+        },
+        {
+          timeZone: "UTC",
+        } as Intl.DateTimeFormatOptions,
       );
+      const formatter = getFormatter(preciseLocale, formatOptions);
+      valueParts.push(...formatter.formatToParts(d).map(part => normalizeStr(part)));
     } catch (error) {
       const reason = error instanceof Error ? error.message : "Unknown error";
       throw new Error(`Failed to format date with locale "${preciseLocale}". ${reason}`, {

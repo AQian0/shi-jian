@@ -1,0 +1,126 @@
+import { describe, expect, it } from "vitest";
+
+import { createLRUCache } from "../cache";
+
+describe("createLRUCache", () => {
+  it("should throw RangeError when maxSize is not a positive integer", () => {
+    expect(() => createLRUCache<string, number>(0)).toThrow(RangeError);
+    expect(() => createLRUCache<string, number>(-1)).toThrow(RangeError);
+    expect(() => createLRUCache<string, number>(1.5)).toThrow(RangeError);
+    expect(() => createLRUCache<string, number>(Number.NaN)).toThrow(RangeError);
+  });
+
+  it("should cache and retrieve values", () => {
+    const cache = createLRUCache<string, number>(3);
+
+    cache.set("a", 1);
+    cache.set("b", 2);
+
+    expect(cache.get("a")).toBe(1);
+    expect(cache.get("b")).toBe(2);
+    expect(cache.get("c")).toBeUndefined();
+  });
+
+  it("should evict least recently used item when exceeding size limit", () => {
+    const cache = createLRUCache<string, number>(3);
+
+    cache.set("a", 1);
+    cache.set("b", 2);
+    cache.set("c", 3);
+
+    // All items should be present
+    expect(cache.get("a")).toBe(1);
+    expect(cache.get("b")).toBe(2);
+    expect(cache.get("c")).toBe(3);
+
+    // Add fourth item, should evict 'a' (least recently used)
+    cache.set("d", 4);
+
+    expect(cache.get("a")).toBeUndefined(); // Evicted
+    expect(cache.get("b")).toBe(2);
+    expect(cache.get("c")).toBe(3);
+    expect(cache.get("d")).toBe(4);
+  });
+
+  it("should update access order on get", () => {
+    const cache = createLRUCache<string, number>(3);
+
+    cache.set("a", 1);
+    cache.set("b", 2);
+    cache.set("c", 3);
+
+    // Access 'a', making it most recently used
+    cache.get("a");
+
+    // Add fourth item, should evict 'b' (now least recently used)
+    cache.set("d", 4);
+
+    expect(cache.get("a")).toBe(1); // Still present
+    expect(cache.get("b")).toBeUndefined(); // Evicted
+    expect(cache.get("c")).toBe(3);
+    expect(cache.get("d")).toBe(4);
+  });
+
+  it("should update existing keys without increasing size", () => {
+    const cache = createLRUCache<string, number>(2);
+
+    cache.set("a", 1);
+    cache.set("b", 2);
+
+    expect(cache.size).toBe(2);
+
+    // Update existing key
+    cache.set("a", 10);
+
+    expect(cache.size).toBe(2);
+    expect(cache.get("a")).toBe(10);
+    expect(cache.get("b")).toBe(2);
+  });
+
+  it("should support has() method", () => {
+    const cache = createLRUCache<string, number>(2);
+
+    cache.set("a", 1);
+
+    expect(cache.has("a")).toBe(true);
+    expect(cache.has("b")).toBe(false);
+  });
+
+  it("should support clear() method", () => {
+    const cache = createLRUCache<string, number>(2);
+
+    cache.set("a", 1);
+    cache.set("b", 2);
+
+    expect(cache.size).toBe(2);
+
+    cache.clear();
+
+    expect(cache.size).toBe(0);
+    expect(cache.get("a")).toBeUndefined();
+    expect(cache.get("b")).toBeUndefined();
+  });
+
+  it("should properly handle undefined values", () => {
+    const cache = createLRUCache<string, number | undefined>(3);
+
+    cache.set("a", void 0);
+    cache.set("b", 2);
+
+    expect(cache.has("a")).toBe(true);
+    expect(cache.get("a")).toBeUndefined();
+    expect(cache.has("b")).toBe(true);
+    expect(cache.get("b")).toBe(2);
+
+    // Access 'a' to move it to most recently used
+    cache.get("a");
+    cache.set("c", 3);
+    cache.set("d", 4);
+
+    // 'b' should be evicted, 'a' (undefined) should still be present
+    expect(cache.has("a")).toBe(true);
+    expect(cache.has("b")).toBe(false);
+    expect(cache.has("c")).toBe(true);
+    expect(cache.has("d")).toBe(true);
+  });
+});

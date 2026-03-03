@@ -8,6 +8,7 @@ import type {
 } from "./types";
 
 import { ap } from "./ap";
+import { createLRUCache } from "./cache";
 import {
   FIXED_LENGTH,
   MIDNIGHT,
@@ -26,13 +27,13 @@ import { parseParts } from "./parseParts";
 import { parts } from "./parts";
 import { range } from "./range";
 
-const validationCache = new Map<string, Part[]>();
+const validationCache = createLRUCache<string, ReadonlyArray<Part>>(50);
 const NUMERIC_VALUES = new Set([
   "numeric",
   "2-digit",
 ]);
 const defaultPartFilter = (): boolean => true;
-const validate = (parts: Part[]): Part[] | never => {
+const validate = (parts: ReadonlyArray<Part>): ReadonlyArray<Part> | never => {
   const cacheKey = parts.map(p => `${p.token}:${p.partName}`).join("|");
   const cached = validationCache.get(cacheKey);
   if (cached) {
