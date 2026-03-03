@@ -7,6 +7,7 @@ export { dayOfYear } from "./dayOfYear";
 export { format } from "./format";
 export { formatStr } from "./formatStr";
 export { fourDigitYear } from "./fourDigitYear";
+export { getFormatter } from "./getFormatter";
 export * from "./iso8601";
 export { monthDays } from "./monthDays";
 export { monthEnd } from "./monthEnd";

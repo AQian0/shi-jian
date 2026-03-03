@@ -8,8 +8,9 @@ import type {
 } from "./types";
 
 import { ap } from "./ap";
-import { minsToOffset, normalizeStr, getGenitiveMonth, getFormatter } from "./common";
+import { minsToOffset, normalizeStr, getGenitiveMonth } from "./common";
 import { normalizeDate } from "./date";
+import { getFormatter } from "./getFormatter";
 import { offset } from "./offset";
 import { parts } from "./parts";
 import { removeOffset } from "./removeOffset";

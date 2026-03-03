@@ -17,8 +17,8 @@ import {
   CLOCK_12_PATTERNS,
   MONTHS_PER_YEAR,
   getGenitiveMonth,
-  getFormatter,
 } from "./common";
+import { getFormatter } from "./getFormatter";
 
 const WEEKDAY_TEST_DATES = [
   3,

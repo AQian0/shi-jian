@@ -192,26 +192,6 @@ export const CLOCK_AGNOSTIC_PATTERNS = [
   ],
 ] as const satisfies ReadonlyArray<FormatPattern>;
 
-import { createLRUCache } from "./cache";
-
-const formatterCache = createLRUCache<string, Intl.DateTimeFormat>(50);
-
-/**
- * @description Get cached Intl.DateTimeFormat instance to avoid repeated instantiation.
- */
-export const getFormatter = (
-  locale: string,
-  options: Intl.DateTimeFormatOptions,
-): Intl.DateTimeFormat => {
-  const key = `${locale}|${JSON.stringify(options)}`;
-  let formatter = formatterCache.get(key);
-  if (!formatter) {
-    formatter = new Intl.DateTimeFormat(locale, options);
-    formatterCache.set(key, formatter);
-  }
-  return formatter;
-};
-
 export const normalizeStr = (part: Intl.DateTimeFormatPart): Intl.DateTimeFormatPart => {
   if (part.type === "literal") {
     return {
@@ -273,6 +253,8 @@ export const FIXED_LENGTH = {
 export const two = (n: number): string => String(n).padStart(2, "0");
 
 export const four = (n: number): string => String(n).padStart(4, "0");
+
+import { getFormatter } from "./getFormatter";
 
 export const getGenitiveMonth = (
   date: Date,
