@@ -7,7 +7,7 @@ describe("createLRUCache", () => {
     expect(() => createLRUCache<string, number>(0)).toThrow(RangeError);
     expect(() => createLRUCache<string, number>(-1)).toThrow(RangeError);
     expect(() => createLRUCache<string, number>(1.5)).toThrow(RangeError);
-    expect(() => createLRUCache<string, number>(NaN)).toThrow(RangeError);
+    expect(() => createLRUCache<string, number>(Number.NaN)).toThrow(RangeError);
   });
 
   it("should cache and retrieve values", () => {
