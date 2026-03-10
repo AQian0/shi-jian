@@ -22,7 +22,7 @@ export type FilledPart = Part & {
 };
 
 export type FormatPattern = [
-  pattern: FormatToken | string,
+  pattern: FormatToken | (string & Record<never, never>),
   option: Partial<Record<Intl.DateTimeFormatPartTypes, string>>,
   exp?: RegExp,
 ];
@@ -41,7 +41,7 @@ export type FormatStyleObj =
       time: FormatStyle;
     };
 
-export type Format = FormatStyle | FormatStyleObj | `${string}`;
+export type Format = FormatStyle | FormatStyleObj | (string & Record<never, never>);
 
 export type FormatToken =
   | "YYYY"

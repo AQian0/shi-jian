@@ -2,7 +2,7 @@ import type { FormatPattern, FormatStyle, OffsetString, TimezoneToken } from "./
 
 export const MS_PER_SECOND = 1000;
 export const SECONDS_PER_MINUTE = 60;
-export const MS_PER_MINUTE = (MS_PER_SECOND * SECONDS_PER_MINUTE) as 60000;
+export const MS_PER_MINUTE = 60_000;
 export const MINUTES_PER_HOUR = 60;
 export const MS_DAY = 86400000;
 
@@ -44,6 +44,9 @@ export const STYLES = [
   "medium",
   "short",
 ] as const satisfies ReadonlyArray<FormatStyle>;
+
+export const isFormatStyle = (f: string): f is FormatStyle =>
+  (STYLES as ReadonlyArray<string>).includes(f);
 
 export const CLOCK_24_PATTERNS = [
   [
@@ -236,7 +239,9 @@ export const validOffset = (offset: string, token: TimezoneToken = "Z"): OffsetS
     const expected = token === "Z" ? "+/-HH:MM" : "+/-HHMM";
     throw new Error(`Invalid offset: "${offset}". Expected ${expected} format (token: ${token}).`);
   }
-  return offset as OffsetString;
+  const rest = offset.slice(1);
+  if (offset.startsWith("+")) return `+${rest}`;
+  return `-${rest}`;
 };
 
 export const FIXED_LENGTH = {

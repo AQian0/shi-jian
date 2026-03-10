@@ -25,7 +25,8 @@ export const createLRUCache = <TKey, TValue>(maxSize: number): LRUCache<TKey, TV
       const value = cache.get(key);
       // LRU: Move accessed item to the end (most recently used)
       cache.delete(key);
-      cache.set(key, value as TValue);
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- existence verified by has() above
+      cache.set(key, value!);
       return value;
     },
     set: (key: TKey, value: TValue): void => {
@@ -34,13 +35,17 @@ export const createLRUCache = <TKey, TValue>(maxSize: number): LRUCache<TKey, TV
         cache.delete(key);
       } else if (cache.size >= maxSize) {
         // Remove oldest entry (first item in Map)
-        const firstKey = cache.keys().next().value as TKey;
-        cache.delete(firstKey);
+        const firstKey = cache.keys().next();
+        if (!firstKey.done) {
+          cache.delete(firstKey.value);
+        }
       }
       cache.set(key, value);
     },
     has: (key: TKey): boolean => cache.has(key),
-    clear: (): void => cache.clear(),
+    clear: (): void => {
+      cache.clear();
+    },
     get size(): number {
       return cache.size;
     },

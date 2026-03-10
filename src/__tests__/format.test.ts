@@ -169,6 +169,7 @@ describe("format", () => {
   });
 
   it("should return empty string when input is null", () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- intentionally testing null input
     expect(format(null as unknown as Date)).toBe("");
   });
 
