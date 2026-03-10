@@ -10,8 +10,7 @@ import { FIRST_CHAR_INDEX } from "./common";
  */
 export const removeOffset = (dateInput?: MaybeDateInput, offset: OffsetString = "+00:00"): Date => {
   const positive = offset.charAt(FIRST_CHAR_INDEX) === "+";
-  return applyOffset(
-    dateInput,
-    offset.replace(positive ? "+" : "-", positive ? "-" : "+") as OffsetString,
-  );
+  const rest = offset.slice(1);
+  const flipped: OffsetString = positive ? `-${rest}` : `+${rest}`;
+  return applyOffset(dateInput, flipped);
 };

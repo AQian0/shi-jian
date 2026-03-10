@@ -2,6 +2,9 @@ import type { Part, FilledPart } from "./types";
 
 import { FIXED_LENGTH, MAX_DAY_PERIOD_LENGTH, fixedLengthByOffset } from "./common";
 
+const isFixedLengthToken = (token: string): token is keyof typeof FIXED_LENGTH =>
+  token in FIXED_LENGTH;
+
 const findDayPeriodLength = (dateStr: string, pos: number): number => {
   for (let j = 1; j <= MAX_DAY_PERIOD_LENGTH; j++) {
     if (Number.isNaN(Number(dateStr.charAt(pos + j)))) {
@@ -21,11 +24,17 @@ export const parseParts = (dateStr: string, formatParts: ReadonlyArray<Part>): F
   ): [
     Part,
     Part | undefined,
-  ] => [
-    // eslint-disable-next-line no-plusplus
-    parts[index++] as Part,
-    parts[index],
-  ];
+  ] => {
+    const current = parts[index];
+    index += 1;
+    if (!current) {
+      throw new Error(`Unexpected end of format parts at index ${index - 1}`);
+    }
+    return [
+      current,
+      parts[index],
+    ];
+  };
   let pos = 0;
   const parsed: FilledPart[] = [];
   while (index < formatParts.length) {
@@ -35,8 +44,8 @@ export const parseParts = (dateStr: string, formatParts: ReadonlyArray<Part>): F
       len = current.partValue.length;
     } else if (current.partName === "timeZoneName") {
       len = fixedLengthByOffset(dateStr.slice(pos));
-    } else if (current.token in FIXED_LENGTH) {
-      len = FIXED_LENGTH[current.token as keyof typeof FIXED_LENGTH];
+    } else if (isFixedLengthToken(current.token)) {
+      len = FIXED_LENGTH[current.token];
     } else if (next) {
       if (next.partName === "literal") {
         len = dateStr.indexOf(next.partValue, pos) - pos;

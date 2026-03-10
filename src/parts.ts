@@ -10,7 +10,7 @@ import type {
 
 import { createLRUCache } from "./cache";
 import {
-  STYLES,
+  isFormatStyle,
   normalizeStr,
   CLOCK_AGNOSTIC_PATTERNS,
   CLOCK_24_PATTERNS,
@@ -63,16 +63,20 @@ const validate = (patterns: Part[]): Part[] => {
 };
 
 const createPart = (hour12: boolean, [token, option, exp]: FormatPattern): Part => {
-  const [partName, partValue] = Object.entries(option)[0] as [
-    Intl.DateTimeFormatPartTypes,
-    string,
-  ];
+  const entries = Object.entries(option);
+  const first = entries[0];
+  if (!first) {
+    throw new Error(`Empty option object for token "${token}"`);
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- Object.entries loses key type
+  const partName = first[0] as Intl.DateTimeFormatPartTypes;
+  const partValue = first[1];
   return {
     option,
     partName,
     partValue,
     token,
-    pattern: exp as RegExp,
+    pattern: exp ?? new RegExp(""),
     hour12,
   };
 };
@@ -84,8 +88,8 @@ const createPart = (hour12: boolean, [token, option, exp]: FormatPattern): Part 
  * // [{ token: 'YYYY', ... }, { token: '-', ... }, { token: 'MM', ... }, ...]
  */
 export const parts = (format: Format, locale: string): Part[] => {
-  if (STYLES.includes(format as FormatStyle) || typeof format === "object") {
-    return styleParts(format as FormatStyle | FormatStyleObj, locale);
+  if (typeof format === "object" || isFormatStyle(format)) {
+    return styleParts(format, locale);
   }
   let f = format;
   let match = 0;
@@ -188,7 +192,7 @@ const styleParts = (format: FormatStyle | FormatStyleObj, locale: string): Part[
       if (!partValue) return void 0;
 
       if (!formatPattern[2]) {
-        formatPattern[2] = new RegExp(`${formatPattern[0]}`, "g");
+        formatPattern[2] = new RegExp(formatPattern[0], "g");
       }
       return {
         option: {
@@ -289,7 +293,11 @@ const partStyle = (
 ): NamedFormatOption | undefined => {
   if (!memoParts.has(locale)) {
     const date = new Date();
-    const formats: Partial<NamedFormats> = {};
+    const formats: NamedFormats = {
+      weekday: {},
+      month: {},
+      dayPeriod: {},
+    };
 
     for (let i = 0; i < MONTHS_PER_YEAR; i++) {
       date.setMonth(i);
@@ -329,16 +337,15 @@ const partStyle = (
         }
 
         segments.forEach(part => {
-          if (part.type === "literal") return;
-          const type = part.type as keyof NamedFormats;
-          formats[type] = {
-            ...formats[type],
+          if (part.type !== "weekday" && part.type !== "month" && part.type !== "dayPeriod") return;
+          formats[part.type] = {
+            ...formats[part.type],
             [part.value]: style,
           };
         });
       }
     }
-    memoParts.set(locale, formats as NamedFormats);
+    memoParts.set(locale, formats);
   }
 
   const formats = memoParts.get(locale);

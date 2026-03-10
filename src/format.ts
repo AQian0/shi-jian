@@ -106,7 +106,8 @@ const fill = (
       return token === "A" ? p.toUpperCase() : p.toLowerCase();
     }
     if (partName === "timeZoneName") {
-      return offset ?? minsToOffset(-1 * d.getTimezoneOffset(), token as TimezoneToken);
+      const tzToken: TimezoneToken = token === "ZZ" ? "ZZ" : "Z";
+      return offset ?? minsToOffset(-1 * d.getTimezoneOffset(), tzToken);
     }
     const value = partMap[partName];
     if (value === void 0) {

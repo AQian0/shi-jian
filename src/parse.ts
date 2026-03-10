@@ -1,11 +1,4 @@
-import type {
-  ParseOptions,
-  Format,
-  Part,
-  FormatStyle,
-  FormatToken,
-  DateOverflowStrategy,
-} from "./types";
+import type { ParseOptions, Format, Part, DateOverflowStrategy } from "./types";
 
 import { ap } from "./ap";
 import { createLRUCache } from "./cache";
@@ -14,7 +7,7 @@ import {
   MIDNIGHT,
   MIDNIGHT_24H,
   NOON,
-  STYLES,
+  isFormatStyle,
   four,
   two,
   validOffset,
@@ -98,12 +91,12 @@ export function parse(
       throw new TypeError(`${baseMessage}. Cause: ${cause.message}`);
     }
     if (cause !== void 0) {
-      throw new Error(`${baseMessage}. Cause: ${String(cause)}`);
+      throw new Error(`${baseMessage}. Cause: ${JSON.stringify(cause)}`);
     }
     throw new Error(baseMessage);
   };
   if (format === "ISO8601") return normalizeDate(dateStr);
-  const genitive = STYLES.includes(format as FormatStyle) || typeof format === "object";
+  const genitive = typeof format === "object" || isFormatStyle(format);
   const formatParts = validate(parts(format, locale).filter(part => partFilter(part)));
   if (formatParts.length === 0) throw new Error("parse() requires a pattern.");
   let parsedParts;
@@ -163,8 +156,8 @@ export function parse(
         a = part.value.toLowerCase() === ap("am", locale).toLowerCase();
       } else if (t === "Z" || t === "ZZ") {
         offset = validOffset(part.value, t);
-      } else {
-        const values = range(t as FormatToken, locale, genitive);
+      } else if (t === "MMM" || t === "MMMM" || t === "ddd" || t === "dddd") {
+        const values = range(t, locale, genitive);
         const index = values.indexOf(part.value);
         if (index !== -1) {
           switch (t) {

@@ -316,6 +316,7 @@ describe("getRange", () => {
   });
 
   it("should return empty array for unknown token", () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- intentionally testing unknown token
     expect(range("xyz" as unknown as FormatToken)).toEqual([]);
   });
 

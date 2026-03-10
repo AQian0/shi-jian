@@ -33,7 +33,18 @@ function relativeTime(d: Date, timeZone: string): Date {
     second?: string;
   } = {};
   utcParts.forEach(part => {
-    parts[part.type as keyof typeof parts] = part.value;
+    switch (part.type) {
+      case "year":
+      case "month":
+      case "day":
+      case "hour":
+      case "minute":
+      case "second":
+        parts[part.type] = part.value;
+        break;
+      default:
+        break;
+    }
   });
   return new Date(
     `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}Z`,
